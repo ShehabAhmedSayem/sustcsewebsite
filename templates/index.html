@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<aside id="colorlib-hero">
+    <div class="flexslider">
+        <ul class="slides">
+        <li style="background-image: url(/static/images/img_bg_1.jpg);">
+            <div class="overlay"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12 col-md-offset-2 slider-text">
+                        <div class="slider-text-inner text-center">
+                            <h1>Best Online Learning System</h1>
+                            <p><a href="{% url 'index' %}" class="btn btn-primary btn-lg btn-learn">Register Now</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li style="background-image: url(/static/images/img_bg_2.jpg);">
+            <div class="overlay"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12 col-md-offset-2 slider-text">
+                        <div class="slider-text-inner text-center">
+                            <h1>Online Free Course</h1>
+                            <p><a href="#" class="btn btn-primary btn-lg btn-learn">Free Trial</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li style="background-image: url(/static/images/img_bg_3.jpg);">
+            <div class="overlay"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12 col-md-offset-2 slider-text">
+                        <div class="slider-text-inner text-center">
+                            <h1>Education is a Key to Success</h1>
+                            <p><a href="#" class="btn btn-primary btn-lg btn-learn">Register Now</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li style="background-image: url(/static/images/img_bg_4.jpg);">
+            <div class="overlay"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12 col-md-offset-2 slider-text">
+                        <div class="slider-text-inner text-center">
+                            <h1>Best Online Learning Center</h1>
+                            <p><a href="#" class="btn btn-primary btn-lg btn-learn">Register Now</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        </ul>
+    </div>
+</aside>
+
+<div id="colorlib-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 about-desc animate-box">
+                <h2>Welcome to Eskwela</h2>
+                <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+            </div>
+            <div class="col-md-6 about-desc fancy-collapse-panel">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Why choose us?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">What we do?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                                <ul>
+                                    <li>Separated they live in Bookmarksgrove right</li>
+                                    <li>Separated they live in Bookmarksgrove right</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Offer Services
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="colorlib-counter" class="colorlib-counters" style="background-image: url(/static/images/img_bg_1.jpg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-3 col-sm-6 animate-box">
+                    <div class="counter-entry">
+                        <span class="icon"><i class="flaticon-book"></i></span>
+                        <div class="desc">
+                            <span class="colorlib-counter js-counter" data-from="0" data-to="1539" data-speed="5000" data-refresh-interval="50"></span>
+                            <span class="colorlib-counter-label">Courses</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 animate-box">
+                    <div class="counter-entry">
+                        <span class="icon"><i class="flaticon-student"></i></span>
+                        <div class="desc">
+                            <span class="colorlib-counter js-counter" data-from="0" data-to="3653" data-speed="5000" data-refresh-interval="50"></span>
+                            <span class="colorlib-counter-label">Students</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 animate-box">
+                    <div class="counter-entry">
+                        <span class="icon"><i class="flaticon-professor"></i></span>
+                        <div class="desc">
+                            <span class="colorlib-counter js-counter" data-from="0" data-to="2300" data-speed="5000" data-refresh-interval="50"></span>
+                            <span class="colorlib-counter-label">Teachers</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 animate-box">
+                    <div class="counter-entry">
+                        <span class="icon"><i class="flaticon-earth-globe"></i></span>
+                        <div class="desc">
+                            <span class="colorlib-counter js-counter" data-from="0" data-to="200" data-speed="5000" data-refresh-interval="50"></span>
+                            <span class="colorlib-counter-label">Countries</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
