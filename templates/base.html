@@ -99,26 +99,34 @@
                             <li class="has-dropdown">
                                 <a href="#">Academic</a>
                                 <ul class="dropdown">
-                                    <li class="has-dropdown">
-                                    <a href="#">Programs</a>
-                                        <ul class="dropdown">
-                                            <li><a href="#">Undergraduate</a></li>
-                                            <li><a href="#">Graduate</a></li>
-                                            <li><a href="#">Phd</a></li>
-                                            <li><a href="#">CCNA</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-dropdown">
-                                    <a href="#">Curriculum</a>
-                                        <ul class="dropdown">
-                                            <li><a href="#">Undergraduate</a></li>
-                                            <li><a href="#">Graduate</a></li>
-                                            <li><a href="#">Phd</a></li>
-                                            <li><a href="#">CCNA</a></li>
-                                        </ul>
-                                    </li>
+                                    <div class="row">
+                                        <div class="col-lg-6" >
+                                            <li>Program</li>
+                                            <hr>
+                                            <li style="color:white;font-size:0.8em;">Undergraduate</li>
+                                                <li><a href="{% url 'umajor' %}" style="margin-left: 20px;">Major</a></li>
+                                                <li><a href="{% url 'usecmajor' %}" style="margin-left: 20px;">Second Major</a></li>
+                                            <li style="color:white;font-size:0.8em;">Graduate</li>
+                                                <li><a href="{% url 'gmajor' %}" style="margin-left: 20px;">Major</a></li>
+                                                <li><a href="{% url 'gsecmajor' %}" style="margin-left: 20px;">Second Major</a></li>
+                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'phd' %}">PHD</a></li>
+                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'ccna' %}">CCNA</a></li>
+                                        </div>
+                                        <div class="col-lg-6" >
+                                            <li>Curriculum</li>
+                                            <hr>
+                                           <li style="color:white;font-size:0.8em;">Undergraduate</li>
+                                                <li><a href="{% url 'cumajor' %}" style="margin-left: 20px;">Major</a></li>
+                                                <li><a href="{% url 'cusecmajor' %}" style="margin-left: 20px;">Second Major</a></li>
+                                            <li style="color:white;font-size:0.8em;">Graduate</li>
+                                                <li><a href="{% url 'cgmajor' %}" style="margin-left: 20px;">Major</a></li>
+                                                <li><a href="{% url 'cgsecmajor' %}" style="margin-left: 20px;">Second Major</a></li>
+                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'cphd' %}">PHD</a></li>
+                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'cccna' %}">CCNA</a></li>
+                                        </div>
+                                    </div>
                                 </ul>
-                            </li>
+								</li>
                             <li><a href="event.html">Events</a></li>
                             <li><a href="news.html">News</a></li>
                             <li><a href="contact.html">Contact</a></li>
