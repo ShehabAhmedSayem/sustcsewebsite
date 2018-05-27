@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'people',
     'home',
     'curriculum',
+    'announcement',
 
     'ckeditor',
     'ckeditor_uploader',

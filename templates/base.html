@@ -67,25 +67,6 @@
 <div id="page">
 
     <nav class="colorlib-nav" role="navigation">
-        <div class="upper-menu">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-4">
-                        <p>Welcome to SUST CSE</p>
-                    </div>
-                    <div class="col-xs-6 col-md-push-2 text-right">
-                        <p>
-                            <ul class="colorlib-social-icons">
-                                <li><a href="#"><i class="icon-twitter"></i></a></li>
-                                <li><a href="#"><i class="icon-facebook"></i></a></li>
-                                <li><a href="#"><i class="icon-linkedin"></i></a></li>
-                                <li><a href="#"><i class="icon-dribbble"></i></a></li>
-                            </ul>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="top-menu">
             <div class="container">
                 <div class="row">
@@ -126,9 +107,23 @@
                                         </div>
                                     </div>
                                 </ul>
-								</li>
-                            <li><a href="event.html">Events</a></li>
-                            <li><a href="news.html">News</a></li>
+                            </li>
+                            <li class="has-dropdown">
+                                <a href="#">People</a>
+                                <ul class="dropdown" style="width:120px;">
+                                    <li><a href="{% url 'ccna' %}">STUDENT</a></li>
+                                    <li><a href="{% url 'phd' %}">FACULTY</a></li>
+                                    <li><a href="{% url 'ccna' %}">STAFF</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-dropdown">
+                                <a href="#">Announcement</a>
+                                <ul class="dropdown" style="width:180px;">
+                                    <li><a href="{% url 'notice_board' %}">NOTICE BOARD</a></li>
+                                    <li><a href="{% url 'news_events' %}">NEWS AND EVENTS</a></li>
+                                    <li><a href="{% url 'honor_board' %}">HONOR BOARD</a></li>
+                                </ul>
+                            </li>
                             <li><a href="contact.html">Contact</a></li>
                             <li class="btn-cta"><a href="#"><span>Login</span></a></li>
                         </ul>

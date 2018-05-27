@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Curriculum{% endblock %}
+{% block content %}
+
+<aside id="colorlib-hero">
+    <div class="flexslider">
+        <ul class="slides">
+        <li style="background-image: url(/static/images/img_bg_3.jpg);">
+            <div class="overlay"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
+                        <div class="slider-text-inner text-center">
+                            <h1>CURRICULUM</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        </ul>
+    </div>
+</aside>
+
+<div class="colorlib-classes">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="row row-pb-lg">
+                    <div class="col-md-12 animate-box">
+                        <div class="classes class-single">
+                            <div class="desc desc2">
+                                {{ curriculum.curriculum_details|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
