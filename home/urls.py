@@ -11,4 +11,5 @@ urlpatterns = [
     path('grad/second-major/', views.grad_second_major, name='gsecmajor'),
     path('phd/', views.phd, name='phd'),
     path('ccna/', views.ccna, name='ccna'),
+    path('publications/', views.publications, name='publications'),
 ]

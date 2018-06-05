@@ -30,6 +30,8 @@
 
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- Animate.css -->
+	<link rel="stylesheet" href="{% static 'css/sidenav.css' %}">
 	<!-- Icomoon Icon Fonts-->
 	<link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
 	<!-- Bootstrap  -->
@@ -81,7 +83,7 @@
                                 <a href="#">Academic</a>
                                 <ul class="dropdown">
                                     <div class="row">
-                                        <div class="col-lg-6" >
+                                        <div class="col-lg-4" >
                                             <li>Program</li>
                                             <hr>
                                             <li style="color:white;font-size:0.8em;">Undergraduate</li>
@@ -93,7 +95,22 @@
                                             <li style="color:white;font-size:0.8em;"><a href="{% url 'phd' %}">PHD</a></li>
                                             <li style="color:white;font-size:0.8em;"><a href="{% url 'ccna' %}">CCNA</a></li>
                                         </div>
-                                        <div class="col-lg-6" >
+                                        <div class="col-lg-4" >
+                                            <li>Admission</li>
+                                            <hr>
+                                           <li style="color:white;font-size:0.8em;">Undergraduate</li>
+                                                <li><a href="{% url 'cumajor' %}" style="margin-left: 20px;">Deciding</a></li>
+                                                <li><a href="{% url 'cusecmajor' %}" style="margin-left: 20px;">Apply</a></li>
+                                                <li><a href="{% url 'cusecmajor' %}" style="margin-left: 20px;">Getting Ready</a></li>
+                                            <li style="color:white;font-size:0.8em;">Second Major</li>
+                                                <li><a href="{% url 'cgmajor' %}" style="margin-left: 20px;">Eligibility</a></li>
+                                                <li><a href="{% url 'cgsecmajor' %}" style="margin-left: 20px;">Steps</a></li>
+                                                <li><a href="{% url 'cgsecmajor' %}" style="margin-left: 20px;">Deadline</a></li>
+                                                <li><a href="{% url 'cgsecmajor' %}" style="margin-left: 20px;">Info Session</a></li>
+                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'cphd' %}">PHD</a></li>
+                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'cccna' %}">CCNA</a></li>
+                                        </div>
+                                        <div class="col-lg-4" >
                                             <li>Curriculum</li>
                                             <hr>
                                            <li style="color:white;font-size:0.8em;">Undergraduate</li>
@@ -108,6 +125,28 @@
                                     </div>
                                 </ul>
                             </li>
+
+
+                            <li class="has-dropdown">
+                                <a href="#">Research</a>
+                                <ul class="dropdown" style="width:300%;">
+                                    <li><a href="{% url 'ccna' %}">Areas</a></li>
+                                    <li><a href="{% url 'ccna' %}">Research Seminar</a></li>
+                                    <li><a href="{% url 'publications' %}">Publications</a></li>
+                                        <!--<li><a href="{% url 'cgmajor' %}" style="margin-left: 20px;">Tech Reports</a></li>
+                                        <li><a href="{% url 'cgsecmajor' %}" style="margin-left: 20px;">Thesis reports</a></li>
+                                        <li><a href="{% url 'cgsecmajor' %}" style="margin-left: 20px;">Poster</a></li>
+                                        <li><a href="{% url 'cgsecmajor' %}" style="margin-left: 20px;">Conference</a></li>
+                                        <li><a href="{% url 'cgsecmajor' %}" style="margin-left: 20px;">Journal</a></li>
+                                        <li><a href="{% url 'cgsecmajor' %}" style="margin-left: 20px;">Patent</a></li>
+                                        <li><a href="{% url 'cgsecmajor' %}" style="margin-left: 20px;">Archive</a></li>-->
+                                </ul>
+                            </li>
+
+
+
+
+
                             <li class="has-dropdown">
                                 <a href="#">People</a>
                                 <ul class="dropdown" style="width:120px;">
