@@ -41,3 +41,8 @@ def phd(request):
 def ccna(request):
     context = {}
     return render(request, 'home/ccna.html', context)
+
+
+def publications(request):
+    context = {}
+    return render(request, 'home/publications.html', context)
