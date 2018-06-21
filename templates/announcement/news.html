@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}News{% endblock %}
+{% block content %}
+<aside id="colorlib-hero">
+    <div class="flexslider">
+        <ul class="slides">
+        <li style="background-image: url(/static/images/bg3.jpg);">
+            <div class="overlay"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
+                        <div class="slider-text-inner text-center">
+                            <h1>News</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        </ul>
+    </div>
+</aside>
+
+<div class="colorlib-blog colorlib-light-grey">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
+                <h2>Read Our News</h2>
+                <p>All top news of CSE SUST is here</p>
+            </div>
+        </div>
+        <div class="row">
+            {% for n in news %}
+            <div class="col-md-12 animate-box">
+                <article class="article-entry">
+                    <a href="#" class="blog-img" style="background-image: url(images/blog-1.jpg);">
+                        <p class="meta"><span class="day">{{ n.date_published|date:"j" }}</span><span class="month">{{ n.date_published|date:"F" }}</span></p>
+                    </a>
+                    <div class="desc">
+                        <h2><a href="#">{{ n.title }}</a></h2>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

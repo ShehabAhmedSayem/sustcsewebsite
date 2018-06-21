@@ -24,6 +24,7 @@ urlpatterns = [
     path('curriculum/', include('curriculum.urls')),
     path('people/', include('people.urls')),
     path('announcement/', include('announcement.urls')),
+    path('research/', include('research.urls')),
 
     path('ckeditor', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),

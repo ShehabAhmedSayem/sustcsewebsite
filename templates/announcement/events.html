@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Events{% endblock %}
+{% block content %}
+<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+			   	<li style="background-image: url(/static/images/bg3.jpg);">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
+				   				<div class="slider-text-inner text-center">
+				   					<h1>Upcoming Events</h1>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			  	</ul>
+		  	</div>
+		</aside>
+
+		<div class="colorlib-event">
+			<div class="container">
+				<div class="row">
+                    {% for event in events %}
+					<div class="col-md-4 animate-box">
+						<div class="event-entry">
+							<div class="desc">
+								<p class="meta"><span class="day">{{ event.event_date|date:"j" }}</span><span class="month">{{ event.event_date|date:"F" }}</span></p>
+                                <h2><a href="#">{{ event.title }}</a></h2>
+							</div>
+							<div class="location">
+								<span class="icon"><i class="icon-map"></i></span>
+								<p>{{ event.location }}</p>
+							</div>
+						</div>
+					</div>
+                    {% endfor %}
+				</div>
+			</div>
+		</div>
+
+<div class="colorlib-blog colorlib-light-grey">
+    <div class="container">
+
+
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Notice
+from .models import Notice, News, HonorBoard, Event
 
 
 def notice(request):
@@ -9,10 +9,18 @@ def notice(request):
 
 
 def news(request):
-    context = {}
-    return render(request, 'announcement/news-events.html', context)
+    news = News.objects.all()
+    context = {'news': news}
+    return render(request, 'announcement/news.html', context)
 
 
 def honor(request):
-    context = {}
+    honors = HonorBoard.objects.all()
+    context = {'honors': honors}
     return render(request, 'announcement/honor-board.html', context)
+
+
+def events(request):
+    events = Event.objects.all()
+    context = {'events': events}
+    return render(request, 'announcement/events.html', context)
