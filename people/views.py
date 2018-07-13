@@ -3,9 +3,15 @@ from .models import *
 
 
 def faculty(request):
-    faculty = Faculty.objects.all()
-    context={'faculty': faculty}
+    faculties = Faculty.objects.all()
+    context={'faculties': faculties}
     return render(request, 'people/faculty.html', context)
+
+
+def faculty_detail(request, faculty_id):
+    faculty = get_object_or_404(Faculty, pk=faculty_id)
+    context={'faculty': faculty}
+    return render(request, 'people/faculty-detail.html', context)
 
 
 def student(request):

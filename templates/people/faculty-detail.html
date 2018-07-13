@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Program{% endblock %}
+{% block content %}
+
+<aside id="colorlib-hero">
+    <div class="flexslider">
+        <ul class="slides">
+        <li style="background-image: url(/static/images/bg3.jpg);">
+            <div class="overlay"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
+                        <div class="slider-text-inner text-center">
+                            <h1>Faculty</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        </ul>
+    </div>
+</aside>
+
+<div class="colorlib-classes">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="classes class-single">
+                    <div class="desc desc2">
+                        <h3>{{ faculty.name }}</h3>
+                        <p>{{ faculty.designation }}</p>
+                        <p>{{ faculty.status }}</p>
+                        <p>{{ faculty.office }}</p>
+                        <p>{{ faculty.contact }}</p>
+                        <p>{{ faculty.email }}</p>
+                        <div>
+                            <h1>Educations</h1>
+                            <hr>
+                            {% if faculty.education_set.all %}
+                                {% for edu in faculty.education_set.all %}
+                                    <p>{{ edu.degree }}</p>
+                                    <p>{{ edu.passing_year }}</p>
+                                {% endfor %}
+                            {% else %}
+                                <p>No Education Details Available</p>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h1>Experience</h1>
+                            <hr>
+                            {% if faculty.experience_set.all %}
+                                {% for exp in faculty.experience_set.all %}
+                                    <p>{{ exp.experience_type }}</p>
+                                    <p>{{ exp.organization }}</p>
+                                {% endfor %}
+                            {% else %}
+                                <p>No Experience Details Available</p>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h1>Publications</h1>
+                            <hr>
+                            {% if faculty.publication_set.all %}
+                                {% for publication in faculty.publication_set.all %}
+                                    <p>{{ publication.title }} - {{ publication.publication_type }}</p>
+                                {% endfor %}
+                            {% else %}
+                                <p>No Publications Details Available</p>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h1>Social Profiles</h1>
+                            <hr>
+                            {% if faculty.socialprofile_set.all %}
+                                {% for scp in faculty.socialprofile_set.all %}
+                                    <p><a href="{{ scp.link }}"> {{ scp.link }}</a></p>
+                                {% endfor %}
+                            {% else %}
+                                <p>No Profile Details Available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

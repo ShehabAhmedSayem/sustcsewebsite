@@ -43,7 +43,7 @@ class SocialProfile(models.Model):
     link = models.URLField()
 
     def __str__(self):
-        return self.name + " -> " + self.link
+        return self.link
 
 
 class Staff(People):
@@ -61,7 +61,7 @@ class Batch(models.Model):
     batch_year = models.IntegerField()
 
     def __str__(self):
-        return self.batch_year
+        return str(self.batch_year)
 
     class Meta:
         verbose_name_plural = "batches"
@@ -105,14 +105,14 @@ class Experience(models.Model):
         ('academic', 'Academic'),
         ('technical', 'Technical'),
     )
-    experience_type = models.CharField(max_length=20, choices=EXP_TYPE)
     name = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+    experience_type = models.CharField(max_length=20, choices=EXP_TYPE)
     organization = models.CharField(max_length=200)
     designation = models.CharField(max_length=200)
     time_duration = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.name + " -> " + self.designation
+        return self.experience_type
 
 
 class Education(models.Model):
@@ -123,5 +123,5 @@ class Education(models.Model):
     specialization = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
-        return self.name + " -> " + self.degree
+        return self.degree
 
