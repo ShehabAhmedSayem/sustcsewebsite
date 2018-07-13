@@ -1,20 +1,59 @@
 from django.contrib import admin
 
-from .models import Notice, ProgramCategory
+from .models import Notice, News, Event, HonorBoard
 
 
 class NoticeAdmin(admin.ModelAdmin):
-    fieldsets = [
-        ('Title of the notice', {'fields': ['title']}),
-        ('Program and Year', {'fields': ['program_year']}),
-        ('Upload the Pdf file of the notice', {'fields': ['upload']}),
-    ]
+    fields = (
+        ('program_name', 'year_semester'),
+        'title',
+        'details',
+        'upload',
+    )
 
-    list_display = ('title', 'program_year', 'date_published')
-    list_filter = ['date_published', 'program_year']
+    list_display = ('title', 'program_name', 'year_semester', 'date_published')
+    list_filter = ['date_published', 'year_semester']
     search_fields = ['title']
 
 
-admin.site.register(ProgramCategory)
+class NewsAdmin(admin.ModelAdmin):
+    fields = (
+        'title',
+        'details',
+        'image',
+    )
+
+    list_display = ('title', 'date_published')
+    list_filter = ['date_published']
+    search_fields = ['title']
+
+
+class EventAdmin(admin.ModelAdmin):
+    fields = (
+        ('title', 'event_date'),
+        'location',
+        'details',
+        'image',
+    )
+
+    list_display = ('title', 'event_date')
+    list_filter = ['event_date']
+    search_fields = ['title']
+
+
+class HonorBoardAdmin(admin.ModelAdmin):
+    fields = (
+        'title',
+        'details',
+        'image',
+    )
+
+    list_display = ('title',)
+    search_fields = ['title']
+
+
 admin.site.register(Notice, NoticeAdmin)
+admin.site.register(News, NewsAdmin)
+admin.site.register(Event, EventAdmin)
+admin.site.register(HonorBoard, HonorBoardAdmin)
 

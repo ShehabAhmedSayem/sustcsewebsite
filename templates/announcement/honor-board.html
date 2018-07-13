@@ -1,3 +1,42 @@
 {% extends 'base.html' %}
-{% block title %}Program{% endblock %}
-{% block content %}<h1>This is the Honor-board Page.</h1>{% endblock %}
+{% block title %}News{% endblock %}
+{% block content %}
+<aside id="colorlib-hero">
+    <div class="flexslider">
+        <ul class="slides">
+        <li style="background-image: url(/static/images/bg3.jpg);">
+            <div class="overlay"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
+                        <div class="slider-text-inner text-center">
+                            <h1>Honor Board</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        </ul>
+    </div>
+</aside>
+
+<div class="colorlib-blog colorlib-light-grey">
+    <div class="container">
+        {% for honor in honors %}
+            <article class="article-entry">
+                <div class="desc">
+                    <div class="row">
+                        <div class="col-md-4 animate-box">
+                            <img src="/static/images/bg3.jpg" width="300px" height="250px">
+                        </div>
+                        <div class="col-md-8 animate-box">
+                            <h1>{{ honor.title }}</h1>
+                            <p>{{ honor.details|safe }}</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
