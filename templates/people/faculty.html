@@ -2,38 +2,54 @@
 {% block title %}Program{% endblock %}
 {% block content %}
 
-<aside id="colorlib-hero">
+
+<!--<aside id="colorlib-hero">
     <div class="flexslider">
         <ul class="slides">
-        <li style="background-image: url(/static/images/bg3.jpg);">
-            <div class="overlay"></div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
-                        <div class="slider-text-inner text-center">
-                            <h1>Faculty</h1>
+            <li style="background-image: url(/static/images/bg3.jpg);">
+                <div class="overlay"></div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
+                            <div class="slider-text-inner text-center">
+                                <h1>Faculty</h1>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </li>
+            </li>
         </ul>
     </div>
-</aside>
+</aside>-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<div ng-app="">
 
-<div class="colorlib-classes">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="classes class-single">
-                    <div class="desc desc2">
-                        {% for faculty in faculties %}
-                        <li><a href="{% url 'faculty_detail' faculty.id %}">{{ faculty.name }}</a><br>
-                        {{faculty.designation}}
-                        </li>
-                        {% endfor %}
+    <div style="background-image: url('/static/images/people/faculty_bg_image.jpg')" class="colorlib-classes">
+        <div class="container">
+            <div class="row">
+                {% for faculty in faculties %}
+                <div class="col-md-3">
+                    <div class="card">
+                        <center>
+                            <a href="{% url 'faculty_detail' faculty.id %}">
+                                <img src="/static/images/people/no_image_available.png" alt="Avatar"
+                                     style="width:75%; margin: auto; padding: 10px;">
+                            </a>
+                        </center>
+                        <div class="card-bottom">
+                            <p class="people-detail">
+                                <b>
+                                    <a class="people-title" href="{% url 'faculty_detail' faculty.id %}">
+                                        {{faculty.name}}</a>
+                                </b>
+                            <p class="people-designation">{{faculty.designation}}</p>
+                            <p class="people-designation" style="padding-bottom: 1em">{{faculty.office}}</p>
+                            </p>
+
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>

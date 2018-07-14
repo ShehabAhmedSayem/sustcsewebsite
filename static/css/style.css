@@ -125,7 +125,8 @@ h1, h2, h3, h4, h5, h6, figure {
       .colorlib-nav .upper-menu .btn-apply a {
         color: rgba(255, 255, 255, 0.6); }
   .colorlib-nav .top-menu {
-    padding: 30px 30px; }
+    padding-bottom: 30px;
+    padding-top: 10px; }
     @media screen and (max-width: 768px) {
       .colorlib-nav .top-menu {
         padding: 28px 1em; } }
@@ -1675,3 +1676,17 @@ input[type="text"] {
 
 .js .animate-box {
   opacity: 0; }
+.top-bar-header{
+  font-size: x-large;
+  display: block;
+}
+.top-bar{
+  background-color: #0E2231;
+  margin: 0px;
+  padding: 0px;
+}
+.top-bar-text{
+  margin-left: 10%;
+  color: #bdc3c7;
+
+}
