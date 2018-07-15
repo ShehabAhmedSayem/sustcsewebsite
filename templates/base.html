@@ -70,12 +70,17 @@
 
 <div id="page">
 
-    <nav class="colorlib-nav" role="navigation">
-        <div class="row top-bar">
-                    <p class="top-bar-text">
+    <nav class="colorlib-nav top-bar" role="navigation">
+        <div class="row">
+
+            <a href="{% url 'index' %}" >
+                <p class="top-bar-text">
                         <span class="top-bar-header">Department of Computer Science and Engineering</span>
                         <span>Shahjalal University of Science and Technology, Sylhet</span>
                     </p>
+
+
+            </a>
 
 
             </div>
@@ -84,15 +89,15 @@
             <div class="container">
 
                 <div class="row">
-                    <div class="col-md-2">
-                        <div id="colorlib-logo"><a href="{% url 'index' %}">SUST CSE</a></div>
-                    </div>
-                    <div class="col-md-10 text-right menu-1">
+                    <!--<div class="col-md-2">-->
+                        <!--<div id="colorlib-logo"><a href="{% url 'index' %}">SUST CSE</a></div>-->
+                    <!--</div>-->
+                    <div class="col-md-12 text-right menu-1">
                         <ul>
-                            <li><a href="{% url 'index' %}">Home</a></li>
-                            <li><a href="{% url 'about' %}">About</a></li>
+                            <li><a class="menu-text" href="{% url 'index' %}">Home</a></li>
+                            <li><a class="menu-text" href="{% url 'about' %}">About</a></li>
                             <li class="has-dropdown">
-                                <a href="#">Academic</a>
+                                <a class="menu-text" href="#">Academic</a>
                                 <ul class="dropdown">
                                     <div class="row">
                                         <div class="col-lg-4" >
@@ -140,7 +145,7 @@
 
 
                             <li class="has-dropdown">
-                                <a href="#">Research</a>
+                                <a class="menu-text" href="#">Research</a>
                                 <ul class="dropdown" style="width:200%;">
                                     <li><a href="{% url 'research_groups' %}">Research Groups</a></li>
                                     <li><a href="{% url 'publications' %}">Publications</a></li>
@@ -172,7 +177,7 @@
                                 </ul>
                             </li>
                             <li><a href="contact.html">Contact</a></li>
-                            <li class="btn-cta"><a href="#"><span>Login</span></a></li>
+                            <li><a href="#"><span>Login</span></a></li>
                         </ul>
                     </div>
                 </div>

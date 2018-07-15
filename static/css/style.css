@@ -159,7 +159,7 @@ h1, h2, h3, h4, h5, h6, figure {
         font-size: 12px;
         padding: 30px 12px;
         font-weight: 700;
-        color: rgba(0, 0, 0, 0.4);
+        color:antiquewhite;
         -webkit-transition: 0.5s;
         -o-transition: 0.5s;
         transition: 0.5s; }
@@ -1688,5 +1688,5 @@ input[type="text"] {
 .top-bar-text{
   margin-left: 10%;
   color: #bdc3c7;
-
 }
+

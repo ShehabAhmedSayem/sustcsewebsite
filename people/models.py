@@ -17,6 +17,8 @@ class People(models.Model):
     office = models.CharField(max_length=200)
     contact = models.CharField(max_length=200, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
+    socialLinks = ["Dribbble.png", "Facebook.png", "Github.png", "YouTube.png", "Twitter.png", "Pinterest.png",
+                   "Linkedin.png", "Google+.png", "Snapchat.png", "Instagram.png"]
 
     class Meta:
         abstract = True

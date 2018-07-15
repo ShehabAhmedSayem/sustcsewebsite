@@ -49,7 +49,7 @@ class Class(models.Model):
     year_semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.course_title + "->" + self.course_teacher + "->" + self.is_current
+        return str(self.course_title)
 
     class Meta:
         verbose_name_plural = "classes"
