@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Curriculum{% endblock %}
+{% block title %}Program{% endblock %}
 {% block content %}
 
 <aside id="colorlib-hero">
@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
                         <div class="slider-text-inner text-center">
-                            <h1>CURRICULUM</h1>
+                            <h1>PROGRAM</h1>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,8 @@
                     <div class="col-md-12 animate-box">
                         <div class="classes class-single">
                             <div class="desc desc2">
-                                {{ program.program_name }}
+                                <h1>{{ program.program_name }}</h1>
+                                <p>{{ program.details|safe }}</p>
                             </div>
                         </div>
                     </div>

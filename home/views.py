@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from curriculum.models import Program
+
 
 def index(request):
     context = {}
@@ -14,33 +16,38 @@ def about(request):
 
 
 def undergrad_major(request):
+    program = Program.objects.get(program_name="Undergraduate Major")
+    context = {'program': program}
+    return render(request, 'home/program_details.html', context)
+
+
+def underegrad(request):
     context = {}
-    return render(request, 'home/undergrad_major.html', context)
+    return render(request, 'home/undergrad.html', context)
 
 
 def undergrad_second_major(request):
-    context = {}
-    return render(request, 'home/undergrad_second_major.html', context)
+    program = Program.objects.get(program_name="Undergraduate Second Major")
+    context = {'program': program}
+    return render(request, 'home/program_details.html', context)
 
 
-def grad_major(request):
-    context = {}
-    return render(request, 'home/grad_major.html', context)
-
-
-def grad_second_major(request):
-    context = {}
-    return render(request, 'home/grad_second_major.html', context)
+def masters(request):
+    program = Program.objects.get(program_name="Masters")
+    context = {'program': program}
+    return render(request, 'home/program_details.html', context)
 
 
 def phd(request):
-    context = {}
-    return render(request, 'home/phd.html', context)
+    program = Program.objects.get(program_name="Phd")
+    context = {'program': program}
+    return render(request, 'home/program_details.html', context)
 
 
 def ccna(request):
-    context = {}
-    return render(request, 'home/ccna.html', context)
+    program = Program.objects.get(program_name="CCNA")
+    context = {'program': program}
+    return render(request, 'home/program_details.html', context)
 
 
 def publications(request):
