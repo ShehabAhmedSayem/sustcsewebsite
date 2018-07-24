@@ -2,7 +2,7 @@
 {% block title %}Program{% endblock %}
 {% block content %}
 
-<aside id="colorlib-hero">
+<!--<aside id="colorlib-hero">
     <div class="flexslider">
         <ul class="slides">
         <li style="background-image: url(/static/images/img_bg_3.jpg);">
@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
                         <div class="slider-text-inner text-center">
-                            <h1>PROGRAM</h1>
+                            <h1>Program</h1>
                         </div>
                     </div>
                 </div>
@@ -19,19 +19,36 @@
         </li>
         </ul>
     </div>
-</aside>
+</aside>-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<div class="people-detail-header-image">
+    <span class="people-detail-header-overlay"></span>
+</div>
+<div class="colorlib-classes people-detail-header-text">
 
-<div class="colorlib-classes">
+
+    <!--<img width="200px" height="200px" class="img img-responsive img-thumbnail img-rounded people-detail-image"
+         src="/static/images/people/no_image_available.png">-->
+
+
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="row row-pb-lg">
-                    <div class="col-md-12 animate-box">
-                        <div class="classes class-single">
-                            <div class="desc desc2">
-                                <h1>{{ program.program_name }}</h1>
-                                <p>{{ program.details|safe }}</p>
-                            </div>
+            <div class="col-md-10">
+                <div class="classes class-single program-detail-header-card">
+                    <div class="desc desc2 row">
+                        <div class="col-md-12 program-detail-container">
+                            <center><h2 class="people-detail-text">Program - {{ program.program_name }}</h2>
+                                <center class="faculty_detail_description" style="color: whitesmoke">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                    eu fugiat nulla pariatur. Excepteur sint
+
+                                </center>
+                                <a href="#program-detail" style="color: white"><i class="material-icons">keyboard_arrow_down</i></a>
+                            </center>
                         </div>
                     </div>
                 </div>
@@ -40,4 +57,28 @@
     </div>
 </div>
 
+<div class="row" id="program-detail">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="card">
+            <div class="card-bottom">
+                <p class="people-detail">
+                    <b>
+                <p class="people-title">Program Detail</p>
+                </b>
+                </p>
+            </div>
+
+            <p class="faculty_detail_description">
+                <span>
+                {{ program.details|safe }}
+                </span>
+
+            </p>
+
+        </div>
+    </div>
+</div>
+
 {% endblock %}
+
+

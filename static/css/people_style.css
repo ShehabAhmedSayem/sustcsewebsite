@@ -18,6 +18,21 @@
     background: rgba(39, 174, 96, 1.0);
 }
 
+.program-detail-header-card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    margin-top: 15%;
+    background: #2980b9;
+}
+.curriculum-detail-header-card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    margin-top: 15%;
+    background: #c0392b;
+}
+
 .card {
     /* Add shadows to create the "card" effect */
     background: white;
@@ -84,11 +99,17 @@
     border-right : 5px solid white;
 }
 
+.program-detail-container {
+    margin-top: 1%;
+
+}
+
 .people-detail-text {
     display: block;
     color: whitesmoke;
     font-weight: 500;
     font-family: cursive;
+
 }
 
 .people-detail-image {
