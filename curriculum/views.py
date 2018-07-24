@@ -6,8 +6,9 @@ from .models import *
 
 def undergrad_major(request):
     program = Program.objects.get(program_name="Undergraduate Major")
-    #course = program.course__set
-    context = {'program': program}
+    courses = program.course_set.all()
+    semesters = Semester.objects.all()
+    context = {'program': program, 'courses': courses, 'semesters':semesters}
     return render(request, 'curriculum/curriculum.html', context)
 
 
@@ -17,24 +18,33 @@ def undergrad(request):
 
 
 def undergrad_second_major(request):
-    program = Course.objects.get(program_name="Undergraduate Second Major")
-    context = {'program': program}
+    program = Program.objects.get(program_name="Undergraduate Second Major")
+    courses = program.course_set.all()
+    semesters = Semester.objects.all()
+    context = {'program': program, 'courses': courses, 'semesters': semesters}
     return render(request, 'curriculum/curriculum.html', context)
 
 
 def masters(request):
-    program = Course.objects.get(program_name="Masters")
-    context = {'program': program}
+    program = Program.objects.get(program_name="Masters")
+    courses = program.course_set.all()
+    semesters = Semester.objects.all()
+    context = {'program': program, 'courses': courses, 'semesters': semesters}
     return render(request, 'curriculum/curriculum.html', context)
 
 
 def phd(request):
-    program = Course.objects.get(program_name="Phd")
-    context = {'program': program}
+    program = Program.objects.get(program_name="Phd")
+    courses = program.course_set.all()
+    semesters = Semester.objects.all()
+    context = {'program': program, 'courses': courses, 'semesters': semesters}
     return render(request, 'curriculum/curriculum.html', context)
 
 
 def ccna(request):
-    program = Course.objects.get(program_name="CCNA")
-    context = {'program': program}
+    program = Program.objects.get(program_name="CCNA")
+    courses = program.course_set.all()
+    semesters = Semester.objects.all()
+    context = {'program': program, 'courses': courses, 'semesters': semesters}
     return render(request, 'curriculum/curriculum.html', context)
+

@@ -9,5 +9,6 @@ def research_groups(request):
 
 
 def publications(request):
-    context={}
+    publications = Publication.objects.all()
+    context={'publications': publications}
     return render(request, 'research/publications.html', context)
