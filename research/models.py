@@ -26,7 +26,7 @@ class ResearchGroupFaculty(models.Model):
     designation = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     class Meta:
         verbose_name_plural = "research group faculties"
@@ -37,7 +37,7 @@ class ResearchGroupStudent(models.Model):
     name = models.ForeignKey(Student, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class ResearchGroupNotice(models.Model):
