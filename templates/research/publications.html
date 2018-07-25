@@ -4,16 +4,12 @@
 
 
 <div id="mySidenav" class="sidenav">
-    <a href="#" onclick="showDiv('tech_report')">Tech Reports</a>
-    <a href="#" onclick="showDiv('thesis_reports')">Thesis reports</a>
-    <a href="#" onclick="showDiv('poster')">Poster</a>
     <a href="#" onclick="showDiv('conference')">Conference</a>
     <a href="#" onclick="showDiv('journal')">Journal</a>
-    <a href="#" onclick="showDiv('patent')">Patent</a>
-    <a href="#" onclick="showDiv('archive')">Archive</a>
+    <a href="#" onclick="showDiv('poster')">Poster</a>
 </div>
 
-<div id="main" onload="showDiv('tech_report')">
+<div id="main" onload="showDiv('conference')">
 
     <form>
         <div class="input-group">
@@ -28,62 +24,67 @@
 
     <br><br>
 
-    <div class="card" id="tech_report">
-        <div class="container">
-            <h4><b>Tech Report</b></h4>
+    <div class="card" id="conference" style="display: none">
+        <table>
+            <tr>
+                <th><a href="#">Title</a></th>
+                <th><a href="#">Cited By</a></th>
+                <th><a href="#">Published Year</a></th>
+            </tr>
             {% for publication in publications %}
-                {% if publication.publication_type.name == "Tech Report" %}
-                    
+                {% if publication.publication_type.name == 'Conference' %}
+                    <tr>
+                        <td>{{ publication.title }}</td>
+                        <td>{{ publication.cited_by }}</td>
+                        <td>{{ publication.published_year }}</td>
+                    </tr>
                 {% endif %}
             {% endfor %}
-            <p>Tech Report Goes Here.....</p>
-        </div>
+        </table>
     </div>
 
-    <div class="card" id="thesis_reports" style="display: none">
-        <div class="container">
-            <h4><b>Thesis reports</b></h4>
-            <p>Thesis reports Goes Here.....</p>
-        </div>
+    <div class="card" id="journal" style="display: none">
+        <table>
+            <tr>
+                <th><a href="#">Title</a></th>
+                <th><a href="#">Cited By</a></th>
+                <th><a href="#">Published Year</a></th>
+            </tr>
+            {% for publication in publications %}
+                {% if publication.publication_type.name == 'Journal' %}
+                    <tr>
+                        <td>{{ publication.title }}</td>
+                        <td>{{ publication.cited_by }}</td>
+                        <td>{{ publication.published_year }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
     </div>
 
     <div class="card" id="poster" style="display: none">
-        <div class="container">
-            <h4><b>Poster</b></h4>
-            <p>Poster Goes Here.....</p>
-        </div>
+        <table>
+            <tr>
+                <th><a href="#">Title</a></th>
+                <th><a href="#">Cited By</a></th>
+                <th><a href="#">Published Year</a></th>
+            </tr>
+            {% for publication in publications %}
+                {% if publication.publication_type.name == 'Poster' %}
+                    <tr>
+                        <td>{{ publication.title }}</td>
+                        <td>{{ publication.cited_by }}</td>
+                        <td>{{ publication.published_year }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
     </div>
-
-    <div class="card" id="conference" style="display: none">
-        <div class="container">
-            <h4><b>Conference</b></h4>
-            <p>Conference Goes Here.....</p>
-        </div>
-    </div>
-    <div class="card" id="journal" style="display: none">
-        <div class="container">
-            <h4><b>Journal</b></h4>
-            <p>Journal Goes Here.....</p>
-        </div>
-    </div>
-    <div class="card" id="patent" style="display: none">
-        <div class="container">
-            <h4><b>Patent</b></h4>
-            <p>Patent Goes Here.....</p>
-        </div>
-    </div>
-    <div class="card" id="archive" style="display: none">
-        <div class="container">
-            <h4><b>Archive</b></h4>
-            <p>Archive Goes Here.....</p>
-        </div>
-    </div>
-
 
 </div>
 
 <script>
-    divs = ["tech_report", "archive", "poster", "patent", "conference", "journal", "thesis_reports"];
+    divs = ["poster", "conference", "journal"];
 
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
@@ -101,15 +102,12 @@
             if (divs[i].valueOf() == divName.valueOf()) {
                 var x = document.getElementById(divs[i].valueOf());
                 x.style.display = "block";
-
             }
             else {
                 var x = document.getElementById(divs[i].valueOf());
                 x.style.display = "none";
-
             }
         }
-
     }
 </script>
 

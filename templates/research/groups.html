@@ -32,9 +32,13 @@
                             <h4>{{ group.date_established }}</h4>
                             <hr>
                             <p>{{ group.about }}</p>
-                            <a href="{{ group.site_link }}">Website</a>
-                            <hr>
-                            <h5>{{ group.contact }}</h5>
+                            {% if group.site_link %}
+                                <a href="{{ group.site_link }}">Website</a>
+                                <hr>
+                            {% endif %}
+                            {% if group.contact %}
+                                <h5>{{ group.contact }}</h5>
+                            {% endif %}
                         </li>
                         {% endfor %}
                     </div>
