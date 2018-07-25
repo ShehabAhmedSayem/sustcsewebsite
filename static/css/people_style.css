@@ -2,7 +2,8 @@
     margin: 0px;
     padding: 0px;
 }
-.content-faculty-detail{
+
+.content-faculty-detail {
     /*background-image: url(../images/people/paper_texture_bg.jpg);*/
     background: #F1F1F1;
     background-repeat: no-repeat;
@@ -25,6 +26,7 @@
     margin-top: 15%;
     background: #2980b9;
 }
+
 .curriculum-detail-header-card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -33,11 +35,35 @@
     background: #c0392b;
 }
 
+.course-dept-circle {
+    display: inline-block;
+    background: rebeccapurple;
+    color: white;
+    width: 4em;
+    height: 4em;
+    line-height: 4em;
+    text-align: center;
+    border-radius: 100%;
+    margin-top: 1em;
+}
+.modal-open[style] {
+padding-right: 0px !important;
+}
+
+.total-course-credit {
+    float: right;
+    margin-right: 1em;
+}
+.modal-header{
+    background: #A3305B;
+    color: white;
+}
 .card {
     /* Add shadows to create the "card" effect */
     background: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
+    margin-bottom: 1em;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -96,7 +122,7 @@
 
 .people-detail-container {
     margin-top: 1%;
-    border-right : 5px solid white;
+    border-right: 5px solid white;
 }
 
 .program-detail-container {
@@ -129,28 +155,34 @@
     font-family: cursive;
     cursor: pointer;
 }
-.people-header-menu:hover{
+
+.people-header-menu:hover {
     color: #2c3e50;
     transition: color 0.8s;
 }
-.material-icons{
+
+.material-icons {
     padding-right: 10px;
     margin-top: 1%;
 }
-.faculty_detail_description{
-    padding:0% 5% 2% 5%;
+
+.faculty_detail_description {
+    padding: 0% 5% 2% 5%;
     font-weight: 500;
     text-align: justify;
 }
-.social-icon{
+
+.social-icon {
     display: inline-block;
     margin-left: 1%;
 }
-.faculty-education-title{
+
+.faculty-education-title {
     display: block;
     font-weight: bold;
     font-size: 1.1em;
 }
-.faculty-education-subtitle{
+
+.faculty-education-subtitle {
     display: block;
 }

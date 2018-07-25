@@ -19,6 +19,8 @@ class Program(models.Model):
 class Semester(models.Model):
     year_semester = models.CharField(max_length=10)
 
+
+
     def __str__(self):
         return self.year_semester
 
@@ -39,6 +41,10 @@ class Course(models.Model):
 
     def __str__(self):
         return self.course_title
+
+    def getDept(self):
+        return self.course_code[0:3]
+
 
 
 class Class(models.Model):
