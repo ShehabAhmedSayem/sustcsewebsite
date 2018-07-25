@@ -2,92 +2,112 @@
 {% block title %}Publications{% endblock %}
 {% block content %}
 
+<!--<script type="text/javascript" src="/static/js/jquery.min.js"></script>-->
 
-<div id="mySidenav" class="sidenav">
-    <a href="#" onclick="showDiv('conference')">Conference</a>
-    <a href="#" onclick="showDiv('journal')">Journal</a>
-    <a href="#" onclick="showDiv('poster')">Poster</a>
+
+<div class="sidebar">
+
+    <ul class="sidebar-nav">
+        <li>
+            <a id="navbar-toggle"><i class="material-icons sidebar-icon" aria-hidden="true">reorder</i></i></a>
+        </li>
+        <li>
+            <a href="#" onclick="showDiv('conference')">Conference <i class="material-icons sidebar-icon"
+                                                                      aria-hidden="true">forum</i></i></a>
+        </li>
+        <li>
+            <a href="#" onclick="showDiv('journal')">Journal <i class="material-icons sidebar-icon" aria-hidden="true">import_contacts</i></i>
+            </a>
+        </li>
+        <li>
+            <a href="#" onclick="showDiv('poster')">Poster <i class="material-icons sidebar-icon" aria-hidden="true">list_alt</i></i>
+            </a>
+        </li>
+    </ul>
 </div>
 
-<div id="main" onload="showDiv('conference')">
 
-    <form>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search by options">
-            <div class="input-group-btn">
-                <button class="btn btn-default" type="submit">
-                    <i class="glyphicon glyphicon-search">Search</i>
-                </button>
+<div id="main">
+
+        <form>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="material-icons">search</i></span>
+                <input style="border:1px solid #bdc3c7" id="searchItem" type="text" class="form-control"
+                       name="searchItem" placeholder="Search by Title, Author, Year, Journal, Conference, Cited By">
             </div>
-        </div>
-    </form>
-
-    <br><br>
+            <br>
+        </form>
+    <br>
 
     <div class="card" id="conference" style="display: none">
-        <table>
-            <tr>
-                <th><a href="#">Title</a></th>
-                <th><a href="#">Cited By</a></th>
-                <th><a href="#">Published Year</a></th>
-            </tr>
-            {% for publication in publications %}
+        <table id="conferenceTable">
+            <thead>
+                <tr>
+                    <th><a href="#">Title</a></th>
+                    <th><a href="#">Cited By</a></th>
+                    <th><a href="#">Published Year</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for publication in publications %}
                 {% if publication.publication_type.name == 'Conference' %}
-                    <tr>
-                        <td>
-                            {{ publication.title }}
-                            </br>
-                            <span style="font-size:10px;">
-                            {{ publication.author_faculty }}
-                            {% for student in publication.author_student.all %}
-                                , {{ student }}
-                            {% endfor %}
+                <tr>
+                    <td>
+                        <b>{{ publication.title }}</b>
+                        </br>
+                        <span>
+                                {{ publication.author_faculty }}
+                                {% for student in publication.author_student.all %}
+                                    , {{ student }}
+                                {% endfor %}
                             </br>
                             {{ publication.where_published }}
-                            </span>
-                        </td>
-                        <td>{{ publication.cited_by }}</td>
-                        <td>{{ publication.published_year }}</td>
-                    </tr>
+                                </span>
+                    </td>
+                    <td>{{ publication.cited_by }}</td>
+                    <td>{{ publication.published_year }}</td>
+                </tr>
                 {% endif %}
-            {% endfor %}
+                {% endfor %}
+            </tbody>
         </table>
     </div>
 
     <div class="card" id="journal" style="display: none">
-        <table>
+        <table id="journalTable">
             <tr>
                 <th><a href="#">Title</a></th>
                 <th><a href="#">Cited By</a></th>
                 <th><a href="#">Published Year</a></th>
             </tr>
             {% for publication in publications %}
-                {% if publication.publication_type.name == 'Journal' %}
-                    <tr>
-                        <td>{{ publication.title }}</td>
-                        <td>{{ publication.cited_by }}</td>
-                        <td>{{ publication.published_year }}</td>
-                    </tr>
-                {% endif %}
+            {% if publication.publication_type.name == 'Journal' %}
+            <tr>
+                <td>{{ publication.title }}</td>
+                <td>{{ publication.cited_by }}</td>
+                <td>{{ publication.published_year }}</td>
+            </tr>
+            {% endif %}
             {% endfor %}
         </table>
     </div>
 
     <div class="card" id="poster" style="display: none">
-        <table>
+        <table id="posterTable">
             <tr>
                 <th><a href="#">Title</a></th>
                 <th><a href="#">Cited By</a></th>
                 <th><a href="#">Published Year</a></th>
             </tr>
             {% for publication in publications %}
-                {% if publication.publication_type.name == 'Poster' %}
-                    <tr>
-                        <td>{{ publication.title }}</td>
-                        <td>{{ publication.cited_by }}</td>
-                        <td>{{ publication.published_year }}</td>
-                    </tr>
-                {% endif %}
+            {% if publication.publication_type.name == 'Poster' %}
+            <tr>
+                <td>{{ publication.title }}</td>
+                <td>{{ publication.cited_by }}</td>
+                <td>{{ publication.published_year }}</td>
+            </tr>
+            {% endif %}
             {% endfor %}
         </table>
     </div>
@@ -120,6 +140,28 @@
             }
         }
     }
+
+    $(document).ready(function () {
+
+        showDiv('conference');
+        var table = $('#conferenceTable').DataTable();
+        alert("Hel");
+
+
+        var state = "expanded";
+        //Check if navbar is expanded or minimized and handle
+        $('#navbar-toggle').click(function () {
+            if (state == "expanded") {
+                $('.sidebar').css('margin-left', '-180px');
+                state = "minimized";
+            } else {
+                if (state == "minimized") {
+                    $('.sidebar').css('margin-left', '0px');
+                    state = "expanded";
+                }
+            }
+        })
+    })
 </script>
 
 
