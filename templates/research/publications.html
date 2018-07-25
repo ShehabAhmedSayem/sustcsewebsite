@@ -34,7 +34,18 @@
             {% for publication in publications %}
                 {% if publication.publication_type.name == 'Conference' %}
                     <tr>
-                        <td>{{ publication.title }}</td>
+                        <td>
+                            {{ publication.title }}
+                            </br>
+                            <span style="font-size:10px;">
+                            {{ publication.author_faculty }}
+                            {% for student in publication.author_student.all %}
+                                , {{ student }}
+                            {% endfor %}
+                            </br>
+                            {{ publication.where_published }}
+                            </span>
+                        </td>
                         <td>{{ publication.cited_by }}</td>
                         <td>{{ publication.published_year }}</td>
                     </tr>
