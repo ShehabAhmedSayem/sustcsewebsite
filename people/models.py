@@ -1,59 +1,11 @@
 from django.db import models
-from ckeditor.fields import RichTextField
-from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class ResearchArea(models.Model):
     name = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.name
-
-
-class People(models.Model):
-    name = models.CharField(max_length=200)
-    designation = models.CharField(max_length=200)
-    image = models.ImageField(blank=True, null=True, upload_to='people/images/')
-    office = models.CharField(max_length=200)
-    contact = models.CharField(max_length=200, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
-    socialLinks = ["Dribbble.png", "Facebook.png", "Github.png", "YouTube.png", "Twitter.png", "Pinterest.png",
-                   "Linkedin.png", "Google+.png", "Snapchat.png", "Instagram.png"]
-
-    class Meta:
-        abstract = True
-
-
-class Faculty(People):
-    research_interest = models.ManyToManyField(ResearchArea, related_name="faculty")
-    STATUS = (
-        ('in_service', 'In service'),
-        ('on_leave', 'On leave'),
-        ('ex', 'Ex Faculty'),
-    )
-    status = models.CharField(max_length=20, choices=STATUS)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name_plural = "faculties"
-
-
-class SocialProfile(models.Model):
-    name = models.ForeignKey(Faculty, on_delete=models.CASCADE)
-    link = models.URLField()
-
-    def __str__(self):
-        return self.link
-
-
-class Staff(People):
-    STATUS = (
-        ('in_service', 'In service'),
-        ('ex', 'Ex Staff'),
-    )
-    status = models.CharField(max_length=20, choices=STATUS)
 
     def __str__(self):
         return self.name
@@ -69,7 +21,42 @@ class Batch(models.Model):
         verbose_name_plural = "batches"
 
 
+class User(AbstractUser):
+    email = models.EmailField(unique=True)
+    is_faculty = models.BooleanField(default=False)
+    username = models.CharField(blank=True, null=True, max_length=150, default="N")
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'is_faculty']
+
+    def __str__(self):
+        return self.email
+
+
+class Faculty(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    name = models.CharField(max_length=200)
+    designation = models.CharField(max_length=200)
+    image = models.ImageField(blank=True, null=True, upload_to='people/images/')
+    office = models.CharField(max_length=200)
+    contact = models.CharField(max_length=200, blank=True, null=True)
+    research_interest = models.ManyToManyField(ResearchArea, related_name="faculty")
+    STATUS = (
+        ('in_service', 'In service'),
+        ('on_leave', 'On leave'),
+        ('ex', 'Ex Faculty'),
+    )
+    status = models.CharField(max_length=20, choices=STATUS)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "faculties"
+
+
 class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     name = models.CharField(max_length=200)
     registration_no = models.CharField(max_length=12)
     STATUS = (
@@ -84,16 +71,25 @@ class Student(models.Model):
         return self.name
 
 
+class SocialProfile(models.Model):
+    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+    link = models.URLField()
+
+    def __str__(self):
+        return self.link
+
+
 class ResearchStudent(models.Model):
-    faculty_name = models.ForeignKey(Faculty, on_delete=models.CASCADE)
-    student_name = models.ForeignKey(Student, on_delete=models.CASCADE)
+    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
     research_area = models.ForeignKey(ResearchArea, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.faculty_name + " -> " + self.student_name
+        return self.faculty.name + " -> " + self.student.name
 
 
 class Award(models.Model):
+    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     title = models.CharField(max_length=500)
     details = models.TextField()
     image = models.ImageField(blank=True, null=True, upload_to='awards/images/')
@@ -107,7 +103,7 @@ class Experience(models.Model):
         ('academic', 'Academic'),
         ('technical', 'Technical'),
     )
-    name = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     experience_type = models.CharField(max_length=20, choices=EXP_TYPE)
     organization = models.CharField(max_length=200)
     designation = models.CharField(max_length=200)
@@ -118,7 +114,7 @@ class Experience(models.Model):
 
 
 class Education(models.Model):
-    name = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     degree = models.CharField(max_length=100)
     institution = models.CharField(max_length=200)
     passing_year = models.IntegerField()
@@ -127,3 +123,19 @@ class Education(models.Model):
     def __str__(self):
         return self.degree
 
+
+class Staff(models.Model):
+    name = models.CharField(max_length=200)
+    designation = models.CharField(max_length=200)
+    image = models.ImageField(blank=True, null=True, upload_to='people/images/')
+    office = models.CharField(max_length=200)
+    contact = models.CharField(max_length=200, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    STATUS = (
+        ('in_service', 'In service'),
+        ('ex', 'Ex Staff'),
+    )
+    status = models.CharField(max_length=20, choices=STATUS)
+
+    def __str__(self):
+        return self.name

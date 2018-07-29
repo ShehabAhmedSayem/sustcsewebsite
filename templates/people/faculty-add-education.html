@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Education{% endblock %}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+{% if user.is_authenticated %}
+    <a href="{% url 'faculty_detail' user.id %}">Back to Profile Page</a>
+    <div class="col-md-12">
+        <div class="row">
+            <div id="faculty_education" class="col-md-10 col-md-offset-1">
+                <div class="card">
+                    <div class="card-bottom">
+                        <p class="people-detail">
+                            <b>
+                        <p class="people-title">Education</p>
+                        </b>
+                        </p>
+                    </div>
+
+                    {% if user.faculty.education_set.all %}
+                    {% for edu in user.faculty.education_set.all %}
+                    <p class="faculty_detail_description">
+                        <span class="faculty-education-title">{{ edu.degree }}</span>
+                        <span class="faculty-education-subtitle">Passing Year : {{ edu.passing_year }}</span>
+                        <span class="faculty-education-subtitle">Institution : {{ edu.institution}}</span>
+                        <span class="faculty-education-subtitle">Specialization : {{ edu.specialization}}</span>
+                    <hr>
+                    </p>
+                    {% endfor %}
+                    {% else %}
+                    <p>No Education Details Available</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ education_form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+
+{% else %}
+    <p>You have nothing to do here</p>
+{% endif %}
+{% endblock %}

@@ -138,4 +138,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'
 
-LOGIN_REDIRECT_URL = '/'
+AUTH_USER_MODEL = 'people.User'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'account-redirect'
+LOGOUT_REDIRECT_URL = 'index'

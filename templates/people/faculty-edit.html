@@ -1,0 +1,10 @@
+{% if user.is_authenticated %}
+    <form enctype="multipart/form-data" method="post" action="">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ faculty_form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+{% else %}
+    <p>You have nothing to do here</p>
+{% endif %}

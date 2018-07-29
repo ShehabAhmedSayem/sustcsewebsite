@@ -19,8 +19,6 @@ class Program(models.Model):
 class Semester(models.Model):
     year_semester = models.CharField(max_length=10)
 
-
-
     def __str__(self):
         return self.year_semester
 
@@ -34,7 +32,7 @@ class Course(models.Model):
     course_type = models.CharField(max_length=20, choices=COURSE_TYPES)
     course_code = models.CharField(max_length=20)
     course_title = models.CharField(max_length=100)
-    course_details = RichTextField()
+    course_details = models.TextField()
     course_credit = models.FloatField()
     program_name = models.ForeignKey(Program, null=True, on_delete=models.SET_NULL)
     year_semester = models.ForeignKey(Semester, null=True, on_delete=models.SET_NULL)
@@ -46,16 +44,15 @@ class Course(models.Model):
         return self.course_code[0:3]
 
 
-
 class Class(models.Model):
-    course_title = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     course_teacher = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     is_current = models.BooleanField(default=False)
     batch = models.ForeignKey(Batch, on_delete=models.CASCADE)
     year_semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.course_title)
+        return self.course.course_title
 
     class Meta:
         verbose_name_plural = "classes"

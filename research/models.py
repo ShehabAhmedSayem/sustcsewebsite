@@ -1,6 +1,4 @@
 from django.db import models
-from ckeditor.fields import RichTextField
-from ckeditor_uploader.fields import RichTextUploadingField
 
 from people.models import ResearchArea, Faculty, Student
 
@@ -22,11 +20,11 @@ class ResearchGroup(models.Model):
 
 class ResearchGroupFaculty(models.Model):
     research_group = models.ForeignKey(ResearchGroup, on_delete=models.CASCADE)
-    name = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     designation = models.CharField(max_length=200)
 
     def __str__(self):
-        return str(self.name)
+        return self.faculty.name
 
     class Meta:
         verbose_name_plural = "research group faculties"
@@ -34,10 +32,10 @@ class ResearchGroupFaculty(models.Model):
 
 class ResearchGroupStudent(models.Model):
     research_group = models.ForeignKey(ResearchGroup, on_delete=models.CASCADE)
-    name = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.name)
+        return self.student.name
 
 
 class ResearchGroupNotice(models.Model):

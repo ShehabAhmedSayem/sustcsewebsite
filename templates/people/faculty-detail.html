@@ -13,7 +13,7 @@
 
 
         <img width="200px" height="200px" class="img img-responsive img-thumbnail img-rounded people-detail-image"
-             src="/static/images/people/saif_sir.jpg">
+             src="/media/{{ faculty.image }}">
 
 
         <div class="container">
@@ -42,7 +42,7 @@
                                 <span class="people-detail-text"><i
                                         class="material-icons">phone</i>{{ faculty.contact }}</span>
                                 <span class="people-detail-text"><i
-                                        class="material-icons">email</i>{{ faculty.email }}</span>
+                                        class="material-icons">email</i>{{ faculty.user.email }}</span>
 
                                 <div class="row" style="margin-top:10px;">
                                     <img class="img img-responsive social-icon" width="45px;" height="45px"
@@ -70,9 +70,13 @@
                                 <a href="#faculty_projects"><span class="people-header-menu">Projects</span></a>
                                 <a href="#faculty_awards"><span class="people-header-menu">Awards</span></a>
                                 <a href="#faculty_other_activities"><span class="people-header-menu">Others</span></a>
+                                {% if user.is_authenticated %}
+                                {% if user.id == faculty.user.id %}
+                                <a href="{% url 'update_faculty' %}"><span class="people-header-menu">Edit Your Profile</span></a>
+                                <a href="{% url 'add_education' %}"><span class="people-header-menu">Add Education</span></a>
+                                {% endif %}
+                                {% endif %}
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -224,6 +228,7 @@
                 </div>
             </div>
 
+
             <div class="row">
 
                 <div id="faculty_awards" class="col-md-10 col-md-offset-1">
@@ -235,14 +240,20 @@
                             </b>
                             </p>
                         </div>
+
+                        {% if faculty.award_set.all %}
+                        {% for award in faculty.award_set.all %}
                         <p class="faculty_detail_description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                            sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            <span class="faculty-education-title">{{ award.title }}</span>
+                            <img height="200px;" width="300px;" src="/media/{{ award.image }}">
+                            <span class="faculty-education-subtitle">{{ award.details }}</span>
+                        <hr>
                         </p>
+                        {% endfor %}
+                        {% else %}
+                        <p class="faculty_detail_description">No Award Available</p>
+                        {% endif %}
+
                     </div>
                 </div>
 

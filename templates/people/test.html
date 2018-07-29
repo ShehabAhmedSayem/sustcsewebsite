@@ -30,7 +30,7 @@
                 <div class="col-md-3">
                     <div class="card">
                         <center>
-                            <a href="{% url 'faculty_detail' faculty.user.id %}">
+                            <a href="#">
                                 <img src="/static/images/people/no_image_available.png" alt="Avatar"
                                      style="width:75%; margin: auto; padding: 10px;">
                             </a>
@@ -38,6 +38,7 @@
                         <div class="card-bottom">
                             <p class="people-detail">
                                 <b>
+                                    <!---->
                                     <a class="people-title" href="{% url 'faculty_detail' faculty.user.id %}">
                                         {{faculty.name}}</a>
                                 </b>

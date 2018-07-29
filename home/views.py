@@ -1,8 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
 from curriculum.models import Program
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+
+
+@login_required
+def account_redirect(request):
+    return redirect('faculty_detail', request.user.id)
 
 
 def index(request):

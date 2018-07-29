@@ -101,10 +101,7 @@
                     <span class="top-bar-header">Department of Computer Science and Engineering</span>
                     <span>Shahjalal University of Science and Technology, Sylhet</span>
                 </p>
-
-
             </a>
-
 
         </div>
         <div class="top-menu">
@@ -128,21 +125,17 @@
                                             <hr>
                                             <li style="color:white;font-size:0.8em;">Undergraduate</li>
                                             <li><a href="{% url 'umajor' %}" style="margin-left: 20px;">Major</a></li>
-                                            <li><a href="{% url 'usecmajor' %}" style="margin-left: 20px;">Second
-                                                Major</a></li>
+                                            <li><a href="{% url 'usecmajor' %}" style="margin-left: 20px;">Second Major</a></li>
                                             <li style="color:white;font-size:0.8em;">Graduate</li>
-                                            <li><a href="{% url 'masters' %}" style="margin-left: 20px;">Masters</a>
-                                            </li>
+                                            <li><a href="{% url 'masters' %}" style="margin-left: 20px;">Masters</a></li>
                                             <li><a href="{% url 'phd' %}" style="margin-left: 20px;">Phd</a></li>
-                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'ccna' %}">CCNA</a>
-                                            </li>
+                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'ccna' %}">CCNA</a></li>
                                         </div>
                                         <div class="col-lg-4">
                                             <li>Admission</li>
                                             <hr>
                                             <li style="color:white;font-size:0.8em;">Undergraduate</li>
-                                            <li><a href="{% url 'cumajor' %}" style="margin-left: 20px;">Deciding</a>
-                                            </li>
+                                            <li><a href="{% url 'cumajor' %}" style="margin-left: 20px;">Deciding</a></li>
                                             <li><a href="#" style="margin-left: 20px;">Apply</a></li>
                                             <li><a href="#" style="margin-left: 20px;">Getting Ready</a></li>
                                             <li style="color:white;font-size:0.8em;">Second Major</li>
@@ -158,14 +151,11 @@
                                             <hr>
                                             <li style="color:white;font-size:0.8em;">Undergraduate</li>
                                             <li><a href="{% url 'cumajor' %}" style="margin-left: 20px;">Major</a></li>
-                                            <li><a href="{% url 'cusecmajor' %}" style="margin-left: 20px;">Second
-                                                Major</a></li>
+                                            <li><a href="{% url 'cusecmajor' %}" style="margin-left: 20px;">Second Major</a></li>
                                             <li style="color:white;font-size:0.8em;">Graduate</li>
-                                            <li><a href="{% url 'cmasters' %}" style="margin-left: 20px;">Masters</a>
-                                            </li>
+                                            <li><a href="{% url 'cmasters' %}" style="margin-left: 20px;">Masters</a></li>
                                             <li><a href="{% url 'cphd' %}" style="margin-left: 20px;">Phd</a></li>
-                                            <li style="color:white;font-size:0.8em;"><a
-                                                    href="{% url 'cccna' %}">CCNA</a></li>
+                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'cccna' %}">CCNA</a></li>
                                         </div>
                                     </div>
                                 </ul>
@@ -208,7 +198,11 @@
                                 </ul>
                             </li>
                             <li><a href="contact.html">Contact</a></li>
-                            <li><a href="{% url 'login' %}"><span>Login</span></a></li>
+                            {% if user.is_authenticated %}
+                                <li><a href="{% url 'logout' %}"><span>Logout</span></a></li>
+                            {% else %}
+                                <li><a href="{% url 'login' %}"><span>Login</span></a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>

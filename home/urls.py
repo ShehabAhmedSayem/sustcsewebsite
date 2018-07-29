@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('account/', views.account_redirect, name='account-redirect'),
     path('about/', views.about, name='about'),
     path('undergrad/', views.underegrad, name='undergrad'),
     path('undergrad/major/', views.undergrad_major, name='umajor'),
