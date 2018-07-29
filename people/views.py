@@ -34,22 +34,18 @@ def staff(request):
 @transaction.atomic
 def update_faculty(request):
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
         faculty_form = FacultyForm(request.POST, instance=request.user.faculty)
 
-        if user_form.is_valid() and faculty_form.is_valid():
-            user_form.save()
+        if faculty_form.is_valid():
             faculty_form.save()
             return redirect('faculty_detail', request.user.id)
         else:
             pass
 
     else:
-        user_form = UserForm(instance=request.user)
         faculty_form = FacultyForm(instance=request.user.faculty)
 
     return render(request, 'people/faculty-edit.html', {
-        'user_form': user_form,
         'faculty_form': faculty_form,
     })
 

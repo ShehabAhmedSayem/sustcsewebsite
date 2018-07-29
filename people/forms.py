@@ -2,12 +2,6 @@ from django import forms
 from .models import *
 
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('email', )
-
-
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
@@ -17,7 +11,7 @@ class StudentForm(forms.ModelForm):
 class FacultyForm(forms.ModelForm):
     class Meta:
         model = Faculty
-        fields = '__all__'
+        exclude = ('user',)
 
 
 class ExperienceForm(forms.ModelForm):
@@ -34,7 +28,7 @@ class EducationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', '')
         super(EducationForm, self).__init__(*args, **kwargs)
-        self.fields['faculty'] = forms.ModelChoiceField(queryset=Faculty.objects.filter(user=user))
+        self.fields['faculty'] = forms.ModelChoiceField(queryset=Faculty.objects.filter(user=user), initial=0)
 
 
 class SocialProfileForm(forms.ModelForm):
