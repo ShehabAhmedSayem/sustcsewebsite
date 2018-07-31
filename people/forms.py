@@ -61,3 +61,18 @@ class SocialProfileForm(forms.ModelForm):
         model = SocialProfile
         fields = '__all__'
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', '')
+        super(SocialProfileForm, self).__init__(*args, **kwargs)
+        self.fields['faculty'] = forms.ModelChoiceField(queryset=Faculty.objects.filter(user=user), initial=0)
+
+
+class AwardForm(forms.ModelForm):
+    class Meta:
+        model = Award
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', '')
+        super(AwardForm, self).__init__(*args, **kwargs)
+        self.fields['faculty'] = forms.ModelChoiceField(queryset=Faculty.objects.filter(user=user), initial=0)

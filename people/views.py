@@ -189,3 +189,38 @@ def delete_publication(request, publication_id):
         messages.error(request, 'You don\'t have authorization!')
 
     return redirect('faculty_detail', request.user.id)
+
+
+@login_required
+@faculty_required
+@transaction.atomic
+def add_award(request):
+    if request.method == 'POST':
+        award_form = AwardForm(request.POST, request.FILES, user=request.user)
+
+        if award_form.is_valid():
+            award_form.save()
+            return redirect('add_award')
+        else:
+            pass
+
+    else:
+        award_form = AwardForm(user=request.user)
+
+    return render(request, 'people/faculty-add-award.html', {
+        'award_form': award_form,
+    })
+
+
+@login_required
+@faculty_required
+@transaction.atomic
+def delete_award(request, award_id):
+    award = get_object_or_404(Award, pk=award_id)
+    if request.user.faculty == award.faculty:
+        award.delete()
+        messages.success(request, 'Successfully deleted!')
+    else:
+        messages.error(request, 'You don\'t have authorization!')
+
+    return redirect('faculty_detail', request.user.id)

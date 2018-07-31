@@ -16,6 +16,7 @@ class ResearchGroup(models.Model):
 
     def __str__(self):
         return self.name
+
     def getStrippedName(self):
         return self.name.replace(" ", "")
 

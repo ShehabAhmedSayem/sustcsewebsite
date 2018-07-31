@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}Social Profile{% endblock %}
+{% block title %}Award{% endblock %}
 {% block content %}
 
-<br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 
 {% if user.is_authenticated %}
 <br>
 <div style="text-align:center;">
-<form method="post" action="">
+<form enctype="multipart/form-data" method="post" action="">
     {% csrf_token %}
-    {{ social_profile_form.as_p }}
+    {{ award_form.as_p }}
     <input type="submit" value="Done" />
 </form>
     <br>
@@ -24,20 +24,21 @@
                 <div class="card-bottom">
                     <p class="people-detail">
                         <b>
-                    <p class="people-title">Social Profile</p>
+                    <p class="people-title">Award</p>
                     </b>
                     </p>
                 </div>
 
-                {% if user.faculty.socialprofile_set.all %}
-                {% for socialprofile in user.faculty.socialprofile_set.all %}
+                {% if user.faculty.award_set.all %}
+                {% for award in user.faculty.award_set.all %}
                 <p class="faculty_detail_description">
-                    <span class="faculty-education-title">{{ socialprofile.link }}</span>
+                    <span class="faculty-education-title">{{ award.title }}</span>
+                    <span class="faculty-education-subtitle">{{ award.details }}</span>
                 <hr>
                 </p>
                 {% endfor %}
                 {% else %}
-                <p class="faculty_detail_description">No Social Profile Link Available</p>
+                <p class="faculty_detail_description">No Award Details Available</p>
                 {% endif %}
 
             </div>

@@ -40,6 +40,7 @@
                                         class="material-icons">email</i>{{ faculty.user.email }}</span>
 
                                 <div class="row" style="margin-top:10px;">
+
                                     <img class="img img-responsive social-icon" width="45px;" height="45px"
                                          src="/static/images//social_icon/Facebook.png">
                                     <img class="img img-responsive social-icon" width="45px;" height="45px"
@@ -50,6 +51,11 @@
                                          src="/static/images//social_icon/Twitter.png">
                                     <img class="img img-responsive social-icon" width="45px;" height="45px"
                                          src="/static/images//social_icon/Google+.png">
+                                    {% if user.is_authenticated %}
+                                    {% if user.id == faculty.user.id %}
+                                    <a href="{% url 'add_social_profile' %}"><span class="people-header-menu">Add Social Profile</span></a>
+                                    {% endif %}
+                                    {% endif %}
                                 </div>
                             </div>
 
@@ -261,7 +267,6 @@
                 </div>
             </div>
 
-
             <div class="row">
 
                 <div id="faculty_awards" class="col-md-10 col-md-offset-1">
@@ -269,7 +274,13 @@
                         <div class="card-bottom">
                             <p class="people-detail">
                                 <b>
-                            <p class="people-title">Awards</p>
+                            <p class="people-title">Awards
+                            {% if user.is_authenticated %}
+                            {% if user.id == faculty.user.id %}
+                            <a href="{% url 'add_award' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
+                            {% endif %}
+                            {% endif %}
+                            </p>
                             </b>
                             </p>
                         </div>
@@ -278,6 +289,11 @@
                         {% for award in faculty.award_set.all %}
                         <p class="faculty_detail_description">
                             <span class="faculty-education-title">{{ award.title }}</span>
+                            {% if user.is_authenticated %}
+                            {% if user.id == faculty.user.id %}
+                            <a href="{% url 'delete_award' award.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
+                            {% endif %}
+                            {% endif %}
                             <img height="200px;" width="300px;" src="/media/{{ award.image }}">
                             <span class="faculty-education-subtitle">{{ award.details }}</span>
                         <hr>
