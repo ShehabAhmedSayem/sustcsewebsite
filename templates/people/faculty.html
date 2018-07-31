@@ -21,7 +21,9 @@
         </ul>
     </div>
 </aside>-->
-<div class="content-faculty-detail">
+
+
+<!--<div class="content-faculty-detail">
 
     <div class="colorlib-classes">
         <div class="container">
@@ -50,6 +52,75 @@
                 </div>
                 {% endfor %}
             </div>
+        </div>
+    </div>
+</div>-->
+
+
+<div class="research-group-background">
+    <div class="program-content-overlay">
+        <div class="program-content">
+
+            <div class="faculty-list">
+                <div class="row">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="classes class-single curriculum-detail-container-card">
+                                <div class="desc desc2 row">
+                                    <div class="col-md-12 program-detail-container">
+
+                                        <form>
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i
+                                                        class="material-icons">search</i></span>
+                                                <input style="border:1px solid #bdc3c7" id="searchItem" type="text"
+                                                       class="form-control"
+                                                       name="searchItem"
+                                                       placeholder="Search by Faculty Name, Designation, Room No, Status"
+                                                       data-toggle="hideseek" data-list=".list">
+                                            </div>
+                                            <br>
+                                        </form>
+
+                                        {% for faculty in faculties %}
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <center>
+                                                    <a href="{% url 'faculty_detail' faculty.user.id %}">
+                                                        <img src="/media/{{ faculty.image }}" alt="Avatar" height="50px" class="img img-responsive">
+                                                    </a>
+                                                </center>
+                                                <div class="card-bottom">
+                                                    <span>
+                                                        <b>
+                                                            <a class="people-title"
+                                                               href="{% url 'faculty_detail' faculty.user.id %}">{{faculty.name}}</a>
+                                                        </b>
+                                                    </span>
+                                                    <span class="people-designation">
+                                                        {{faculty.designation}}
+                                                    </span>
+                                                    <span class="people-designation">
+                                                        {{faculty.getFacultyStatus}}
+                                                    </span>
+                                                    <span class="people-designation" style="margin-bottom: 2%;">
+                                                        {{faculty.office}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
         </div>
     </div>
 </div>

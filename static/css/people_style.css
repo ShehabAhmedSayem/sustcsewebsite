@@ -4,8 +4,7 @@
 }
 
 .content-faculty-detail {
-    /*background-image: url(../images/people/paper_texture_bg.jpg);*/
-    background: #F1F1F1;
+    background-image: url(../images/bg1.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
@@ -99,7 +98,9 @@ padding-right: 0px !important;
 
 .people-title {
     color: white;
-    padding: 1em;
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: 0.2em;
     display: block;
     margin: 0px;
 }
@@ -108,6 +109,7 @@ padding-right: 0px !important;
     color: #95a5a6;
     display: block;
     margin-left: 1em;
+    padding-bottom: 0.2em;
 }
 
 .people-detail-header-image {
@@ -122,6 +124,16 @@ padding-right: 0px !important;
     background-image: url(../images/bg3.jpg);
     background-size: 100% 100%;
     background-attachment: fixed;
+}
+.faculty-list-background{
+    background-image: url(../images/bg3.jpg);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+
+}
+.faculty-list{
+    margin-top:5%;
+
 }
 .program-content-overlay{
     background: rgba(0, 0, 0, 0.6);

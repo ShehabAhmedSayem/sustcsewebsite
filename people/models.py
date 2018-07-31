@@ -51,6 +51,15 @@ class Faculty(models.Model):
     def __str__(self):
         return self.name
 
+    def getFacultyStatus(self):
+        if self.status == 'in_service':
+            return "In service"
+        elif self.status == 'on_leave':
+            return "On leave"
+        elif self.status == 'ex':
+            return "Ex Faculty"
+
+
     class Meta:
         verbose_name_plural = "faculties"
 
