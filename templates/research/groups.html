@@ -2,7 +2,7 @@
 {% block title %}Program{% endblock %}
 {% block content %}
 
-<aside id="colorlib-hero">
+<!--<aside id="colorlib-hero">
     <div class="flexslider">
         <ul class="slides">
         <li style="background-image: url(/static/images/bg3.jpg);">
@@ -46,6 +46,179 @@
             </div>
         </div>
     </div>
+</div>-->
+
+
+<div class="research-group-background">
+    <div class="program-content-overlay">
+        <div class="program-content">
+            <div class="">
+                <div class="row">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <h2 class="program-detail-card-header">
+                                <i class="material-icons">school</i>
+                                Research Group</h2>
+                            <div class="classes class-single program-detail-header-card">
+                                <div class="desc desc2 row">
+                                    <div class="col-md-12 program-detail-container">
+                                        <center class="faculty_detail_description">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                            tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat.
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                            eu fugiat nulla pariatur. Excepteur sint Lorem ipsum dolor sit amet,
+                                            consectetur
+                                            adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat.
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                            eu fugiat nulla pariatur. Excepteur sint
+                                        </center>
+                                        <center>
+                                            <a href="#curriculum-detail" style="color: black"><i class="material-icons">keyboard_arrow_down</i></a>
+                                        </center>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="curriculum-detail">
+                <div class="row">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="classes class-single curriculum-detail-container-card">
+                                <div class="desc desc2 row">
+                                    <div class="col-md-12 program-detail-container">
+
+                                        <form>
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i
+                                                        class="material-icons">search</i></span>
+                                                <input style="border:1px solid #bdc3c7" id="searchItem" type="text"
+                                                       class="form-control"
+                                                       name="searchItem"
+                                                       placeholder="Search by Course Code, Course Title, Course Credit"
+                                                       data-toggle="hideseek" data-list=".list">
+                                            </div>
+                                            <br>
+                                        </form>
+
+
+                                        {% for group in groups %}
+
+                                        <div class="col-md-4 col-sm-11 col-xs-11 card" style="padding: 0px">
+
+
+                                            <div class="research_group_img_div">
+                                                <div class="hovereffect">
+                                                    <img class="img-responsive"
+                                                         src="/static/images/backgrounds/material-bg-01.png"
+                                                         alt="">
+                                                    <div class="overlay">
+                                                        <h2>Natural Language Processing</h2>
+                                                        {% if group.site_link %}
+                                                        <a class="info" href="{{ group.site_link }}">Visit Site</a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="research_group_card">
+
+                                                <span class="research_group_name">{{ group.name }}</span>
+                                                <hr>
+                                                <i class="material-icons">date_range</i> <span>  {{ group.date_established }}</span>
+                                                <br>
+                                                <i class="material-icons">description</i><span data-toggle="modal" data-target="#{{group.getStrippedName}}"
+                                                               style="cursor: pointer">  View Details</span>
+
+
+                                                <br>
+                                                {% if group.rules %}
+                                                    <i class="material-icons">assignment_turned_in</i> <span data-toggle="modal" data-target="#rules{{group.getStrippedName}}"
+                                                               style="cursor: pointer">View Rules</span>
+                                                {% endif %}
+
+                                                <div id="{{group.getStrippedName}}" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <span style="color: white">Course Detail of {{course.rules}}</span>
+                                                                <span data-dismiss="modal"
+                                                                      style="cursor: pointer"><i
+                                                                        class="material-icons">clear</i></span>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>{{ group.about }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div id="rules{{group.getStrippedName}}" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <span style="color: white">Course Detail of {{course.course_code}}</span>
+                                                                <span data-dismiss="modal"
+                                                                      style="cursor: pointer"><i
+                                                                        class="material-icons">clear</i></span>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>{{ group.about }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                {% if group.site_link %}
+                                                <i class="material-icons">language</i> <a href="{{ group.site_link }}">{{group.site_link}}</a>
+                                                {% endif %}
+                                                <br>
+                                                {% if group.office %}
+                                                <i class="material-icons">location_on</i> <span >{{group.office}}</span>
+                                                {% endif %}
+                                                <br>
+                                                {% if group.email %}
+                                                <i class="material-icons">email</i> <span href="{{ group.email }}">{{group.email}}</span>
+                                                {% endif %}
+                                                <br>
+                                                {% if group.contact %}
+                                                <i class="material-icons">phone</i> <span>{{ group.contact }}</span>
+                                                {% endif %}
+
+                                            </div>
+
+
+                                        </div>
+
+                                        {% endfor %}
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </div>
 </div>
 
+
 {% endblock %}
+
+

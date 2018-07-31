@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="row " id="curriculum-detail">
+
+
+    <div class="container col-md-10 col-md-offset-1">
+
+
+        <form>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="material-icons">search</i></span>
+                <input style="border:1px solid #bdc3c7" id="searchItem" type="text" class="form-control"
+                       name="searchItem" placeholder="Search by Course Code, Course Title, Course Credit"
+                       data-toggle="hideseek" data-list=".list">
+            </div>
+            <br>
+
+        </form>
+        {% for semester in semesters %}
+        <div class="card">
+
+
+            <div class="card-bottom  animate-box">
+                <p class="people-detail">
+                    <b>
+                <p class="people-title">
+                    {% if semester.year_semester == "1/1" %}
+                    1st Year 1st Semester
+                    {% elif semester.year_semester == "1/2" %}
+                    1st Year 2nd Semester
+                    {% elif semester.year_semester == "2/1" %}
+                    2nd Year 1st Semester
+                    {% elif semester.year_semester == "2/2" %}
+                    2nd Year 2nd Semester
+                    {% elif semester.year_semester == "3/1" %}
+                    3rd Year 1st Semester
+                    {% elif semester.year_semester == "3/2" %}
+                    3rd Year 2nd Semester
+                    {% elif semester.year_semester == "4/1" %}
+                    4th Year 1st Semester
+                    {% elif semester.year_semester == "4/2" %}
+                    4th Year 2nd Semester
+                    {% endif %}
+
+                    {% for k,v in totalCoursePerSemester.items %}
+                    {% if k == semester.year_semester %}
+                    <b class="total-course-credit"> Total Course : {{v}} </b>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% for k,v in totalCreditPerSemester.items %}
+                    {% if k == semester.year_semester %}
+                    <b class="total-course-credit"> Total Credit : {{v}} </b>
+                    {% endif %}
+                    {% endfor %}
+
+
+                </p></b>
+                </p>
+            </div>
+
+            <p class="faculty_detail_description">
+                <div class="row list" style="margin: 15px;">
+                    {% for course in courses %}
+                    {% if course.year_semester.year_semester == semester.year_semester %}
+                    <!--<div class="col-md-12">-->
+                    <div class="col-md-1 ignore-me">
+                        <span class="course-dept-circle ignore-me">{{course.getDept}}</span>
+                    </div>
+                    <div class="col-md-5">
+                        <b>{{ course.course_code }}</b>
+                        <br>
+                        {{ course.course_title }}
+                        <br>
+                        Credit : {{ course.course_credit }}
+                        <br>
+                        <a data-toggle="modal" data-target="#{{course.course_code}}" style="cursor: pointer">View
+                            Details</a>
+
+
+                        <div id="{{course.course_code}}" class="modal fade" role="dialog"
+                             style="padding-right: 0px !important;">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <span style="color: white">Course Detail of {{course.course_code}}</span>
+                                        <span data-dismiss="modal" style="cursor: pointer"><i class="material-icons">clear</i></span>
+                                    </div>
+                                    <div class="modal-body">
+            <p>{{ course.course_details }}</p> </div>
+                            </div>
+                        </div>
+</div>
+</div>
+<!--</div>-->
+<!--</div>-->
+{% endif %}
+{% endfor %}
+</div>
+
+</p>
+
+</div>
+{% endfor %}
+
+
+</div>
+</div>
+
+
+</body>
+</html>

@@ -1,6 +1,5 @@
 {% load static %}
 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -32,13 +31,14 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
     <!-- jQuery library -->
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
 
-    <!-- Popper JS -->
+    <!--Popper JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
+    <!--Latest compiled JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 
 
@@ -54,6 +54,7 @@
     <link rel="stylesheet" href="{% static 'css/publication_style.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/people_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/curriculum_style.css' %}">
 
     <!-- Magnific Popup -->
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
@@ -75,26 +76,28 @@
     <script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
-    <script src="{% static 'js/respond.min.js' %}"></script>
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/jquery.hideseek.min.js' %}"></script>
-    <![endif]-->
 
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+    <script src="{% static 'js/respond.min.js' %}"></script>
+
+    <script src="{% static 'js/jquery.hideseek.min.js' %}"></script>
+
+    <![endif]&ndash;&gt;-->
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 
 </head>
 
-<body style="padding-right: 0px; !important;">
+<body style="padding-right: 0px; !important;" id="body">
 
 <div class="colorlib-loader"></div>
 
 <div id="page">
+    <nav class="colorlib-nav top-bar navbar-fixed-top" id="navbar" role="navigation">
 
-    <nav class="colorlib-nav top-bar" role="navigation">
-        <div class="row">
+        <div class="row" id="top-nav-title">
 
             <a href="{% url 'index' %}" style="width: 100%">
                 <p class="top-bar-text">
@@ -104,6 +107,7 @@
             </a>
 
         </div>
+
         <div class="top-menu">
 
             <div class="container">
@@ -125,17 +129,21 @@
                                             <hr>
                                             <li style="color:white;font-size:0.8em;">Undergraduate</li>
                                             <li><a href="{% url 'umajor' %}" style="margin-left: 20px;">Major</a></li>
-                                            <li><a href="{% url 'usecmajor' %}" style="margin-left: 20px;">Second Major</a></li>
+                                            <li><a href="{% url 'usecmajor' %}" style="margin-left: 20px;">Second
+                                                Major</a></li>
                                             <li style="color:white;font-size:0.8em;">Graduate</li>
-                                            <li><a href="{% url 'masters' %}" style="margin-left: 20px;">Masters</a></li>
+                                            <li><a href="{% url 'masters' %}" style="margin-left: 20px;">Masters</a>
+                                            </li>
                                             <li><a href="{% url 'phd' %}" style="margin-left: 20px;">Phd</a></li>
-                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'ccna' %}">CCNA</a></li>
+                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'ccna' %}">CCNA</a>
+                                            </li>
                                         </div>
                                         <div class="col-lg-4">
                                             <li>Admission</li>
                                             <hr>
                                             <li style="color:white;font-size:0.8em;">Undergraduate</li>
-                                            <li><a href="{% url 'cumajor' %}" style="margin-left: 20px;">Deciding</a></li>
+                                            <li><a href="{% url 'cumajor' %}" style="margin-left: 20px;">Deciding</a>
+                                            </li>
                                             <li><a href="#" style="margin-left: 20px;">Apply</a></li>
                                             <li><a href="#" style="margin-left: 20px;">Getting Ready</a></li>
                                             <li style="color:white;font-size:0.8em;">Second Major</li>
@@ -151,11 +159,14 @@
                                             <hr>
                                             <li style="color:white;font-size:0.8em;">Undergraduate</li>
                                             <li><a href="{% url 'cumajor' %}" style="margin-left: 20px;">Major</a></li>
-                                            <li><a href="{% url 'cusecmajor' %}" style="margin-left: 20px;">Second Major</a></li>
+                                            <li><a href="{% url 'cusecmajor' %}" style="margin-left: 20px;">Second
+                                                Major</a></li>
                                             <li style="color:white;font-size:0.8em;">Graduate</li>
-                                            <li><a href="{% url 'cmasters' %}" style="margin-left: 20px;">Masters</a></li>
+                                            <li><a href="{% url 'cmasters' %}" style="margin-left: 20px;">Masters</a>
+                                            </li>
                                             <li><a href="{% url 'cphd' %}" style="margin-left: 20px;">Phd</a></li>
-                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'cccna' %}">CCNA</a></li>
+                                            <li style="color:white;font-size:0.8em;"><a
+                                                    href="{% url 'cccna' %}">CCNA</a></li>
                                         </div>
                                     </div>
                                 </ul>
@@ -199,9 +210,9 @@
                             </li>
                             <li><a href="contact.html">Contact</a></li>
                             {% if user.is_authenticated %}
-                                <li><a href="{% url 'logout' %}"><span>Logout</span></a></li>
+                            <li><a href="{% url 'logout' %}"><span>Logout</span></a></li>
                             {% else %}
-                                <li><a href="{% url 'login' %}"><span>Login</span></a></li>
+                            <li><a href="{% url 'login' %}"><span>Login</span></a></li>
                             {% endif %}
                         </ul>
                     </div>
@@ -211,6 +222,9 @@
     </nav>
 
     {% block content %}{% endblock %}
+
+    {% block footer %}
+
 
     <footer id="colorlib-footer">
         <div class="container">
@@ -276,15 +290,17 @@
         </div>
     </footer>
 
+
+    {% endblock %}
+
 </div>
 
 <div class="gototop js-top">
     <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 </div>
 
-
-<!-- jQuery -->
-<script src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/data-table.js' %}"></script>
 <!-- jQuery Easing -->
 <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
 <!-- Bootstrap -->
@@ -304,6 +320,40 @@
 <script src="{% static 'js/jquery.countTo.js' %}"></script>
 <!-- Main -->
 <script src="{% static 'js/main.js' %}"></script>
+<script>
+
+    $(document).ready(function () {
+        var lastScrollTop = 0;
+        $("#page").scroll(function () {
+
+
+            var heightOfHeader = $("#top-nav-title").height();
+            console.log('scrolling ', $("#page").scrollTop());
+            if ($("#page").scrollTop() >= heightOfHeader) {
+                $('#top-nav-title').slideUp();
+
+            } else {
+                $('#top-nav-title').slideDown(function () {
+
+                });
+
+
+            }
+            var st = $(this).scrollTop();
+            if (st > lastScrollTop) {
+                // downscroll code
+                $('#publication-bottom-nav').slideUp()
+            } else {
+                // upscroll code
+                $('#publication-bottom-nav').slideDown()
+            }
+            lastScrollTop = st;
+
+
+        })
+
+    })
+</script>
 
 </body>
 

@@ -1,0 +1,64 @@
+.curriculum-background{
+    background-image: url(../images/bg1.jpg);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+.curriculum-detail-card-header {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    margin-top: 5%;
+    font-weight: 100;
+    padding: 1%;
+    color: papayawhip;
+    font-family: cursive;
+    margin-bottom: unset;
+    background: steelblue;
+}
+
+.curriculum-detail-container-card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    background: whitesmoke;
+    border-bottom: 5px solid dodgerblue;
+    border-top: 5px solid dodgerblue;
+    margin-top: 1em;
+}
+.curriculum-semester-card{
+    margin-bottom: 1em;
+
+
+}
+.semester-title{
+    padding: 1%;
+    background: #192a56;
+    color: whitesmoke;
+    font-size: 1em;
+    margin: 0px;
+}
+.total-course-credit {
+    float: right;
+    margin-right: 1em;
+}
+.semester-courses{
+    border: 1px solid #192a56;
+    /*border-right: 1px solid #192a56;
+    border-bottom: 1px solid #192a56;*/
+
+}
+.course-dept-circle {
+    display: inline-block;
+    background: rebeccapurple;
+    color: white;
+    width: 4em;
+    height: 4em;
+    line-height: 4em;
+    text-align: center;
+    border-radius: 100%;
+    margin-top: 1em;
+}
+.course{
+    margin-bottom: 1.5em;
+}

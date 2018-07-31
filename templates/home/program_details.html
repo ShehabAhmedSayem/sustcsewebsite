@@ -4,63 +4,84 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-<div class="people-detail-header-image">
+<!--<div class="people-detail-header-image">
     <span class="people-detail-header-overlay"></span>
-</div>
-<div class="colorlib-classes people-detail-header-text">
+</div>-->
+<div class="program-background">
+    <div class="program-content-overlay">
+        <div class="program-content">
+            <div class="">
+                <div class="row">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <h2 class="program-detail-card-header" >
+                                <i class="material-icons">school</i>
+                                Program - {{ program.program_name }}</h2>
+                            <div class="classes class-single program-detail-header-card">
+                                <div class="desc desc2 row">
+                                    <div class="col-md-12 program-detail-container">
+                                        <center class="faculty_detail_description">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                            tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat.
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                            eu fugiat nulla pariatur. Excepteur sint Lorem ipsum dolor sit amet,
+                                            consectetur
+                                            adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat.
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                            eu fugiat nulla pariatur. Excepteur sint Lorem ipsum dolor sit amet,
+                                            consectetur
+                                            adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat.
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                            eu fugiat nulla pariatur. Excepteur sint
 
+                                        </center>
+                                        <center>
+                                            <a href="#program-detail" style="color: black"><i class="material-icons">keyboard_arrow_down</i></a>
+                                        </center>
 
-    <!--<img width="200px" height="200px" class="img img-responsive img-thumbnail img-rounded people-detail-image"
-         src="/static/images/people/no_image_available.png">-->
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10">
-                <div class="classes class-single program-detail-header-card">
-                    <div class="desc desc2 row">
-                        <div class="col-md-12 program-detail-container">
-                            <center><h2 class="people-detail-text">Program - {{ program.program_name }}</h2>
-                                <center class="faculty_detail_description" style="color: whitesmoke">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                                    eu fugiat nulla pariatur. Excepteur sint
-
-                                </center>
-                                <a href="#program-detail" style="color: white"><i class="material-icons">keyboard_arrow_down</i></a>
-                            </center>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<div class="row" id="program-detail">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="card">
-            <div class="card-bottom">
-                <p class="people-detail">
-                    <b>
-                <p class="people-title">Program Detail</p>
-                </b>
-                </p>
+            <div id="program-detail">
+                <div class="row">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <h2 class="program-detail-card-header" >
+                                <i class="material-icons">school</i>
+                                {{ program.program_name }} - Program Detail</h2>
+                            <div class="classes class-single program-detail-container-card">
+                                <div class="desc desc2 row">
+                                    <div class="col-md-12 program-detail-container">
+                                        <center class="faculty_detail_description">
+                                            {{ program.details|safe }}
+                                        </center>
+                                        <a href="#program-detail" style="color: white"><i class="material-icons">keyboard_arrow_down</i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <p class="faculty_detail_description">
-                <span>
-                {{ program.details|safe }}
-                </span>
-
-            </p>
-
+            <br><br>
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 
