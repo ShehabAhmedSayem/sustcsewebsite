@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Education{% endblock %}
+{% block title %}Experience{% endblock %}
 {% block content %}
 
 {% if user.is_authenticated %}
@@ -7,7 +7,7 @@
 <div style="text-align:center;">
 <form method="post" action="">
     {% csrf_token %}
-    {{ education_form.as_p }}
+    {{ publication_form.as_p }}
     <input type="submit" value="Done" />
 </form>
     <br>
@@ -17,29 +17,28 @@
 <br>
 <div class="col-md-12">
     <div class="row">
-        <div id="faculty_education" class="col-md-10 col-md-offset-1">
+        <div id="faculty_publication" class="col-md-10 col-md-offset-1">
             <div class="card">
                 <div class="card-bottom">
                     <p class="people-detail">
                         <b>
-                    <p class="people-title">Education</p>
+                    <p class="people-title">Publication</p>
                     </b>
                     </p>
                 </div>
 
-                {% if user.faculty.education_set.all %}
-                {% for edu in user.faculty.education_set.all %}
+                {% if user.faculty.publication_set.all %}
+                {% for publication in user.faculty.publication_set.all %}
                 <p class="faculty_detail_description">
-                    <span class="faculty-education-title">{{ edu.degree }}</span>
-                    <span class="faculty-education-subtitle">Passing Year : {{ edu.passing_year }}</span>
-                    <span class="faculty-education-subtitle">Institution : {{ edu.institution}}</span>
-                    <span class="faculty-education-subtitle">Specialization : {{ edu.specialization}}</span>
+                    <span class="faculty-education-title">{{ publication.title }}</span>
+                    <span class="faculty-education-subtitle">Publication Type : {{ publication.publication_type }}</span>
                 <hr>
                 </p>
                 {% endfor %}
                 {% else %}
-                <p>No Education Details Available</p>
+                <p class="faculty_detail_description">No Publications Details Available</p>
                 {% endif %}
+
             </div>
         </div>
     </div>

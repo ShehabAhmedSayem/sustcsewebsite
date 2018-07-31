@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Education{% endblock %}
+{% block title %}Experience{% endblock %}
 {% block content %}
 
 {% if user.is_authenticated %}
@@ -7,7 +7,7 @@
 <div style="text-align:center;">
 <form method="post" action="">
     {% csrf_token %}
-    {{ education_form.as_p }}
+    {{ experience_form.as_p }}
     <input type="submit" value="Done" />
 </form>
     <br>
@@ -22,23 +22,23 @@
                 <div class="card-bottom">
                     <p class="people-detail">
                         <b>
-                    <p class="people-title">Education</p>
+                    <p class="people-title">Experience</p>
                     </b>
                     </p>
                 </div>
 
-                {% if user.faculty.education_set.all %}
-                {% for edu in user.faculty.education_set.all %}
+                {% if user.faculty.experience_set.all %}
+                {% for exp in user.faculty.experience_set.all %}
                 <p class="faculty_detail_description">
-                    <span class="faculty-education-title">{{ edu.degree }}</span>
-                    <span class="faculty-education-subtitle">Passing Year : {{ edu.passing_year }}</span>
-                    <span class="faculty-education-subtitle">Institution : {{ edu.institution}}</span>
-                    <span class="faculty-education-subtitle">Specialization : {{ edu.specialization}}</span>
+                    <span class="faculty-education-title">{{ exp.experience_type }}</span>
+                    <span class="faculty-education-subtitle">Organization : {{ exp.organization }}</span>
+                    <span class="faculty-education-subtitle">Position : {{ exp.designation }}</span>
+                    <span class="faculty-education-subtitle">Period : {{ exp.time_duration }}</span>
                 <hr>
                 </p>
                 {% endfor %}
                 {% else %}
-                <p>No Education Details Available</p>
+                <p>No Experience Details Available</p>
                 {% endif %}
             </div>
         </div>

@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from research.models import Publication, PublicationType
 
 
 class StudentForm(forms.ModelForm):
@@ -19,6 +20,11 @@ class ExperienceForm(forms.ModelForm):
         model = Experience
         fields = '__all__'
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', '')
+        super(ExperienceForm, self).__init__(*args, **kwargs)
+        self.fields['faculty'] = forms.ModelChoiceField(queryset=Faculty.objects.filter(user=user), initial=0)
+
 
 class EducationForm(forms.ModelForm):
     class Meta:
@@ -31,7 +37,27 @@ class EducationForm(forms.ModelForm):
         self.fields['faculty'] = forms.ModelChoiceField(queryset=Faculty.objects.filter(user=user), initial=0)
 
 
+class PublicationForm(forms.ModelForm):
+    class Meta:
+        model = Publication
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', '')
+        super(PublicationForm, self).__init__(*args, **kwargs)
+        self.fields['author_faculty'] = forms.ModelChoiceField(queryset=Faculty.objects.filter(user=user), initial=0)
+        self.fields['author_student'] = forms.ModelMultipleChoiceField(queryset=Student.objects.all())
+        self.fields['publication_type'] = forms.ModelChoiceField(queryset=PublicationType.objects.all())
+
+
+class ResearchInterestForm(forms.ModelForm):
+    class Meta:
+        model = Publication
+        fields = '__all__'
+
+
 class SocialProfileForm(forms.ModelForm):
     class Meta:
         model = SocialProfile
         fields = '__all__'
+

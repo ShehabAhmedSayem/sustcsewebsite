@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
 from .models import *
 from .forms import *
 from .decorators import *
+from research.models import Publication
 
 
 def faculty(request):
@@ -34,7 +35,7 @@ def staff(request):
 @transaction.atomic
 def update_faculty(request):
     if request.method == 'POST':
-        faculty_form = FacultyForm(request.POST, instance=request.user.faculty)
+        faculty_form = FacultyForm(request.POST, request.FILES, instance=request.user.faculty)
 
         if faculty_form.is_valid():
             faculty_form.save()
@@ -56,7 +57,6 @@ def update_faculty(request):
 def add_education(request):
     if request.method == 'POST':
         education_form = EducationForm(request.POST, user=request.user)
-        #education_form = EducationForm(request.POST, instance=request.user.faculty)
 
         if education_form.is_valid():
             education_form.save()
@@ -65,47 +65,127 @@ def add_education(request):
             pass
 
     else:
-        #education_form = EducationForm(instance=request.user.faculty)
         education_form = EducationForm(user=request.user)
 
     return render(request, 'people/faculty-add-education.html', {
         'education_form': education_form,
     })
 
+
+@login_required
+@faculty_required
+@transaction.atomic
+def delete_education(request, education_id):
+    education = get_object_or_404(Education, pk=education_id)
+    if request.user.faculty == education.faculty:
+        education.delete()
+        messages.success(request, 'Successfully deleted!')
+    else:
+        messages.error(request, 'You don\'t have authorization!')
+
+    return redirect('faculty_detail', request.user.id)
+
+
 @login_required
 @faculty_required
 @transaction.atomic
 def add_experience(request):
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
-        experience_form = FacultyForm(request.POST, instance=request.user.faculty)
-        education_form = FacultyForm(request.POST, instance=request.user.faculty)
-        social_profile_form = FacultyForm(request.POST, instance=request.user.faculty)
-        faculty_form = FacultyForm(request.POST, instance=request.user.faculty)
+        experience_form = ExperienceForm(request.POST, user=request.user)
 
-        if user_form.is_valid() and faculty_form.is_valid() and experience_form.is_valid() \
-                and education_form.is_valid() and social_profile_form.is_valid():
-            user_form.save()
-            faculty_form.save()
+        if experience_form.is_valid():
             experience_form.save()
-            education_form.save()
-            social_profile_form.save()
-            return redirect('faculty_detail', request.user.id)
+            return redirect('add_experience')
         else:
             pass
 
     else:
-        user_form = UserForm(instance=request.user)
-        faculty_form = FacultyForm(instance=request.user.faculty)
-        experience_form = ExperienceForm(instance=request.user.faculty)
-        education_form = EducationForm(instance=request.user.faculty)
-        social_profile_form = SocialProfileForm(instance=request.user.faculty)
+        experience_form = ExperienceForm(user=request.user)
 
-    return render(request, 'people/faculty-edit.html', {
-        'user_form': user_form,
-        'faculty_form': faculty_form,
+    return render(request, 'people/faculty-add-experience.html', {
         'experience_form': experience_form,
-        'education_form': education_form,
+    })
+
+
+@login_required
+@faculty_required
+@transaction.atomic
+def delete_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+    if request.user.faculty == experience.faculty:
+        experience.delete()
+        messages.success(request, 'Successfully deleted!')
+    else:
+        messages.error(request, 'You don\'t have authorization!')
+
+    return redirect('faculty_detail', request.user.id)
+
+
+@login_required
+@faculty_required
+@transaction.atomic
+def add_publication(request):
+    if request.method == 'POST':
+        publication_form = PublicationForm(request.POST, user=request.user)
+
+        if publication_form.is_valid():
+            publication_form.save()
+            return redirect('add_publication')
+        else:
+            pass
+
+    else:
+        publication_form = PublicationForm(user=request.user)
+
+    return render(request, 'people/faculty-add-publication.html', {
+        'publication_form': publication_form,
+    })
+
+
+@login_required
+@faculty_required
+@transaction.atomic
+def delete_publication(request, publication_id):
+    publication = get_object_or_404(Publication, pk=publication_id)
+    if request.user.faculty == publication.author_faculty:
+        publication.delete()
+        messages.success(request, 'Successfully deleted!')
+    else:
+        messages.error(request, 'You don\'t have authorization!')
+
+    return redirect('faculty_detail', request.user.id)
+
+
+@login_required
+@faculty_required
+@transaction.atomic
+def add_social_profile(request):
+    if request.method == 'POST':
+        social_profile_form = SocialProfileForm(request.POST, user=request.user)
+
+        if social_profile_form.is_valid():
+            social_profile_form.save()
+            return redirect('add_social_profile')
+        else:
+            pass
+
+    else:
+        social_profile_form = SocialProfileForm(user=request.user)
+
+    return render(request, 'people/faculty-add-social-profile.html', {
         'social_profile_form': social_profile_form,
     })
 
+
+@login_required
+@faculty_required
+@transaction.atomic
+def delete_publication(request, publication_id):
+    publication = get_object_or_404(Publication, pk=publication_id)
+    if request.user.faculty == publication.author_faculty:
+        publication.delete()
+        messages.success(request, 'Successfully deleted!')
+    else:
+        messages.error(request, 'You don\'t have authorization!')
+
+    return redirect('faculty_detail', request.user.id)
