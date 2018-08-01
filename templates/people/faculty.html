@@ -2,59 +2,27 @@
 {% block title %}Program{% endblock %}
 {% block content %}
 
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery.hideseek.min.js"></script>
+<script type="text/javascript">
 
-<!--<aside id="colorlib-hero">
-    <div class="flexslider">
-        <ul class="slides">
-            <li style="background-image: url(/static/images/bg3.jpg);">
-                <div class="overlay"></div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
-                            <div class="slider-text-inner text-center">
-                                <h1>Faculty</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-</aside>-->
+    $(document).ready(function () {
+        alert("Hello");
+        $('#searchFaculty').hideseek({
+            list: '.list',
+            nodata: 'Nothing Found',
+            attribute: 'text',
+            matches: false,
+            highlight: false,
+            ignore: '.ignore-me',
+            navigation: false,
+            ignore_accents: false,
+            hidden_mode: false,
+            min_chars: 1
+        });
+    });
 
-
-<!--<div class="content-faculty-detail">
-
-    <div class="colorlib-classes">
-        <div class="container">
-            <div class="row">
-                {% for faculty in faculties %}
-                <div class="col-md-3">
-                    <div class="card">
-                        <center>
-                            <a href="{% url 'faculty_detail' faculty.user.id %}">
-                                <img src="/media/{{ faculty.image }}" alt="Avatar"
-                                     style="width:75%; margin: auto; padding: 10px;">
-                            </a>
-                        </center>
-                        <div class="card-bottom">
-                            <p class="people-detail">
-                                <b>
-                                    <a class="people-title" href="{% url 'faculty_detail' faculty.user.id %}">
-                                        {{faculty.name}}</a>
-                                </b>
-                            <p class="people-designation">{{faculty.designation}}</p>
-                            <p class="people-designation" style="padding-bottom: 1em">{{faculty.office}}</p>
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</div>-->
+</script>
 
 
 <div class="research-group-background">
@@ -74,9 +42,9 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i
                                                         class="material-icons">search</i></span>
-                                                <input style="border:1px solid #bdc3c7" id="searchItem" type="text"
+                                                <input style="border:1px solid #bdc3c7" id="searchFaculty" type="text"
                                                        class="form-control"
-                                                       name="searchItem"
+                                                       name="searchFaculty"
                                                        placeholder="Search by Faculty Name, Designation, Room No, Status"
                                                        data-toggle="hideseek" data-list=".list">
                                             </div>
@@ -84,7 +52,7 @@
                                         </form>
 
                                         {% for faculty in faculties %}
-                                        <div class="col-md-4 col-sm-6">
+                                        <div class="col-md-4 col-sm-6 list" >
                                             <div class="card">
                                                 <center>
                                                     <a href="{% url 'faculty_detail' faculty.user.id %}">

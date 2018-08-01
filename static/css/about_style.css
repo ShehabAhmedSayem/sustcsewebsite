@@ -1,0 +1,52 @@
+.about-background {
+    background-image: url(../images/bg2.jpg);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+.about-content {
+    margin-top: 5%;
+}
+
+.about-detail-container-card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    background: whitesmoke;
+    border-top: 5px solid dodgerblue;
+    margin-top: 1em;
+}
+.history-card {
+    /* Add shadows to create the "card" effect */
+    background: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    margin-bottom: 1em;
+    margin-right: 3em;
+    border-top: 5px solid orangered;
+}
+.year-div{
+    background: orangered;
+    color: white;
+    margin: auto;
+    padding: 25px;
+    width: 100%;
+    height: 100px;
+    display: block;
+    font-size: 32px;
+    text-align: center;
+}
+.history-text{
+    padding: 8%;
+    text-align: justify;
+
+}
+.about-welcome{
+    text-align: justify;
+    font-weight: 150;
+
+}
+.about-why-header{
+    font-size: 1.5em;
+    font-weight: 200;
+}
