@@ -3,386 +3,405 @@
 {% block content %}
 
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-<div class="content-faculty-detail">
-    <div class="people-detail-header-image">
-        <span class="people-detail-header-overlay"></span>
-    </div>
-    <div class="colorlib-classes people-detail-header-text">
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/easing.js"></script>
+<script src="/static/js/easyResponsiveTabs.js"></script>
+<script src="/static/js/jquery.swipebox.min.js"></script>
+<script src="/static/js/move-top.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
-        <img width="200px" height="200px" class="img img-responsive img-thumbnail img-rounded people-detail-image"
-             src="/media/{{ faculty.image }}">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="classes class-single faculty-detail-header-card">
-                        <div class="desc desc2 row">
-                            <div class="col-md-8 people-detail-container">
-                                <h2 class="people-detail-text">{{ faculty.name }}</h2>
-                                <hr>
-                                <span class="people-detail-text"><i class="material-icons">school</i>{{ faculty.designation }}</span>
-                                <span class="people-detail-text"><i
-                                        class="material-icons">info</i>
-                                    {% for k,v in faculty.STATUS %}
-                                        {% if k == faculty.status %}
-                                            {{v}}
-                                        {% endif %}
-                                    {% endfor %}
+<div class="about-background">
+    <div class="program-content-overlay">
+        <div class="program-content">
 
-                                </span>
-                                <span class="people-detail-text"><i
-                                        class="material-icons">place</i>{{ faculty.office }}</span>
-                                <span class="people-detail-text"><i
-                                        class="material-icons">phone</i>{{ faculty.contact }}</span>
-                                <span class="people-detail-text"><i
-                                        class="material-icons">email</i>{{ faculty.user.email }}</span>
+            <div class="about-content">
+                <div class="row">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="classes class-single faculty-detail-container-card">
+                                <div class="desc desc2 row" style="padding: 0;">
+                                    <div class="col-md-12 faculty-detail-container">
 
-                                <div class="row" style="margin-top:10px;">
+                                        <div id="home" class="banner">
+                                            <div class="banner-info">
+                                                <div class="container">
+                                                    <div class="col-md-4 header-left">
+                                                        <img src="/media/{{ faculty.image }}" alt=""/>
 
-                                    <img class="img img-responsive social-icon" width="45px;" height="45px"
-                                         src="/static/images//social_icon/Facebook.png">
-                                    <img class="img img-responsive social-icon" width="45px;" height="45px"
-                                         src="/static/images//social_icon/Linkedin.png">
-                                    <img class="img img-responsive social-icon" width="45px;" height="45px"
-                                         src="/static/images//social_icon/Github.png">
-                                    <img class="img img-responsive social-icon" width="45px;" height="45px"
-                                         src="/static/images//social_icon/Twitter.png">
-                                    <img class="img img-responsive social-icon" width="45px;" height="45px"
-                                         src="/static/images//social_icon/Google+.png">
-                                    {% if user.is_authenticated %}
-                                    {% if user.id == faculty.user.id %}
-                                    <a href="{% url 'add_social_profile' %}"><span class="people-header-menu">Add Social Profile</span></a>
-                                    {% endif %}
-                                    {% endif %}
+
+                                                        {% if faculty.socialprofile_set.all %}
+                                                        <span class="social-profile-header">Find Me On</span>
+                                                        {% for socialProfile in faculty.socialprofile_set.all %}
+                                                        <a class="social-profile-icon" href="{{ socialProfile.link}}">
+                                                            <i class="material-icons">dashboard</i>
+                                                        </a>
+                                                        {% endfor %}
+                                                        {% endif %}
+
+
+                                                    </div>
+                                                    <div class="col-md-7 header-right faculty-intro-header">
+                                                        <h2>Hello</h2>
+                                                        <h1 style="margin: 0px;">I'm {{ faculty.name }}</h1>
+                                                        <h6 style="margin: 0px; color: #ecf0f1; font-weight: bold; letter-spacing:2px; ">
+                                                            {{ faculty.designation }}<br>Department of CSE SUST</h6>
+                                                        <ul class="address">
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">place</i> Office
+                                                                    </b></li>
+                                                                    <li>{{ faculty.office }}</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">phone</i> Phone
+                                                                    </b></li>
+                                                                    <li>{{ faculty.contact }}</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">email</i> E-mail
+                                                                    </b></li>
+                                                                    <li>{{ faculty.user.email }}</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="top-nav wow">
+                                            <div class="container">
+                                                <div class="navbar-header logo">
+                                                    <button type="button" class="navbar-toggle collapsed"
+                                                            data-toggle="collapse"
+                                                            data-target="#bs-example-navbar-collapse-1">
+                                                        Menu
+                                                    </button>
+                                                </div>
+                                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                                    <div class="menu">
+                                                        <ul class="nav navbar">
+                                                            <li><a href="#about" class="scroll">About</a></li>
+                                                            <li><a href="#work" class="scroll">Experience</a></li>
+                                                            <li><a href="#education" class="scroll">Education</a></li>
+                                                            <li><a href="#skills" class="scroll">Skills</a></li>
+                                                            <li><a href="#projects" class="scroll">My Projects</a></li>
+                                                            <li><a href="#contact" class="scroll">Contact</a></li>
+                                                        </ul>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="about" class="about">
+                                            <div class="container">
+                                                <h3 class="title"> About Me</h3>
+                                                <div class="col-md-11 about-left">
+                                                    <p class="about-text">Lorem ipsum dolor sit amet, consectetur
+                                                        adipiscing elit.
+                                                        Suspendisse laoreet sem sit amet dolor luctus pellentesque.
+                                                        Pellentesque eleifend tellus at interdum elementum. Nam egestas
+                                                        molestie elit. Vivamus sed accumsan quam, a mollis magna. Nam
+                                                        aliquet eros eget sapien consequat tincidunt at vel nibh. Duis
+                                                        ut turpis mi. Duis nec scelerisque urna, sit amet varius arcu.
+                                                        Aliquam aliquet sapien quis mauris semper suscipit. Maecenas
+                                                        pharetra dapibus posuere. Praesent odio sem, varius quis dolor
+                                                        vel, maximus dapibus mi. Pellentesque mattis mauris neque. Nam
+                                                        aliquam turpis ante, at cursus massa ullamcorper ut. Proin id
+                                                        diam id nisi sagittis pellentesque sed sit amet eros.
+                                                        In porttitor tempus nulla, a porta purus commodo sed. Praesent
+                                                        hendrerit nisi nunc, ut porttitor justo pellentesque et ac
+                                                        gravida sem mattis. Donec ornare justo nec</p>
+                                                </div>
+
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+
+
+                                        <div id="work" class="work">
+                                            <div class="">
+                                                <h3 class="title">Work Experience</h3>
+
+
+                                                {% if faculty.experience_set.all %}
+                                                {% for exp in faculty.experience_set.all %}
+                                                {% if forloop.counter|divisibleby:2 %}
+
+
+                                                <!--left-->
+                                                <div class="row work-info">
+                                                    <div class="col-md-5">
+
+                                                                <span class="work-place"
+                                                                      style="float: right;margin-right: 4em;margin-top: 3em;display: block;">{{ exp.organization }}</span>
+                                                        <br><br><br><br><br>
+                                                        <p class="work-desc">Sed ut perspiciatis unde omnis iste natus
+                                                            error sit
+                                                            voluptatem accusantium doloremque laudantium, totam rem
+                                                            aperiam, eaque ipsa quae ab illo inventore veritatis et
+                                                            quasi architecto beatae vitae dicta sunt explicabo </p>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-6 work-right work-right2"
+                                                         style="border-left: 1px solid white;">
+                                                        <h5 style="border: 0px;">
+                                                                    <span class="glyphicon glyphicon-briefcase"
+                                                                          style="margin-left: -4em"> </span>
+                                                        </h5>
+
+                                                        <h4> {{ exp.time_duration }} </h4>
+                                                    </div>
+                                                </div>
+
+
+                                                {% else %}
+
+                                                <!--right-->
+                                                <div class="row work-info">
+                                                    <div class="col-md-5">
+
+                                                        <h4>{{ exp.time_duration }} </h4>
+
+                                                    </div>
+
+                                                    <div class="col-md-6" style="border-left: 1px solid white;">
+                                                        <h5 style="border: 0px;">
+                                                                    <span class="glyphicon glyphicon-briefcase"
+                                                                          style="margin-left: -4em"> </span>
+                                                        </h5>
+
+                                                        <span class="work-place">{{ exp.organization }}</span>
+                                                        <p class="work-desc">
+                                                        <ul class="work-detail">
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">place</i>
+                                                                        Organization
+                                                                    </b></li>
+                                                                    <li>{{ exp.organization }}</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">school</i> Position
+                                                                    </b></li>
+                                                                    <li>{{ exp.designation }}</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">date_range</i> Time
+                                                                        Period
+                                                                    </b></li>
+                                                                    <li>{{ exp.time_duration }}</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+
+
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+
+
+                                                {% endif %}
+
+
+                                                <p class="faculty_detail_description">
+                                                    <span class="faculty-education-title">{{ exp.experience_type }}</span>
+                                                    {% if user.is_authenticated %}
+                                                    {% if user.id == faculty.user.id %}
+                                                    <a href="{% url 'delete_experience' exp.id %}"><i
+                                                            class="material-icons"
+                                                            style="display: inline-block; float:right;">clear</i></a>
+                                                    {% endif %}
+                                                    {% endif %}
+                                                    <span class="faculty-education-subtitle">Organization : {{ exp.organization }}</span>
+                                                    <span class="faculty-education-subtitle">Position : {{ exp.designation }}</span>
+                                                    <span class="faculty-education-subtitle">Period : {{ exp.time_duration }}</span>
+                                                <hr>
+                                                </p>
+                                                {% endfor %}
+                                                {% else %}
+                                                <p class="faculty_detail_description">No Experience Details
+                                                    Available</p>
+                                                {% endif %}
+
+
+                                                <!--left -->
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <!--education div-->
+
+                                        <div id="education" class="education">
+                                            <div class="">
+                                                <h3 class="title">Education</h3>
+
+                                                {% if faculty.education_set.all %}
+                                                {% for edu in faculty.education_set.all %}
+                                                {% if forloop.counter|divisibleby:2 %}
+
+
+                                                <!--left-->
+                                                <div class="row work-info">
+                                                    <div class="col-md-5">
+                                                        <br><br><br><br><br>
+
+                                                        <span class="work-place">{{ edu.institution }}</span>
+                                                        <p class="work-desc">
+                                                        <ul class="education-detail">
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">place</i>
+                                                                        Institution
+                                                                    </b></li>
+                                                                    <li>{{ edu.institution }}</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">school</i> Year of
+                                                                        Passing
+                                                                    </b></li>
+                                                                    <li>{{ edu.passing_year}}</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">date_range</i> Time
+                                                                        Specialization
+                                                                    </b></li>
+                                                                    <li>{{ edu.specialization }}</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        </p>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-6 work-right work-right2"
+                                                         style="border-left: 1px solid black;">
+                                                        <h5 style="border: 0px;">
+                                                                    <span class="glyphicon glyphicon-briefcase"
+                                                                          style="margin-left: -4em"> </span>
+                                                        </h5>
+
+                                                        <h4> {{ edu.passing_year }} </h4>
+                                                    </div>
+                                                </div>
+
+
+                                                {% else %}
+
+                                                <!--right-->
+                                                <div class="row work-info">
+                                                    <div class="col-md-5">
+
+                                                        <h4>{{ edu.passing_year }} </h4>
+
+                                                    </div>
+
+                                                    <div class="col-md-6" style="border-left: 1px solid black;">
+                                                        <h5 style="border: 0px;">
+                                                                    <span class="glyphicon glyphicon-briefcase"
+                                                                          style="margin-left: -4em"> </span>
+                                                        </h5>
+
+                                                        {% if user.is_authenticated %}
+                                                        {% if user.id == faculty.user.id %}
+                                                        <a href="{% url 'delete_experience' edu.id %}"><i
+                                                                class="material-icons"
+                                                                style="display: inline-block; float:right;">clear</i></a>
+                                                        {% endif %}
+                                                        {% endif %}
+
+                                                        <span class="work-place">{{ edu.institution }}</span>
+                                                        <p class="work-desc">
+                                                        <ul class="education-detail">
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">place</i>
+                                                                        Institution
+                                                                    </b></li>
+                                                                    <li>{{ edu.institution }}</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">school</i> Year of
+                                                                        Passing
+                                                                    </b></li>
+                                                                    <li>{{ edu.passing_year}}</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <ul class="address-text">
+                                                                    <li><b><i class="material-icons">date_range</i>
+                                                                        Specialization
+                                                                    </b></li>
+                                                                    <li>{{ edu.specialization }}</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+
+
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+
+
+                                                {% endif %}
+
+
+                                                <!--<p class="faculty_detail_description">
+                                                    <span class="faculty-education-title">{{ edu.degree }}</span>
+                                                    <span class="faculty-education-subtitle">Organization : {{ edu.institution }}</span>
+                                                    <span class="faculty-education-subtitle">Position : {{ edu.specialization }}</span>
+                                                    <span class="faculty-education-subtitle">Period : {{ edu.passing_year }}</span>
+                                                <hr>
+                                                </p>-->
+                                                {% endfor %}
+                                                {% else %}
+                                                <p class="faculty_detail_description">No Experience Details
+                                                    Available</p>
+                                                {% endif %}
+
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-4" style="margin-top: 1%;">
-                                <a href="#faculty_education"><span class="people-header-menu">Education</span></a>
-                                <a href="#faculty_experiences"><span class="people-header-menu">Experience</span></a>
-                                <a href="#faculty_publications"><span class="people-header-menu">Publications</span></a>
-                                <a href="#faculty_research_interest"><span
-                                        class="people-header-menu">Research Interest</span></a>
-                                <a href="#faculty_projects"><span class="people-header-menu">Projects</span></a>
-                                <a href="#faculty_awards"><span class="people-header-menu">Awards</span></a>
-                                <a href="#faculty_other_activities"><span class="people-header-menu">Others</span></a>
-                                {% if user.is_authenticated %}
-                                {% if user.id == faculty.user.id %}
-                                <a href="{% url 'update_faculty' %}"><span class="people-header-menu">Edit Your Profile</span></a>
-                                {% endif %}
-                                {% endif %}
-                            </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
+            <br><br>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            {% if messages %}
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                        {{ message|safe }}
-                    </div>
-                {% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-            <div class="row">
-                <div id="faculty_education" class="col-md-10 col-md-offset-1">
-                    <div class="card">
-                        <div class="card-bottom">
-                            <p class="people-detail">
-                                <b>
-                            <p class="people-title">Education
-                            {% if user.is_authenticated %}
-                            {% if user.id == faculty.user.id %}
-                            <a href="{% url 'add_education' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
-                            {% endif %}
-                            {% endif %}
-                            </p>
-                            </b>
-                            </p>
-                        </div>
-
-                        {% if faculty.education_set.all %}
-                        {% for edu in faculty.education_set.all %}
-                        <p class="faculty_detail_description">
-                            <span class="faculty-education-title">{{ edu.degree }}</span>
-                            {% if user.is_authenticated %}
-                            {% if user.id == faculty.user.id %}
-                            <a href="{% url 'delete_education' edu.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
-                            {% endif %}
-                            {% endif %}
-                            <span class="faculty-education-subtitle">Passing Year : {{ edu.passing_year }}</span>
-                            <span class="faculty-education-subtitle">Institution : {{ edu.institution}}</span>
-                            <span class="faculty-education-subtitle">Specialization : {{ edu.specialization}}</span>
-                        <hr>
-                        </p>
-                        {% endfor %}
-                        {% else %}
-                        <p class="faculty_detail_description">No Education Details Available</p>
-                        {% endif %}
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-
-                <div id="faculty_experiences" class="col-md-10 col-md-offset-1">
-                    <div class="card">
-                        <div class="card-bottom">
-                            <p class="people-detail">
-                                <b>
-                            <p class="people-title">Experiences
-                            {% if user.is_authenticated %}
-                            {% if user.id == faculty.user.id %}
-                            <a href="{% url 'add_experience' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
-                            {% endif %}
-                            {% endif %}
-                            </p>
-                            </b>
-                            </p>
-                        </div>
-
-
-                        {% if faculty.experience_set.all %}
-                        {% for exp in faculty.experience_set.all %}
-                        <p class="faculty_detail_description">
-                            <span class="faculty-education-title">{{ exp.experience_type }}</span>
-                            {% if user.is_authenticated %}
-                            {% if user.id == faculty.user.id %}
-                            <a href="{% url 'delete_experience' exp.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
-                            {% endif %}
-                            {% endif %}
-                            <span class="faculty-education-subtitle">Organization : {{ exp.organization }}</span>
-                            <span class="faculty-education-subtitle">Position : {{ exp.designation }}</span>
-                            <span class="faculty-education-subtitle">Period : {{ exp.time_duration }}</span>
-                        <hr>
-                        </p>
-                        {% endfor %}
-                        {% else %}
-                        <p class="faculty_detail_description">No Experience Details Available</p>
-                        {% endif %}
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="row">
-
-                <div id="faculty_publications" class="col-md-10 col-md-offset-1">
-                    <div class="card">
-                        <div class="card-bottom">
-                            <p class="people-detail">
-                                <b>
-                            <p class="people-title">Publications
-                            {% if user.is_authenticated %}
-                            {% if user.id == faculty.user.id %}
-                            <a href="{% url 'add_publication' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
-                            {% endif %}
-                            {% endif %}
-                            </p>
-                            </b>
-                            </p>
-                        </div>
-
-                        {% if faculty.publication_set.all %}
-                        {% for publication in faculty.publication_set.all %}
-                        <p class="faculty_detail_description">
-                            <span class="faculty-education-title">{{ publication.title }}</span>
-                            {% if user.is_authenticated %}
-                            {% if user.id == faculty.user.id %}
-                            <a href="{% url 'delete_publication' publication.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
-                            {% endif %}
-                            {% endif %}
-                            <span class="faculty-education-subtitle">Publication Type : {{ publication.publication_type }}</span>
-                        <hr>
-                        </p>
-                        {% endfor %}
-                        {% else %}
-                        <p class="faculty_detail_description">No Publications Details Available</p>
-                        {% endif %}
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div id="faculty_research_interest" class="col-md-10 col-md-offset-1">
-                    <div class="card">
-                        <div class="card-bottom">
-                            <p class="people-detail">
-                                <b>
-                            <p class="people-title">Research Interest</p>
-                            </b>
-                            </p>
-                        </div>
-                        {% if faculty.research_interest.all %}
-                        {% for research_interest in faculty.research_interest.all %}
-                        <p class="faculty_detail_description">
-                            <span class="faculty-education-title">{{ research_interest}}</span>
-                            <!--<span class="faculty-education-subtitle">Publication Type : {{ publication.publication_type }}</span>-->
-                        <hr>
-                        </p>
-                        {% endfor %}
-                        {% else %}
-                        <p class="faculty_detail_description">No Research Interest Details Available</p>
-                        {% endif %}
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="row">
-                <div id="faculty_projects" class="col-md-10 col-md-offset-1">
-                    <div class="card">
-                        <div class="card-bottom">
-                            <p class="people-detail">
-                                <b>
-                            <p class="people-title">Projects</p>
-                            </b>
-                            </p>
-                        </div>
-                        <p class="faculty_detail_description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                            sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-
-                <div id="faculty_awards" class="col-md-10 col-md-offset-1">
-                    <div class="card">
-                        <div class="card-bottom">
-                            <p class="people-detail">
-                                <b>
-                            <p class="people-title">Awards
-                            {% if user.is_authenticated %}
-                            {% if user.id == faculty.user.id %}
-                            <a href="{% url 'add_award' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
-                            {% endif %}
-                            {% endif %}
-                            </p>
-                            </b>
-                            </p>
-                        </div>
-
-                        {% if faculty.award_set.all %}
-                        {% for award in faculty.award_set.all %}
-                        <p class="faculty_detail_description">
-                            <span class="faculty-education-title">{{ award.title }}</span>
-                            {% if user.is_authenticated %}
-                            {% if user.id == faculty.user.id %}
-                            <a href="{% url 'delete_award' award.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
-                            {% endif %}
-                            {% endif %}
-                            <img height="200px;" width="300px;" src="/media/{{ award.image }}">
-                            <span class="faculty-education-subtitle">{{ award.details }}</span>
-                        <hr>
-                        </p>
-                        {% endfor %}
-                        {% else %}
-                        <p class="faculty_detail_description">No Award Available</p>
-                        {% endif %}
-
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="row">
-                <div id="faculty_other_activities" class="col-md-10 col-md-offset-1">
-                    <div class="card">
-                        <div class="card-bottom">
-                            <p class="people-detail">
-                                <b>
-                            <p class="people-title">Other Activities</p>
-                            </b>
-                            </p>
-                        </div>
-                        <p class="faculty_detail_description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                            sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </div>
-                </div>
-                <
-            </div>
-
-        </div>
-
-
     </div>
 </div>
-
-<!--<div>
-                            <h1>Educations</h1>
-                            <hr>
-                            {% if faculty.education_set.all %}
-                                {% for edu in faculty.education_set.all %}
-                                    <p>{{ edu.degree }}</p>
-                                    <p>{{ edu.passing_year }}</p>
-                                {% endfor %}
-                            {% else %}
-                                <p>No Education Details Available</p>
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1>Experience</h1>
-                            <hr>
-                            {% if faculty.experience_set.all %}
-                                {% for exp in faculty.experience_set.all %}
-                                    <p>{{ exp.experience_type }}</p>
-                                    <p>{{ exp.organization }}</p>
-                                {% endfor %}
-                            {% else %}
-                                <p>No Experience Details Available</p>
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1>Publications</h1>
-                            <hr>
-                            {% if faculty.publication_set.all %}
-                                {% for publication in faculty.publication_set.all %}
-                                    <p>{{ publication.title }} - {{ publication.publication_type }}</p>
-                                {% endfor %}
-                            {% else %}
-                                <p>No Publications Details Available</p>
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1>Social Profiles</h1>
-                            <hr>
-                            {% if faculty.socialprofile_set.all %}
-                                {% for scp in faculty.socialprofile_set.all %}
-                                    <p><a href="{{ scp.link }}"> {{ scp.link }}</a></p>
-                                {% endfor %}
-                            {% else %}
-                                <p>No Profile Details Available</p>
-                            {% endif %}
-                        </div>-->
 
 {% endblock %}

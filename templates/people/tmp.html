@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<div class="content-faculty-detail">
+    <div class="people-detail-header-image">
+        <span class="people-detail-header-overlay"></span>
+    </div>
+    <div class="colorlib-classes people-detail-header-text">
+
+        <img width="200px" height="200px" class="img img-responsive img-thumbnail img-rounded people-detail-image"
+             src="/media/{{ faculty.image }}">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="classes class-single faculty-detail-header-card">
+                        <div class="desc desc2 row">
+                            <div class="col-md-8 people-detail-container">
+                                <h2 class="people-detail-text">{{ faculty.name }}</h2>
+                                <hr>
+                                <span class="people-detail-text"><i class="material-icons">school</i>{{ faculty.designation }}</span>
+                                <span class="people-detail-text"><i class="material-icons">info</i>
+                                    {{faculty.getStatus}}
+                                </span>
+                                <span class="people-detail-text"><i
+                                        class="material-icons">place</i>{{ faculty.office }}</span>
+                                <span class="people-detail-text"><i
+                                        class="material-icons">phone</i>{{ faculty.contact }}</span>
+                                <span class="people-detail-text"><i
+                                        class="material-icons">email</i>{{ faculty.user.email }}</span>
+
+                                <div class="row" style="margin-top:10px;">
+
+                                    <img class="img img-responsive social-icon" width="45px;" height="45px"
+                                         src="/static/images//social_icon/Facebook.png">
+                                    <img class="img img-responsive social-icon" width="45px;" height="45px"
+                                         src="/static/images//social_icon/Linkedin.png">
+                                    <img class="img img-responsive social-icon" width="45px;" height="45px"
+                                         src="/static/images//social_icon/Github.png">
+                                    <img class="img img-responsive social-icon" width="45px;" height="45px"
+                                         src="/static/images//social_icon/Twitter.png">
+                                    <img class="img img-responsive social-icon" width="45px;" height="45px"
+                                         src="/static/images//social_icon/Google+.png">
+                                    {% if user.is_authenticated %}
+                                    {% if user.id == faculty.user.id %}
+                                    <a href="{% url 'add_social_profile' %}"><span class="people-header-menu">Add Social Profile</span></a>
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" style="margin-top: 1%;">
+                                <a href="#faculty_education"><span class="people-header-menu">Education</span></a>
+                                <a href="#faculty_experiences"><span class="people-header-menu">Experience</span></a>
+                                <a href="#faculty_publications"><span class="people-header-menu">Publications</span></a>
+                                <a href="#faculty_research_interest"><span
+                                        class="people-header-menu">Research Interest</span></a>
+                                <a href="#faculty_projects"><span class="people-header-menu">Projects</span></a>
+                                <a href="#faculty_awards"><span class="people-header-menu">Awards</span></a>
+                                <a href="#faculty_other_activities"><span class="people-header-menu">Others</span></a>
+                                {% if user.is_authenticated %}
+                                {% if user.id == faculty.user.id %}
+                                <a href="{% url 'update_faculty' %}"><span class="people-header-menu">Edit Your Profile</span></a>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {% if messages %}
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message|safe }}
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <div id="faculty_education" class="col-md-10 col-md-offset-1">
+                    <div class="card">
+                        <div class="card-bottom">
+                            <p class="people-detail">
+                                <b>
+                            <p class="people-title">Education
+                            {% if user.is_authenticated %}
+                            {% if user.id == faculty.user.id %}
+                            <a href="{% url 'add_education' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
+                            {% endif %}
+                            {% endif %}
+                            </p>
+                            </b>
+                            </p>
+                        </div>
+
+                        {% if faculty.education_set.all %}
+                        {% for edu in faculty.education_set.all %}
+                        <p class="faculty_detail_description">
+                            <span class="faculty-education-title">{{ edu.degree }}</span>
+                            {% if user.is_authenticated %}
+                            {% if user.id == faculty.user.id %}
+                            <a href="{% url 'delete_education' edu.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
+                            {% endif %}
+                            {% endif %}
+                            <span class="faculty-education-subtitle">Passing Year : {{ edu.passing_year }}</span>
+                            <span class="faculty-education-subtitle">Institution : {{ edu.institution}}</span>
+                            <span class="faculty-education-subtitle">Specialization : {{ edu.specialization}}</span>
+                        <hr>
+                        </p>
+                        {% endfor %}
+                        {% else %}
+                        <p class="faculty_detail_description">No Education Details Available</p>
+                        {% endif %}
+
+                        {% if faculty.socialprofile_set.all %}
+                        {% for socialProfile in faculty.socialprofile_set.all %}
+                        <p class="faculty_detail_description">
+                            <span class="faculty-education-title">{{ socialProfile.link}}</span>
+                            {% if user.is_authenticated %}
+                            {% if user.id == faculty.user.id %}
+                            <a href="{% url 'delete_education' edu.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
+                            {% endif %}
+                            {% endif %}
+                            <span class="faculty-education-subtitle">Passing Year : {{ edu.passing_year }}</span>
+                            <span class="faculty-education-subtitle">Institution : {{ edu.institution}}</span>
+                            <span class="faculty-education-subtitle">Specialization : {{ edu.specialization}}</span>
+                        <hr>
+                        </p>
+                        {% endfor %}
+                        {% else %}
+                        <p class="faculty_detail_description">No Education Details Available</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div id="faculty_experiences" class="col-md-10 col-md-offset-1">
+                    <div class="card">
+                        <div class="card-bottom">
+                            <p class="people-detail">
+                                <b>
+                            <p class="people-title">Experiences
+                            {% if user.is_authenticated %}
+                            {% if user.id == faculty.user.id %}
+                            <a href="{% url 'add_experience' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
+                            {% endif %}
+                            {% endif %}
+                            </p>
+                            </b>
+                            </p>
+                        </div>
+
+
+                        {% if faculty.experience_set.all %}
+                        {% for exp in faculty.experience_set.all %}
+                        <p class="faculty_detail_description">
+                            <span class="faculty-education-title">{{ exp.experience_type }}</span>
+                            {% if user.is_authenticated %}
+                            {% if user.id == faculty.user.id %}
+                            <a href="{% url 'delete_experience' exp.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
+                            {% endif %}
+                            {% endif %}
+                            <span class="faculty-education-subtitle">Organization : {{ exp.organization }}</span>
+                            <span class="faculty-education-subtitle">Position : {{ exp.designation }}</span>
+                            <span class="faculty-education-subtitle">Period : {{ exp.time_duration }}</span>
+                        <hr>
+                        </p>
+                        {% endfor %}
+                        {% else %}
+                        <p class="faculty_detail_description">No Experience Details Available</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+
+                <div id="faculty_publications" class="col-md-10 col-md-offset-1">
+                    <div class="card">
+                        <div class="card-bottom">
+                            <p class="people-detail">
+                                <b>
+                            <p class="people-title">Publications
+                            {% if user.is_authenticated %}
+                            {% if user.id == faculty.user.id %}
+                            <a href="{% url 'add_publication' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
+                            {% endif %}
+                            {% endif %}
+                            </p>
+                            </b>
+                            </p>
+                        </div>
+
+                        {% if faculty.publication_set.all %}
+                        {% for publication in faculty.publication_set.all %}
+                        <p class="faculty_detail_description">
+                            <span class="faculty-education-title">{{ publication.title }}</span>
+                            {% if user.is_authenticated %}
+                            {% if user.id == faculty.user.id %}
+                            <a href="{% url 'delete_publication' publication.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
+                            {% endif %}
+                            {% endif %}
+                            <span class="faculty-education-subtitle">Publication Type : {{ publication.publication_type }}</span>
+                        <hr>
+                        </p>
+                        {% endfor %}
+                        {% else %}
+                        <p class="faculty_detail_description">No Publications Details Available</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="faculty_research_interest" class="col-md-10 col-md-offset-1">
+                    <div class="card">
+                        <div class="card-bottom">
+                            <p class="people-detail">
+                                <b>
+                            <p class="people-title">Research Interest</p>
+                            </b>
+                            </p>
+                        </div>
+                        {% if faculty.research_interest.all %}
+                        {% for research_interest in faculty.research_interest.all %}
+                        <p class="faculty_detail_description">
+                            <span class="faculty-education-title">{{ research_interest}}</span>
+                            <!--<span class="faculty-education-subtitle">Publication Type : {{ publication.publication_type }}</span>-->
+                        <hr>
+                        </p>
+                        {% endfor %}
+                        {% else %}
+                        <p class="faculty_detail_description">No Research Interest Details Available</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div id="faculty_projects" class="col-md-10 col-md-offset-1">
+                    <div class="card">
+                        <div class="card-bottom">
+                            <p class="people-detail">
+                                <b>
+                            <p class="people-title">Projects</p>
+                            </b>
+                            </p>
+                        </div>
+                        <p class="faculty_detail_description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                            sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div id="faculty_awards" class="col-md-10 col-md-offset-1">
+                    <div class="card">
+                        <div class="card-bottom">
+                            <p class="people-detail">
+                                <b>
+                            <p class="people-title">Awards
+                            {% if user.is_authenticated %}
+                            {% if user.id == faculty.user.id %}
+                            <a href="{% url 'add_award' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
+                            {% endif %}
+                            {% endif %}
+                            </p>
+                            </b>
+                            </p>
+                        </div>
+
+                        {% if faculty.award_set.all %}
+                        {% for award in faculty.award_set.all %}
+                        <p class="faculty_detail_description">
+                            <span class="faculty-education-title">{{ award.title }}</span>
+                            {% if user.is_authenticated %}
+                            {% if user.id == faculty.user.id %}
+                            <a href="{% url 'delete_award' award.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
+                            {% endif %}
+                            {% endif %}
+                            <img height="200px;" width="300px;" src="/media/{{ award.image }}">
+                            <span class="faculty-education-subtitle">{{ award.details }}</span>
+                        <hr>
+                        </p>
+                        {% endfor %}
+                        {% else %}
+                        <p class="faculty_detail_description">No Award Available</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div id="faculty_other_activities" class="col-md-10 col-md-offset-1">
+                    <div class="card">
+                        <div class="card-bottom">
+                            <p class="people-detail">
+                                <b>
+                            <p class="people-title">Other Activities</p>
+                            </b>
+                            </p>
+                        </div>
+                        <p class="faculty_detail_description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                            sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
+                </div>
+                <
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>
