@@ -129,6 +129,7 @@
                                 <ul class="dropdown">
                                     <div class="row">
                                         <div class="col-lg-4">
+
                                             <li>Program</li>
                                             <hr>
                                             <li style="color:white;font-size:0.8em;">Undergraduate</li>
@@ -143,22 +144,22 @@
                                             </li>
                                         </div>
                                         <div class="col-lg-4">
+
                                             <li>Admission</li>
                                             <hr>
                                             <li style="color:white;font-size:0.8em;">Undergraduate</li>
-                                            <li><a href="{% url 'cumajor' %}" style="margin-left: 20px;">Deciding</a>
+                                            <li><a href="http://www.sust.edu/admission" style="margin-left: 20px;">Major</a></li>
+                                            <li><a href="{% url 'admission_second_major' %}" style="margin-left: 20px;">Second
+                                                Major</a></li>
+                                            <li style="color:white;font-size:0.8em;">Graduate</li>
+                                            <li><a href="{% url 'admission_masters' %}" style="margin-left: 20px;">Masters</a>
                                             </li>
-                                            <li><a href="#" style="margin-left: 20px;">Apply</a></li>
-                                            <li><a href="#" style="margin-left: 20px;">Getting Ready</a></li>
-                                            <li style="color:white;font-size:0.8em;">Second Major</li>
-                                            <li><a href="#" style="margin-left: 20px;">Eligibility</a></li>
-                                            <li><a href="#" style="margin-left: 20px;">Steps</a></li>
-                                            <li><a href="#" style="margin-left: 20px;">Deadline</a></li>
-                                            <li><a href="#" style="margin-left: 20px;">Info Session</a></li>
-                                            <li style="color:white;font-size:0.8em;"><a href="#">Phd</a></li>
-                                            <li style="color:white;font-size:0.8em;"><a href="#">CCNA</a></li>
+                                            <li><a href="{% url 'admission_phd' %}" style="margin-left: 20px;">Phd</a></li>
+                                            <li style="color:white;font-size:0.8em;"><a href="{% url 'admission_ccna' %}">CCNA</a>
+                                            </li>
                                         </div>
                                         <div class="col-lg-4">
+
                                             <li>Curriculum</li>
                                             <hr>
                                             <li style="color:white;font-size:0.8em;">Undergraduate</li>

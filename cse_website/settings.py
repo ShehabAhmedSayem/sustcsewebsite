@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'curriculum',
     'announcement',
     'research',
+    'admission',
 
     'ckeditor',
     'ckeditor_uploader',

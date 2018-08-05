@@ -31,11 +31,6 @@ def undergrad_major(request):
     return render(request, 'home/program_details.html', context)
 
 
-def underegrad(request):
-    context = {}
-    return render(request, 'home/undergrad.html', context)
-
-
 def undergrad_second_major(request):
     program = Program.objects.get(program_name="Undergraduate Second Major")
     context = {'program': program}

@@ -23,11 +23,6 @@ def undergrad_major(request):
     return render(request, 'curriculum/curriculum.html', context)
 
 
-def undergrad(request):
-    context = {}
-    return render(request, 'home/undergrad.html', context)
-
-
 def undergrad_second_major(request):
     program = Program.objects.get(program_name="Undergraduate Second Major")
     courses = program.course_set.all()
