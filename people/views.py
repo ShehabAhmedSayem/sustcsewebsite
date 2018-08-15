@@ -6,6 +6,23 @@ from .models import *
 from .forms import *
 from .decorators import *
 from research.models import Publication
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import time
+import os
+
+class Pub:
+    title = ""
+    author = ""
+    cited_by = 0
+    year = 1990
+
+    def __init__(self, title, cited_by, author, year):
+        self.title = title
+        self.cited_by = cited_by
+        self.author = author
+        self.year = year
 
 
 def faculty(request):
@@ -18,6 +35,99 @@ def faculty_detail(request, user_id):
     faculty = get_object_or_404(Faculty, pk=user_id)
     context={'faculty': faculty}
     return render(request, 'people/faculty-detail.html', context)
+
+
+def start_scrapping(url):
+
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+
+    driver = webdriver.Chrome(chrome_options=chrome_options)
+    driver.implicitly_wait(30)
+    driver.get(url)
+
+    python_button = driver.find_element_by_xpath('//*[@id="gsc_bpf_more"]')
+    python_button.click()
+    time.sleep(3)
+
+    page_content = BeautifulSoup(driver.page_source, "html.parser")
+    publications = page_content.find_all(class_='gsc_a_t')
+    citations = page_content.find_all(class_='gsc_a_ac')
+    years = page_content.find_all(class_='gsc_a_h gsc_a_hc gs_ibl')
+
+    titles = []
+    authors = []
+    cites = []
+    ye = []
+    where = []
+
+    for p in publications:
+        if p.a is not None and p.div is not None:
+            titles.append(p.a.get_text())
+            aandw = p.find_all('div', class_='gs_gray')
+            authors.append(aandw[0].get_text())
+            where.append(aandw[1].get_text())
+
+    for c in citations:
+        if c is not None:
+            cites.append(c.get_text())
+
+    for y in years:
+        if y is not None:
+            ye.append(y.get_text())
+
+    driver.close()
+
+    return titles, authors, cites, ye, where
+
+
+def faculty_publications(request, user_id):
+    faculty = get_object_or_404(Faculty, pk=user_id)
+    google_scholar_link = faculty.google_scholars_link
+    publications = faculty.publication_set.all()
+    context = {'publications': publications, 'faculty_id': user_id, 'google_scholar_link': google_scholar_link}
+    return render(request, 'people/faculty-publications.html', context)
+
+
+def update_publications(request, faculty_id):
+    faculty = get_object_or_404(Faculty, pk=faculty_id)
+    publications = faculty.publication_set.all()
+    if faculty.google_scholars_link:
+        titles, authors, citations, years, wheres = start_scrapping(faculty.google_scholars_link)
+
+        index = 0
+        for t in titles:
+            found = 0
+            for p in publications:
+                if t == p.title:
+                    if citations[index]:
+                        p.cited_by = int(citations[index])
+                    else:
+                        p.cited_by = 0
+                    p.save()
+                    found = 1
+                    break
+            if found == 0:
+                p = Publication()
+                p.title = t
+
+                if years[index]:
+                    p.published_year = years[index]
+                else:
+                    p.published_year = 'None'
+
+                if citations[index]:
+                    p.cited_by = int(citations[index])
+                else:
+                    p.cited_by = 0
+
+                p.author_faculty = faculty
+                p.authors = authors[index]
+                p.where_published = wheres[index]
+                p.save()
+            index += 1
+
+    return redirect('faculty_publications', faculty.user_id)
 
 
 def student(request):

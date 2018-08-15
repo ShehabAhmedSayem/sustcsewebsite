@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}News{% endblock %}
+{% block title %}Syllabus{% endblock %}
 {% block content %}
 <aside id="colorlib-hero">
     <div class="flexslider">
@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
                         <div class="slider-text-inner text-center">
-                            <h1>Honor Board</h1>
+                            <h1>Syllabus</h1>
                         </div>
                     </div>
                 </div>
@@ -22,20 +22,11 @@
 
 <div class="colorlib-blog colorlib-light-grey">
     <div class="container">
-        {% for honor in honors %}
-            <article class="article-entry">
-                <div class="desc">
-                    <div class="row">
-                        <div class="col-md-4 animate-box">
-                            <img src="/static/images/bg3.jpg" width="300px" height="250px">
-                        </div>
-                        <div class="col-md-8 animate-box">
-                            <h1>{{ honor.title }}</h1>
-                            <p>{{ honor.details}}</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
+        {% for batch in batches %}
+        <p>{{batch.batch_year}}</p>
+            {% if batch.syllabus %}
+                <a href="{% url 'download_syllabus' batch.syllabus.name %}">Get the Syllabus</a>
+            {% endif %}
         {% endfor %}
     </div>
 </div>

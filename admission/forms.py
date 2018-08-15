@@ -9,9 +9,8 @@ class SecondMajorApplicationForm(forms.ModelForm):
         fields = '__all__'
 
 
-SecondMajorPreCourseListFormSet = modelformset_factory(
-    SecondMajorPreCourseList,
-    #exclude=('applicant',),
-    fields='__all__',
+SecondMajorCourseFormset = modelformset_factory(
+    SecondMajorCourse,
+    fields=('course_code', 'course_credit', 'course_grade', ),
     extra=1,
 )

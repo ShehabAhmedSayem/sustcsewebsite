@@ -20,6 +20,14 @@
     </div>
 </aside>
 
+{% for n in news %}
+    <p class="meta"><span class="day">{{ n.date_published|date:"j" }}</span><span class="month">{{ n.date_published|date:"F" }}</span></p>
+    </a>
+    <div class="desc">
+    <h2><a href="#">{{ n.title }}</a></h2>
+{% endfor %}
+
+<!--
 <div class="colorlib-blog colorlib-light-grey">
     <div class="container">
         <div class="row">
@@ -44,4 +52,5 @@
         </div>
     </div>
 </div>
+-->
 {% endblock %}

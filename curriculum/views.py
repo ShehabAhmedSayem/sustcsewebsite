@@ -1,7 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.urls import reverse
 from .models import *
+from people.models import Batch
+import os
+from django.conf import settings
 
 
 def undergrad_major(request):
@@ -101,4 +104,21 @@ def ccna(request):
     context = {'program': program, 'courses': courses, 'semesters': semesters,
                'totalCreditPerSemester': totalCreditPerSemester, 'totalCoursePerSemester': totalCoursePerSemester}
     return render(request, 'curriculum/curriculum.html', context)
+
+
+def syllabus(request):
+    batches = Batch.objects.all()
+    context = {'batches':batches}
+    return render(request, 'curriculum/syllabus.html', context)
+
+
+def download_syllabus(request, path):
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/pdf")
+            response['Content-Disposition'] = 'attachment; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
 

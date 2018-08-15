@@ -89,7 +89,7 @@
 
 
                                         {% for semester in semesters %}
-
+                                        {% if semester.running %}
                                         <div class="curriculum-semester-card">
 
                                             <p class="semester-title" style="font-size: 1em;">
@@ -177,9 +177,8 @@
 
 
                                         </div>
-
+                                        {% endif %}
                                         {% endfor %}
-
 
                                     </div>
                                 </div>

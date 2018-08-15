@@ -4,23 +4,29 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<form class="form-horizontal" method="POST" action="" style="text-align:center;">
+<form class="form-horizontal" method="POST" action="">
     {% csrf_token %}
-    {{application_form.as_p}}
-
+{{application_form.as_p}}
 {{ formset.management_form }}
 {% for form in formset %}
-<div class="form-row">
-    {{form.as_p}}
-    <button class="btn btn-success add-form-row"><i class="material-icons">add_circle_outline</i></button>
-
+<div class="row form-row spacer">
+    <div class="input-group">
+        {{form.as_p}}
+        <div class="input-group-append">
+            <button class="btn btn-success add-form-row">+</button>
+        </div>
+    </div>
 </div>
 {% endfor %}
-<br><br>
-    <button type="submit" class="btn btn-block btn-primary">Create</button>
+<div class="row spacer">
+    <div class="col-4 offset-2">
+        <button type="submit" class="btn btn-block btn-primary">Create</button>
+    </div>
+</div>
 </form>
 
 </body>
+
 
 <script type='text/javascript'>
 function updateElementIndex(el, prefix, ndx) {
@@ -63,7 +69,6 @@ function deleteForm(prefix, btn) {
     return false;
 }
 $(document).on('click', '.add-form-row', function(e){
-    console.log("hello");
     e.preventDefault();
     cloneMore('.form-row:last', 'form');
     return false;

@@ -18,7 +18,7 @@ class Program(models.Model):
 
 class Semester(models.Model):
     year_semester = models.CharField(max_length=10)
-
+    running = models.BooleanField(default=False)
     def __str__(self):
         return self.year_semester
 
@@ -48,7 +48,7 @@ class Class(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     course_teacher = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     is_current = models.BooleanField(default=False)
-    batch = models.ForeignKey(Batch, on_delete=models.CASCADE)
+    batch = models.ForeignKey(Batch, on_delete=models.CASCADE, default="1991")
     year_semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
 
     def __str__(self):

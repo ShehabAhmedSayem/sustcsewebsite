@@ -13,6 +13,7 @@ class ResearchArea(models.Model):
 
 class Batch(models.Model):
     batch_year = models.IntegerField()
+    syllabus = models.FileField(blank=True, null=True, upload_to='syllabus/')
 
     def __str__(self):
         return str(self.batch_year)
@@ -41,12 +42,16 @@ class Faculty(models.Model):
     office = models.CharField(max_length=200)
     contact = models.CharField(max_length=200, blank=True, null=True)
     research_interest = models.ManyToManyField(ResearchArea, related_name="faculty")
+
     STATUS = (
         ('in_service', 'In service'),
         ('on_leave', 'On leave'),
         ('ex', 'Ex Faculty'),
     )
+
     status = models.CharField(max_length=20, choices=STATUS)
+    personal_website = models.URLField(blank=True, null=True)
+    google_scholars_link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -58,7 +63,6 @@ class Faculty(models.Model):
             return "On leave"
         elif self.status == 'ex':
             return "Ex Faculty"
-
 
     class Meta:
         verbose_name_plural = "faculties"

@@ -83,13 +83,14 @@ class PublicationType(models.Model):
 
 class Publication(models.Model):
     title = models.CharField(max_length=500)
-    publication_type = models.ForeignKey(PublicationType, on_delete=models.CASCADE)
-    published_year = models.CharField(max_length=10)
+    publication_type = models.ForeignKey(PublicationType, on_delete=models.CASCADE,default=2)
+    published_year = models.CharField(blank=True, null=True, max_length=10)
     link = models.URLField(blank=True, null=True)
     research_group = models.ForeignKey(ResearchGroup, blank=True, null=True, on_delete=models.SET_NULL)
     author_faculty = models.ForeignKey(Faculty, null=True, on_delete=models.SET_NULL)
-    author_student = models.ManyToManyField(Student, related_name="students")
-    where_published = models.CharField(max_length=500)
+    author_student = models.ManyToManyField(Student, blank=True, related_name="students")
+    authors = models.CharField(blank=True, null=True, max_length=1000)
+    where_published = models.CharField(blank=True, null=True, max_length=500)
     cited_by = models.IntegerField()
 
     def __str__(self):

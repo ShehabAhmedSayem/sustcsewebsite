@@ -19,7 +19,7 @@ class Notice(models.Model):
 class HonorBoard(models.Model):
     title = models.CharField(max_length=500)
     image = models.ImageField(blank=True, null=True, upload_to='images/')
-    details = RichTextField()
+    details = models.TextField()
 
     def __str__(self):
         return self.title
@@ -28,7 +28,7 @@ class HonorBoard(models.Model):
 class News(models.Model):
     title = models.CharField(max_length=500)
     date_published = models.DateField(auto_now_add=True)
-    details = RichTextField()
+    details = models.TextField()
     image = models.ImageField(blank=True, null=True, upload_to='images/')
 
     def __str__(self):
@@ -42,7 +42,7 @@ class Event(models.Model):
     title = models.CharField(max_length=500)
     event_date = models.DateTimeField()
     location = models.CharField(max_length=500)
-    details = RichTextField()
+    details = models.TextField()
     image = models.ImageField(blank=True, null=True, upload_to='images/')
 
     def __str__(self):
