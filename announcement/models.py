@@ -31,8 +31,21 @@ class News(models.Model):
     details = models.TextField()
     image = models.ImageField(blank=True, null=True, upload_to='images/')
 
+
+
     def __str__(self):
         return self.title
+
+    def getStrippedName(self):
+        return self.title.replace(" ", "")
+
+    def getNewsIntro(self):
+        newsDetail = self.details
+        if len(newsDetail) > 300:
+            return newsDetail[0:300]
+        else:
+            return newsDetail
+
 
     class Meta:
         verbose_name_plural = "news"
@@ -47,6 +60,16 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+    def getStrippedName(self):
+        return self.title.replace(" ", "")
+
+    def getEventsIntro(self):
+        eventDetail = self.details
+        if len(eventDetail) > 300:
+            return eventDetail[0:300]
+        else:
+            return eventDetail
 
 
 

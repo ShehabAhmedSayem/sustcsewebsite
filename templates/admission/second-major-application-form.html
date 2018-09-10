@@ -1,81 +1,228 @@
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
-<form class="form-horizontal" method="POST" action="">
-    {% csrf_token %}
-{{application_form.as_p}}
-{{ formset.management_form }}
-{% for form in formset %}
-<div class="row form-row spacer">
-    <div class="input-group">
-        {{form.as_p}}
-        <div class="input-group-append">
-            <button class="btn btn-success add-form-row">+</button>
-        </div>
-    </div>
-</div>
-{% endfor %}
-<div class="row spacer">
-    <div class="col-4 offset-2">
-        <button type="submit" class="btn btn-block btn-primary">Create</button>
-    </div>
-</div>
-</form>
-
-</body>
-
-
-<script type='text/javascript'>
-function updateElementIndex(el, prefix, ndx) {
-    var id_regex = new RegExp('(' + prefix + '-\\d+)');
-    var replacement = prefix + '-' + ndx;
-    if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
-    if (el.id) el.id = el.id.replace(id_regex, replacement);
-    if (el.name) el.name = el.name.replace(id_regex, replacement);
-}
-function cloneMore(selector, prefix) {
-    var newElement = $(selector).clone(true);
-    var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
-    newElement.find(':input').each(function() {
-        var name = '';
-        var id = 'id_' + name;
-        $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
-    });
-    total++;
-    $('#id_' + prefix + '-TOTAL_FORMS').val(total);
-    $(selector).after(newElement);
-    var conditionRow = $('.form-row:not(:last)');
-    conditionRow.find('.btn.add-form-row')
-    .removeClass('btn-success').addClass('btn-danger')
-    .removeClass('add-form-row').addClass('remove-form-row')
-    .html('<i class="material-icons">remove_circle_outline</i>');
-    return false;
-}
-function deleteForm(prefix, btn) {
-    var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
-    if (total > 1){
-        btn.closest('.form-row').remove();
-        var forms = $('.form-row');
-        $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
-        for (var i=0, formCount=forms.length; i<formCount; i++) {
-            $(forms.get(i)).find(':input').each(function() {
-                updateElementIndex(this, prefix, i);
-            });
+{% extends 'base.html' %}
+{% block title %}Apply for Admission{% endblock %}
+{% block content %}
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <style>
+        input[type="text"], input[type="email"], input[type="number"], textarea {
+            width: 100%;
+            height: auto;
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #d7d7d7;
+            border: 0;
+            margin: 8px 16px 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
         }
-    }
-    return false;
-}
-$(document).on('click', '.add-form-row', function(e){
-    e.preventDefault();
-    cloneMore('.form-row:last', 'form');
-    return false;
-});
-$(document).on('click', '.remove-form-row', function(e){
-    e.preventDefault();
-    deleteForm('form', $(this));
-    return false;
-});
-</script>
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        table {
+            width: 85%;
+        }
+
+    </style>
+    <div class="content-admission-form">
+        <div class="admission-form-content-overlay">
+            <div class="admission-form-content">
+                <div class="admission-form-container-card-header">
+                    Fill the form to apply
+                </div>
+
+                <div class="admission-form-container-card">
+
+                    <form class="form-horizontal" method="POST" action="">
+                        {% csrf_token %}
+                        <table>
+                            {% for field in application_form %}
+                                <tr>
+                                    <th>{{ field.label_tag }}</th>
+                                    <td>
+                                        {{ field.errors }}
+                                        {{ field }}
+                                        {{ field.help_text }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+
+                        </table>
+                        <br>
+
+                        {{ formset.management_form }}
+
+                        <div id="courseForm_0">
+                            <div style="float:left;width:40%;text-align:left;">
+                                <span id="completedCourse_0">Completed Course 1</span>
+                            </div>
+
+                            <div style="float:right;width:30%;text-align:right;">
+                                <span class="delete-course" id="deleteCourse_0" >Delete</span>
+                            </div>
+                            {% comment %}<div class="col-md-12">
+                                <div id="completedCourse_0" class="col-md-10">
+                                    <span>Completed Course 1</span>
+                                </div>
+                                <div class="col-md-2">Delete</div>
+                            </div>{% endcomment %}
+                            <br><hr>
+                            <table id="courseTable">
+                                {% for field in formset %}
+
+                                    <th>{{ field.label_tag }}</th>
+                                    <td>
+                                        {{ field }}
+
+                                    </td>
+                                {% endfor %}
+                            </table>
+
+                        </div>
+                        <br>
+
+                        <div class="input-group-append">
+                            <button class="submit-button add-form-row" style="background: #0e6498">Add More Course
+                            </button>
+                        </div>
+                        <br>
+
+
+                        {% comment %}{% for form in formset %}
+                            <div class="row form-row spacer">
+                                <div class="input-group">
+                                    {{ form.as_p }}
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success add-form-row">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+{% endcomment %}
+
+                        <div class="row spacer input-group-append">
+                            <button type="submit" class="submit-button">Submit</button>
+                        </div>
+                    </form>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <script type='text/javascript'>
+
+        var lastId = 0;
+        {#init();#}
+        function init() {
+            $("#deleteCourse_0").hide();
+
+        }
+
+        function updateElementIndex(el, prefix, ndx) {
+            var id_regex = new RegExp('(' + prefix + '-\\d+)');
+            var replacement = prefix + '-' + ndx;
+            if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+            if (el.id) el.id = el.id.replace(id_regex, replacement);
+            if (el.name) el.name = el.name.replace(id_regex, replacement);
+        }
+
+        function cloneMore(selector, prefix) {
+            var newElement = $(selector).clone(true);
+            var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+            newElement.find(':input').each(function () {
+                var name = '';
+                var id = 'id_' + name;
+                $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+            });
+            total++;
+            $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+            $(selector).after(newElement);
+            var conditionRow = $('.form-row:not(:last)');
+            conditionRow.find('.btn.add-form-row')
+                .removeClass('btn-success').addClass('btn-danger')
+                .removeClass('add-form-row').addClass('remove-form-row')
+                .html('<i class="material-icons">remove_circle_outline</i>');
+            return false;
+        }
+
+        function deleteForm(prefix, btn) {
+            var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+            if (total > 1) {
+                btn.closest('.form-row').remove();
+                var forms = $('.form-row');
+                $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+                for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                    $(forms.get(i)).find(':input').each(function () {
+                        updateElementIndex(this, prefix, i);
+                    });
+                }
+            }
+            return false;
+        }
+
+        {% comment %}$(document).on('click', '.add-form-row', function (e) {
+            e.preventDefault();
+            cloneMore('.form-row:last', 'form');
+            return false;
+        });
+        $(document).on('click', '.remove-form-row', function (e) {
+            e.preventDefault();
+            deleteForm('form', $(this));
+            return false;
+        });{% endcomment %}
+
+        $(".add-form-row").click(function (e) {
+            e.preventDefault();
+            addCourseField();
+
+
+        });
+
+        $(".delete-course").bind('click',function () {
+            alert("Hello");
+
+            {#deleteCourseField(this.attr("id"));#}
+
+
+        });
+
+        function addCourseField() {
+            var clonedField = $("#courseForm_" + lastId).clone(true);
+            var completedCourse = clonedField.find("#completedCourse_" + lastId);
+            var deleteCourse = clonedField.find("#deleteCourse_" + lastId);
+            lastId++;
+            completedCourse.attr("id", "completedCourse_" + lastId);
+            completedCourse.html("Completed Course " + (lastId + 1));
+            clonedField.attr("id", "courseForm_" + lastId);
+            deleteCourse.attr("id", "deleteCourse_" + lastId);
+            deleteCourse.show();
+            clonedField.find("input").val("");
+            clonedField.insertAfter("#courseForm_" + (lastId - 1));
+            clonedField.hide();
+            clonedField.slideDown(800);
+        }
+        
+        function deleteCourseField(id) {
+            alert("Will Delete"+id);
+            
+        }
+
+
+    </script>
+
+{% endblock %}

@@ -1,33 +1,84 @@
 {% extends 'base.html' %}
 {% block title %}Syllabus{% endblock %}
 {% block content %}
-<aside id="colorlib-hero">
-    <div class="flexslider">
-        <ul class="slides">
-        <li style="background-image: url(/static/images/bg3.jpg);">
-            <div class="overlay"></div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
-                        <div class="slider-text-inner text-center">
-                            <h1>Syllabus</h1>
+    <div class="curriculum-background">
+        <div class="program-content-overlay">
+            <div class="program-content">
+                <div class="">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <h2 class="detail-card-header news-detail-card-header">
+                                    <i class="material-icons">bookmark_border</i>Syllabus (Session Wise)</h2>
+                                <div class="classes class-single detail-card news-detail-card">
+                                    <div class="desc desc2 row">
+                                        <div class="col-md-12 program-detail-container">
+                                            <center class="faculty_detail_description">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                                tempor
+                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis
+                                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat.
+                                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                                dolore
+                                                eu fugiat nulla pariatur. Excepteur sint Lorem ipsum dolor sit amet,
+                                                consectetur
+                                                adipiscing elit, sed do eiusmod tempor
+                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis
+                                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat.
+                                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                                dolore
+                                                eu fugiat nulla pariatur. Excepteur sint
+                                            </center>
+                                            <center>
+                                                <a href="#curriculum-detail" style="color: black"><i
+                                                        class="material-icons">keyboard_arrow_down</i></a>
+                                            </center>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </li>
-        </ul>
-    </div>
-</aside>
+                <div id="curriculum-detail">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <div class="classes class-single curriculum-detail-container-card">
+                                    <div class="desc desc2 row">
+                                        <div class="col-md-12 detail-container">
 
-<div class="colorlib-blog colorlib-light-grey">
-    <div class="container">
-        {% for batch in batches %}
-        <p>{{batch.batch_year}}</p>
-            {% if batch.syllabus %}
-                <a href="{% url 'download_syllabus' batch.syllabus.name %}">Get the Syllabus</a>
-            {% endif %}
-        {% endfor %}
+
+                                            {% for batch in batches %}
+
+                                                {% if batch.syllabus %}
+
+                                                    <div class="col-md-3 col-sm-11 animate-box col-xs-11 card news-card"
+                                                         style="padding: 50px; background: #0E2231;">
+
+                                                        <center>
+                                                            <a style="color: white;"
+                                                               href="{% url 'download_syllabus' batch.syllabus.name %}">
+                                                                {{ batch.batch_year }} Session
+                                                            </a>
+                                                        </center>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+            </div>
+        </div>
     </div>
-</div>
 {% endblock %}

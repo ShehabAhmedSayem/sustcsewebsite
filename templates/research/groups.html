@@ -115,7 +115,7 @@
 
                                         {% for group in groups %}
 
-                                        <div class="col-md-4 col-sm-11 col-xs-11 card" style="padding: 0px">
+                                        <div class="col-md-4 col-sm-11 col-xs-11 card news-card" style="padding: 0px">
 
 
                                             <div class="research_group_img_div">
@@ -124,7 +124,7 @@
                                                          src="/static/images/backgrounds/material-bg-01.png"
                                                          alt="">
                                                     <div class="overlay">
-                                                        <h2>Natural Language Processing</h2>
+                                                        <h2>{{ group.name }}</h2>
                                                         {% if group.site_link %}
                                                         <a class="info" href="{{ group.site_link }}">Visit Site</a>
                                                         {% endif %}

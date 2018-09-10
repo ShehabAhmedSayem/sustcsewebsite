@@ -1,50 +1,130 @@
 {% extends 'base.html' %}
 {% block title %}Events{% endblock %}
 {% block content %}
-<aside id="colorlib-hero">
-			<div class="flexslider">
-				<ul class="slides">
-			   	<li style="background-image: url(/static/images/bg3.jpg);">
-			   		<div class="overlay"></div>
-			   		<div class="container-fluid">
-			   			<div class="row">
-				   			<div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
-				   				<div class="slider-text-inner text-center">
-				   					<h1>Upcoming Events</h1>
-				   				</div>
-				   			</div>
-				   		</div>
-			   		</div>
-			   	</li>
-			  	</ul>
-		  	</div>
-		</aside>
 
-		<div class="colorlib-event">
-			<div class="container">
-				<div class="row">
-                    {% for event in events %}
-					<div class="col-md-4 animate-box">
-						<div class="event-entry">
-							<div class="desc">
-								<p class="meta"><span class="day">{{ event.event_date|date:"j" }}</span><span class="month">{{ event.event_date|date:"F" }}</span></p>
-                                <h2><a href="#">{{ event.title }}</a></h2>
-							</div>
-							<div class="location">
-								<span class="icon"><i class="icon-map"></i></span>
-								<p>{{ event.location }}</p>
-							</div>
-						</div>
-					</div>
-                    {% endfor %}
-				</div>
-			</div>
-		</div>
+    <div class="curriculum-background">
+        <div class="program-content-overlay">
+            <div class="program-content">
+                <div class="">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <h2 class="detail-card-header events-detail-card-header">
+                                    <i class="material-icons">event_available</i>Events</h2>
+                                <div class="classes class-single detail-card notice-detail-card">
+                                    <div class="desc desc2 row">
+                                        <div class="col-md-12 program-detail-container">
+                                            <center class="faculty_detail_description">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                                tempor
+                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis
+                                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat.
+                                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                                dolore
+                                                eu fugiat nulla pariatur. Excepteur sint Lorem ipsum dolor sit amet,
+                                                consectetur
+                                                adipiscing elit, sed do eiusmod tempor
+                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis
+                                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat.
+                                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                                dolore
+                                                eu fugiat nulla pariatur. Excepteur sint
+                                            </center>
+                                            <center>
+                                                <a href="#curriculum-detail" style="color: black"><i
+                                                        class="material-icons">keyboard_arrow_down</i></a>
+                                            </center>
 
-<div class="colorlib-blog colorlib-light-grey">
-    <div class="container">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="curriculum-detail">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <div class="classes class-single curriculum-detail-container-card">
+                                    <div class="desc desc2 row">
+                                        <div class="col-md-12 detail-container notice-detail-container">
+
+                                            {% for event in events %}
+
+                                                <div class="col-md-5 animate-box col-sm-11 col-xs-11 card news-card"
+                                                     style="padding: 0px">
+                                                    <div class="research_group_img_div">
+                                                        <div class="hovereffect">
+                                                            <img class="img-responsive"
+                                                                 src="/static/images/backgrounds/material-bg-01.png"
+                                                                 alt="">
+                                                            <div class="news-overlay">
+                                                                <h3>
+                                                                    <span class="day">{{ event.event_date|date:"j" }}</span>
+                                                                    <span class="month">{{ event.event_date|date:"F" }}</span>
+                                                                    <span class="month">, {{ event.event_date.year }}</span>
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="research_group_card">
+
+                                                        <span class="research_group_name">{{ event.title }}</span>
+                                                        <hr>
+                                                        <i class="material-icons">date_range</i>
+                                                        <span>
+                                                                <span class="day">{{ event.event_date|date:"j" }}</span>
+                                                                <span class="month">{{ event.event_date|date:"F" }}</span>
+                                                                <span class="month">, {{ event.event_date.year }}</span>
+                                                        </span>
+                                                        <br>
+                                                        <i class="material-icons">place</i>
+                                                        <span>
+                                                                {{ event.location }}
+                                                        </span>
+                                                        <br>
+                                                        <i class="material-icons">description</i>
+                                                        <span style="text-align: justify;">{{ event.getEventsIntro}}</span>
+                                                        <span data-toggle="modal" data-target="#{{ event.getStrippedName}}"
+                                                              style="cursor: pointer;color: dodgerblue"> View Details</span>
+                                                        <br>
+                                                        <div id="{{ event.getStrippedName }}" class="modal fade"
+                                                             role="dialog">
+                                                            <div class="modal-dialog">
+                                                                <!-- Modal content-->
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <span style="color: white">{{ event.title }}</span>
+                                                                        <span data-dismiss="modal"
+                                                                              style="cursor: pointer"><i
+                                                                                class="material-icons">clear</i></span>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>{{ event.details }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
 
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+            </div>
+        </div>
     </div>
-</div>
 {% endblock %}

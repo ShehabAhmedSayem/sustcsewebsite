@@ -1,42 +1,92 @@
 {% extends 'base.html' %}
-{% block title %}News{% endblock %}
+{% block title %}Honor Board{% endblock %}
 {% block content %}
-<aside id="colorlib-hero">
-    <div class="flexslider">
-        <ul class="slides">
-        <li style="background-image: url(/static/images/bg3.jpg);">
-            <div class="overlay"></div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
-                        <div class="slider-text-inner text-center">
-                            <h1>Honor Board</h1>
+    <div class="curriculum-background">
+        <div class="program-content-overlay">
+            <div class="program-content">
+                <div class="">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <h2 class="detail-card-header honor-detail-card-header">
+                                    <i class="material-icons">school</i>Honor Board</h2>
+                                <div class="classes class-single detail-card news-detail-card">
+                                    <div class="desc desc2 row">
+                                        <div class="col-md-12 program-detail-container">
+                                            <center class="faculty_detail_description">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                                tempor
+                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis
+                                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat.
+                                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                                dolore
+                                                eu fugiat nulla pariatur. Excepteur sint Lorem ipsum dolor sit amet,
+                                                consectetur
+                                                adipiscing elit, sed do eiusmod tempor
+                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis
+                                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat.
+                                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                                dolore
+                                                eu fugiat nulla pariatur. Excepteur sint
+                                            </center>
+                                            <center>
+                                                <a href="#curriculum-detail" style="color: black"><i
+                                                        class="material-icons">keyboard_arrow_down</i></a>
+                                            </center>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div id="curriculum-detail">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <div class="classes class-single curriculum-detail-container-card">
+                                    <div class="desc desc2 row">
+                                        <div class="col-md-12 detail-container">
+
+                                            {% for honor in honors %}
+                                                <div class="card">
+                                                    <div class="desc">
+                                                        <div class="col-md-12 animate-box">
+
+                                                            <div class="pull-left" style="margin-right: 25px;">
+
+                                                                <img src="/static/images/bg3.jpg" width="300px"
+                                                                     height="250px">
+                                                            </div>
+
+                                                            <div class="honor-detail-desc">
+                                                                <h2 style="display: inline-block;">{{ honor.title }}</h2>
+                                                                <p>
+                                                                    {{ honor.details }}
+                                                                </p>
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
                 </div>
             </div>
-        </li>
-        </ul>
-    </div>
-</aside>
+        </div>
 
-<div class="colorlib-blog colorlib-light-grey">
-    <div class="container">
-        {% for honor in honors %}
-            <article class="article-entry">
-                <div class="desc">
-                    <div class="row">
-                        <div class="col-md-4 animate-box">
-                            <img src="/static/images/bg3.jpg" width="300px" height="250px">
-                        </div>
-                        <div class="col-md-8 animate-box">
-                            <h1>{{ honor.title }}</h1>
-                            <p>{{ honor.details}}</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        {% endfor %}
-    </div>
-</div>
 {% endblock %}
