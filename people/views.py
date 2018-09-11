@@ -136,7 +136,8 @@ def student(request):
 
 
 def staff(request):
-    context = {}
+    staffs = Staff.objects.all()
+    context = {'staffs': staffs}
     return render(request, 'people/staff.html', context)
 
 

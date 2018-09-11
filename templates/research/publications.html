@@ -26,7 +26,7 @@
             if (divs[i].valueOf() == divName.valueOf()) {
                 var x = document.getElementById(divs[i].valueOf());
                 x.style.display = "block";
-                $("#publication_title").text(divs[i].valueOf()+" Publication ")
+                $("#publication_title").text("Publication: "+divs[i].valueOf())
             }
             else {
                 var x = document.getElementById(divs[i].valueOf());
@@ -74,7 +74,7 @@
                     <div class="col-md-12">
                         <h2 class="program-detail-card-header">
                             <i class="material-icons">school</i>
-                            <span id="publication_title">Program - {{ program.program_name }}</span></h2>
+                            <span id="publication_title">Publications</span></h2>
                         <div class="classes class-single program-detail-header-card">
                             <div class="desc desc2 row">
                                 <div class="col-md-12 program-detail-container">
@@ -94,16 +94,21 @@
                                             {% if publication.publication_type.name == 'Conference' %}
                                             <tr>
                                                 <td>
+                                                    {% if publication.link %}
+                                                    <a href="{{ publication.link }}"><b>{{ publication.title }}</b></a>
+                                                    {% else %}
                                                     <b>{{ publication.title }}</b>
-                                                    </br>
+                                                    {% endif %}
+                                                    <br>
                                                     <span>
-                                {{ publication.author_faculty }}
-                                {% for student in publication.author_student.all %}
-                                    , {{ student }}
-                                {% endfor %}
+                                                        {% if publication.authors %}
+                                                        {{ publication.authors }}
+                                                        {% else %}
+                                                        {{ publication.author_faculty }}
+                                                        {% endif %}
                                                         </br>
                                                         {{ publication.where_published }}
-                                </span>
+                                                    </span>
                                                 </td>
                                                 <td>{{ publication.cited_by }}</td>
                                                 <td>{{ publication.published_year }}</td>

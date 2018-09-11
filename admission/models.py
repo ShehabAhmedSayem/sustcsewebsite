@@ -2,10 +2,10 @@ from django.db import models
 
 
 class SecondMajorApplication(models.Model):
-    registration_no = models.IntegerField(max_length=12,primary_key=True)
+    registration_no = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
     department = models.CharField(max_length=100)
-    phone_number = models.IntegerField(max_length=20)
+    phone_number = models.CharField(max_length=20)
     email = models.EmailField()
     address = models.CharField(max_length=1000)
     reason_of_study = models.TextField()

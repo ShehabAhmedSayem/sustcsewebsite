@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Faculty{% endblock %}
+{% block title %}Staff{% endblock %}
 {% block content %}
 
 <script src="/static/js/jquery.min.js"></script>
@@ -50,30 +50,35 @@
                                             <br>
                                         </form>
 
-                                        {% for faculty in faculties %}
+                                        {% for staff in staffs %}
                                         <div class="col-md-4 col-sm-6 list" >
                                             <div class="card">
                                                 <center>
-                                                    <a href="{% url 'faculty_detail' faculty.user.id %}">
-                                                        <img src="/media/{{ faculty.image }}" alt="Avatar" height="50px" class="img img-responsive">
-                                                    </a>
+                                                    <img src="/media/{{ staff.image }}" alt="Avatar" height="50px" class="img img-responsive">
                                                 </center>
                                                 <div class="card-bottom">
-                                                    <span>
-                                                        <b>
-                                                            <a class="people-title"
-                                                               href="{% url 'faculty_detail' faculty.user.id %}">{{faculty.name}}</a>
-                                                        </b>
+                                                    <span class="people-designation">
+                                                        <h3 style="color:gray">{{staff.name}}</h3>
                                                     </span>
                                                     <span class="people-designation">
-                                                        {{faculty.designation}}
+                                                        {{staff.designation}}
                                                     </span>
                                                     <span class="people-designation">
-                                                        {{faculty.getFacultyStatus}}
+                                                        {{staff.status}}
                                                     </span>
                                                     <span class="people-designation" style="margin-bottom: 2%;">
-                                                        {{faculty.office}}
+                                                        {{staff.office}}
                                                     </span>
+                                                    {% if staff.contact %}
+                                                    <span class="people-designation" style="margin-bottom: 2%;">
+                                                        {{staff.contact}}
+                                                    </span>
+                                                    {% endif %}
+                                                    {% if staff.email %}
+                                                    <span class="people-designation" style="margin-bottom: 2%;">
+                                                        {{staff.email}}
+                                                    </span>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>

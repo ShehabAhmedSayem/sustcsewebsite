@@ -37,6 +37,7 @@ class User(AbstractUser):
 class Faculty(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     name = models.CharField(max_length=200)
+    about = models.CharField(blank=True, null=True, max_length=2000, default='Hi. A am a proud faculty of SUST CSE.')
     designation = models.CharField(max_length=200)
     image = models.ImageField(blank=True, null=True, upload_to='people/images/')
     office = models.CharField(max_length=200)

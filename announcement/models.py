@@ -31,8 +31,6 @@ class News(models.Model):
     details = models.TextField()
     image = models.ImageField(blank=True, null=True, upload_to='images/')
 
-
-
     def __str__(self):
         return self.title
 
@@ -45,7 +43,6 @@ class News(models.Model):
             return newsDetail[0:300]
         else:
             return newsDetail
-
 
     class Meta:
         verbose_name_plural = "news"
