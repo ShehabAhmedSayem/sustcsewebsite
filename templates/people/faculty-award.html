@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Award{% endblock %}
+{% block content %}
+
+<br><br><br><br><br><br>
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div id="faculty_publication" class="col-md-10 col-md-offset-1">
+            <div class="card">
+                <div class="card-bottom">
+                    <p class="people-detail">
+                        <b>
+                    <p class="people-title">Awards Of {{ faculty.name }}</p>
+                    {% if user.is_authenticated %}
+                    {% if user.id == faculty.user.id %}
+                    <a href="{% url 'add_award' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
+                    {% endif %}
+                    {% endif %}
+                    </b>
+                    </p>
+                </div>
+
+                {% if faculty.award_set.all %}
+                {% for award in faculty.award_set.all %}
+                <p class="faculty_detail_description">
+                    <span class="faculty-education-title">{{ award.title }}</span>
+                    {% if user.is_authenticated %}
+                    {% if user.id == faculty.user.id %}
+                    <a href="{% url 'delete_award' award.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
+                    {% endif %}
+                    {% endif %}
+                    <img height="200px;" width="300px;" src="/media/{{ award.image }}">
+                    <span class="faculty-education-subtitle">{{ award.details }}</span>
+                <hr>
+                </p>
+                {% endfor %}
+                {% else %}
+                <p class="faculty_detail_description">No Award Available</p>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

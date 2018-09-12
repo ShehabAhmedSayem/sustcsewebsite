@@ -7,6 +7,7 @@ class ProgramAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Program name', {'fields': ['program_name']}),
         ('Details of the program', {'fields': ['details']}),
+        ('Admission Form of the program', {'fields': ['admission_form']}),
     ]
 
 

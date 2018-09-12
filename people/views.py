@@ -89,6 +89,12 @@ def faculty_publications(request, user_id):
     return render(request, 'people/faculty-publications.html', context)
 
 
+def faculty_awards(request, user_id):
+    faculty = get_object_or_404(Faculty, pk=user_id)
+    context = {'faculty':faculty}
+    return render(request, 'people/faculty-award.html', context)
+
+
 def update_publications(request, faculty_id):
     faculty = get_object_or_404(Faculty, pk=faculty_id)
     publications = faculty.publication_set.all()
@@ -333,7 +339,7 @@ def add_award(request):
 
         if award_form.is_valid():
             award_form.save()
-            return redirect('add_award')
+            return redirect('faculty_awards',  request.user.id)
         else:
             pass
 
@@ -356,4 +362,4 @@ def delete_award(request, award_id):
     else:
         messages.error(request, 'You don\'t have authorization!')
 
-    return redirect('faculty_detail', request.user.id)
+    return redirect('faculty_awards', request.user.id)

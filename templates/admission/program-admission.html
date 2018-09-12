@@ -73,14 +73,18 @@
                                     </div>
                                     <div class="col-md-12 program-detail-container">
                                         <center class="faculty_detail_description">
+                                            {% if program.admission_form %}
+
                                             {% if program.program_name == "Undergraduate Second Major" %}
-                                                Wanna Get Admitted to Second Major in CSE- fill up this <a href="{% url 'second_major_application' %}">form</a>
+                                                Wanna Get Admitted to Second Major in CSE- fill up this
                                             {% elif program.program_name == "Masters" %}
-                                                Wanna Get Admitted to Masters- fill up this <a href="#">form</a>
+                                                Wanna Get Admitted to Masters- fill up this
                                             {% elif program.program_name == "Phd" %}
-                                                Wanna Get Admitted to Phd- fill up this <a href="#">form</a>
+                                                Wanna Get Admitted to Phd- fill up this
                                             {% elif program.program_name == "CCNA" %}
-                                                Wanna Get Admitted to CCNA- fill up this <a href="#">form</a>
+                                                Wanna Get Admitted to CCNA- fill up this
+                                            {% endif %}
+                                            <a href="{% url 'download_form' program.admission_form.name %}">form</a>
                                             {% endif %}
                                         </center>
                                         </div>

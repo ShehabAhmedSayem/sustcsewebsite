@@ -11,6 +11,7 @@ from people.models import Faculty, Batch
 class Program(models.Model):
     program_name = models.CharField(max_length=100)
     details = RichTextField()
+    admission_form = models.FileField(blank=True, null=True, upload_to='admission_form/')
 
     def __str__(self):
         return self.program_name

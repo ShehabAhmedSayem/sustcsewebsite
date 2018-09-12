@@ -23,6 +23,7 @@ urlpatterns = [
     path('faculty/add_social_profile', views.add_social_profile, name='add_social_profile'),
     path('faculty/delete_publication/<int:publication_id>', views.delete_publication, name='delete_publication'),
 
+    path('faculty/awards/<int:user_id>', views.faculty_awards, name='faculty_awards'),
     path('faculty/add_award', views.add_award, name='add_award'),
     path('faculty/delete_award/<int:award_id>', views.delete_award, name='delete_award'),
 
