@@ -50,6 +50,12 @@ class PublicationForm(forms.ModelForm):
         self.fields['publication_type'] = forms.ModelChoiceField(queryset=PublicationType.objects.all())
 
 
+class PublicationEditForm(forms.ModelForm):
+    class Meta:
+        model = Publication
+        fields = '__all__'
+
+
 class ResearchInterestForm(forms.ModelForm):
     class Meta:
         model = Publication

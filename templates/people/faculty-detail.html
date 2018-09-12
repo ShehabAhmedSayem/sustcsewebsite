@@ -102,6 +102,7 @@
                                                                 <li><a href="#work" class="scroll">Experience</a></li>
                                                                 <li><a href="#education" class="scroll">Education</a>
                                                                 </li>
+                                                                <li><a href="#award" class="scroll">Award</a></li>
                                                                 <li>
                                                                     <a href="{% url 'faculty_publications' faculty.user_id %}"
                                                                        class="scroll">Publications</a></li>
@@ -127,7 +128,11 @@
                                             <div id="work" class="work">
                                                 <div class="">
                                                     <h3 class="title">Work Experience</h3>
-
+                                                    {% if user.is_authenticated %}
+                                                    {% if user.id == faculty.user.id %}
+                                                    <a href="{% url 'add_experience' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
+                                                    {% endif %}
+                                                    {% endif %}
 
                                                     {% if faculty.experience_set.all %}
                                                         {% for exp in faculty.experience_set.all %}
@@ -240,7 +245,7 @@
 
                                                                     {% if user.is_authenticated %}
                                                                         {% if user.id == faculty.user.id %}
-                                                                            <a href="{% url 'delete_experience' edu.id %}"><i
+                                                                            <a href="{% url 'delete_education' edu.id %}"><i
                                                                                     class="material-icons"
                                                                                     style="display: inline-block; float:right;">clear</i></a>
                                                                         {% endif %}
@@ -281,7 +286,7 @@
                                                             </div>
                                                         {% endfor %}
                                                     {% else %}
-                                                        <p class="faculty_detail_description">No Experience Details
+                                                        <p class="faculty_detail_description">No Education Details
                                                             Available</p>
                                                     {% endif %}
 

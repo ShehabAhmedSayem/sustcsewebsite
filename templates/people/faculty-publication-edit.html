@@ -1,0 +1,9 @@
+{% if user.is_authenticated %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ publication_form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+{% else %}
+    <p>You have nothing to do here</p>
+{% endif %}

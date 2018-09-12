@@ -85,7 +85,7 @@ def faculty_publications(request, user_id):
     faculty = get_object_or_404(Faculty, pk=user_id)
     google_scholar_link = faculty.google_scholars_link
     publications = faculty.publication_set.all()
-    context = {'publications': publications, 'faculty_id': user_id, 'google_scholar_link': google_scholar_link}
+    context = {'publications': publications, 'faculty_id': user_id, 'google_scholar_link': google_scholar_link, 'faculty':faculty}
     return render(request, 'people/faculty-publications.html', context)
 
 
@@ -249,6 +249,28 @@ def add_publication(request):
         publication_form = PublicationForm(user=request.user)
 
     return render(request, 'people/faculty-add-publication.html', {
+        'publication_form': publication_form,
+    })
+
+
+@login_required
+@faculty_required
+@transaction.atomic
+def edit_publication(request, publication_id):
+    publication = get_object_or_404(Publication, pk=publication_id)
+    if request.method == 'POST':
+        publication_form = PublicationEditForm(request.POST, instance=publication)
+
+        if publication_form.is_valid():
+            publication_form.save()
+            return redirect('faculty_publications', request.user.id)
+        else:
+            pass
+
+    else:
+        publication_form = PublicationEditForm(instance=publication)
+
+    return render(request, 'people/faculty-publication-edit.html', {
         'publication_form': publication_form,
     })
 

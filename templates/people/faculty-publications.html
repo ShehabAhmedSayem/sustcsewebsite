@@ -65,6 +65,65 @@
     })
 </script>
 
+<div class="about-background">
+        <div class="program-content-overlay">
+            <div class="program-content">
+
+                <div class="about-content">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <div class="classes class-single faculty-detail-container-card">
+                                    <div class="desc desc2 row" style="padding: 0;">
+                                        <div class="col-md-12 faculty-detail-container">
+
+                                            <div id="home" class="banner">
+                                                <div class="banner-info">
+                                                    <div class="container">
+                                                        <div class="col-md-4 header-left">
+                                                            <img src="/media/{{ faculty.image }}" alt=""/>
+                                                        </div>
+                                                        <div class="col-md-7 header-right faculty-intro-header">
+                                                            <h2>Hello</h2>
+                                                            <h1 style="margin: 0px;">I'm {{ faculty.name }}</h1>
+                                                            <h6 style="margin: 0px; color: #ecf0f1; font-weight: bold; letter-spacing:2px; ">
+                                                                {{ faculty.designation }}<br>Department of CSE SUST</h6>
+                                                            <ul class="address">
+                                                                <li>
+                                                                    {% if faculty.research_interest.all %}
+                                                                     <ul class="address-text">
+                                                                        <li><b><i class="material-icons">book</i>
+                                                                            Research Interest
+                                                                        </b></li>
+                                                                        {% for research_interest in faculty.research_interest.all %}
+                                                                        <li>{{ research_interest }}</li>
+                                                                         {% endfor %}
+                                                                    </ul>
+                                                                    {% endif %}
+                                                                </li>
+                                                            </ul>
+                                                            {% if user.is_authenticated %}
+                                                            {% if user.id == faculty.user.id %}
+                                                            <a href="{% url 'add_publication' %}"><button type="button" class="btn btn-info" style="float:right">Add New Publication</button></a>
+                                                            {% endif %}
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
 
 <div class="publication-background">
     <div class="program-content-overlay">
@@ -75,10 +134,13 @@
                         <h2 class="program-detail-card-header">
                             <i class="material-icons">school</i>
                             <span id="publication_title">Publications</span>
+
                             {% if user.is_authenticated %}
                                 <a href="{% url 'update_publications' faculty_id %}"><button class="btn-info" style="float:right; font-size:18px; padding:5px 15px; border-radius:15px;"><b>Update</b></button></a>
                             {% endif %}
+
                             </h2>
+
                         <div class="classes class-single program-detail-header-card">
                             <div class="desc desc2 row">
                                 <div class="col-md-12 program-detail-container">
@@ -113,6 +175,14 @@
                                                         </br>
                                                         {{ publication.where_published }}
                                                     </span>
+                                                    {% if user.is_authenticated %}
+                                                    {% if user.id == faculty.user.id %}
+                                                    </br>
+                                                    <span>
+                                                    <a href="{% url 'edit_publication' publication.id %}"><button type="button" class="btn btn-light" style="padding:5px;border-radius:10px">Edit</button></a>
+                                                    </span>
+                                                    {% endif %}
+                                                    {% endif %}
                                                 </td>
                                                 <td>{{ publication.cited_by }}</td>
                                                 <td>{{ publication.published_year }}</td>

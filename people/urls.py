@@ -17,6 +17,7 @@ urlpatterns = [
     path('faculty/delete_experience/<int:experience_id>', views.delete_experience, name='delete_experience'),
 
     path('faculty/add_publication', views.add_publication, name='add_publication'),
+    path('faculty/edit_publication/<int:publication_id>', views.edit_publication, name='edit_publication'),
     path('faculty/delete_publication/<int:publication_id>', views.delete_publication, name='delete_publication'),
 
     path('faculty/add_social_profile', views.add_social_profile, name='add_social_profile'),
