@@ -10,7 +10,9 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
+from urllib.parse import urlparse
 import os
+
 
 class Pub:
     title = ""
@@ -27,18 +29,37 @@ class Pub:
 
 def faculty(request):
     faculties = Faculty.objects.all()
-    context={'faculties': faculties}
+    context = {'faculties': faculties}
     return render(request, 'people/faculty.html', context)
+
+def getSocialIcon(link):
+    url = urlparse(link)
+    urlPath = url.path
+    link = link.replace(urlPath,"")
+    print("LinkFor",link)
+    uClient = urlReq(link)
+    pageHTML = uClient.read()
+    uClient.close()
+    pageSoup = bsoup(pageHTML, "html.parser")
+    containers = pageSoup.find_all("link", {"rel": "icon"})
+    iconLink = containers[0]["href"]
+    return iconLink
 
 
 def faculty_detail(request, user_id):
     faculty = get_object_or_404(Faculty, pk=user_id)
-    context={'faculty': faculty}
+    socialLink = faculty.socialprofile_set.all()
+    socialLinkDict = {}
+    for link in socialLink:
+        print(link.link)
+        print(getSocialIcon(link.link))
+        socialLinkDict[link.link] = getSocialIcon(link.link)
+
+    context = {'faculty': faculty,'socialLinkDict':socialLinkDict}
     return render(request, 'people/faculty-detail.html', context)
 
 
 def start_scrapping(url):
-
     chrome_options = Options()
     chrome_options.add_argument("--headless")
 
@@ -85,13 +106,14 @@ def faculty_publications(request, user_id):
     faculty = get_object_or_404(Faculty, pk=user_id)
     google_scholar_link = faculty.google_scholars_link
     publications = faculty.publication_set.all()
-    context = {'publications': publications, 'faculty_id': user_id, 'google_scholar_link': google_scholar_link, 'faculty':faculty}
+    context = {'publications': publications, 'faculty_id': user_id, 'google_scholar_link': google_scholar_link,
+               'faculty': faculty}
     return render(request, 'people/faculty-publications.html', context)
 
 
 def faculty_awards(request, user_id):
     faculty = get_object_or_404(Faculty, pk=user_id)
-    context = {'faculty':faculty}
+    context = {'faculty': faculty}
     return render(request, 'people/faculty-award.html', context)
 
 
@@ -339,7 +361,7 @@ def add_award(request):
 
         if award_form.is_valid():
             award_form.save()
-            return redirect('faculty_awards',  request.user.id)
+            return redirect('faculty_awards', request.user.id)
         else:
             pass
 

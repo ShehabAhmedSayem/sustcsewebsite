@@ -34,17 +34,27 @@
                                                                 <span class="social-profile-header">Find Me On</span>
                                                                 {% for socialProfile in faculty.socialprofile_set.all %}
                                                                     <a class="social-profile-icon"
-                                                                       href="{{ socialProfile.link }}">
-                                                                        <i class="material-icons">dashboard</i>
+                                                                       href="{{ socialProfile.link }}" target="_blank">
+
+                                                                        {% for key,value in socialLinkDict.items %}
+                                                                            {% if key == socialProfile.link %}
+                                                                                <img class="img img-responsive" width="32px" height="32px" src="{{ value }}" />
+                                                                            {% endif %}
+                                                                        {% endfor %}
+
+{#                                                                        <i class="material-icons">dashboard</i>#}
                                                                     </a>
                                                                 {% endfor %}
                                                             {% endif %}
 
                                                             {% if user.is_authenticated %}
-                                                            {% if user.id == faculty.user.id %}
-
-                                                            <a href="{% url 'add_social_profile' %}"><button type="button" class="btn btn-info">Add</button></a>
-                                                            {% endif %}
+                                                                {% if user.id == faculty.user.id %}
+                                                                    <br>
+                                                                    <br>
+                                                                    <a href="{% url 'add_social_profile' %}">
+                                                                        <button type="button" class="btn btn-info">Add</button>
+                                                                    </a>
+                                                                {% endif %}
                                                             {% endif %}
                                                         </div>
 
@@ -79,9 +89,13 @@
                                                                 </li>
                                                             </ul>
                                                             {% if user.is_authenticated %}
-                                                            {% if user.id == faculty.user.id %}
-                                                            <a href="{% url 'update_faculty' %}"><button type="button" class="btn btn-info" style="float:right">Edit Profile</button></a>
-                                                            {% endif %}
+                                                                {% if user.id == faculty.user.id %}
+                                                                    <a href="{% url 'update_faculty' %}">
+                                                                        <button type="button" class="btn btn-info"
+                                                                                style="float:right">Edit Profile
+                                                                        </button>
+                                                                    </a>
+                                                                {% endif %}
                                                             {% endif %}
                                                         </div>
                                                         <div class="clearfix"></div>
@@ -107,8 +121,11 @@
                                                                 <li><a href="#about" class="scroll">About</a></li>
                                                                 <li><a href="#work" class="scroll">Experience</a></li>
                                                                 <li><a href="#education" class="scroll">Education</a>
+                                                                <li><a href="#research" class="scroll">Research
+                                                                    Interest</a>
                                                                 </li>
-                                                                <li><a href="{% url 'faculty_awards' faculty.user_id %}" class="scroll">Award</a></li>
+                                                                <li><a href="{% url 'faculty_awards' faculty.user_id %}"
+                                                                       class="scroll">Award</a></li>
                                                                 <li>
                                                                     <a href="{% url 'faculty_publications' faculty.user_id %}"
                                                                        class="scroll">Publications</a></li>
@@ -130,14 +147,20 @@
                                                 </div>
                                             </div>
 
+                                            <!--Work Experience div-->
 
                                             <div id="work" class="work">
                                                 <div class="">
                                                     <h3 class="title">Work Experience</h3>
                                                     {% if user.is_authenticated %}
-                                                    {% if user.id == faculty.user.id %}
-                                                    <a href="{% url 'add_experience' %}"><button type="button" class="btn btn-info" style="float:right;">Add Experience</button></a>
-                                                    {% endif %}
+                                                        {% if user.id == faculty.user.id %}
+                                                            <a href="{% url 'add_experience' %}">
+                                                                <button type="button" class="btn btn-info"
+                                                                        style="float:right; margin-right: 2em">Add
+                                                                    Experience
+                                                                </button>
+                                                            </a>
+                                                        {% endif %}
                                                     {% endif %}
 
                                                     {% if faculty.experience_set.all %}
@@ -209,8 +232,12 @@
 
                                                         {% endfor %}
                                                     {% else %}
-                                                        <p class="faculty_detail_description">No Experience Details
-                                                            Available</p>
+                                                        <center>
+                                                            <p style="color: #ffaaaf">
+                                                                No Experience Details are Available</p>
+
+                                                        </center>
+
                                                     {% endif %}
 
 
@@ -225,12 +252,22 @@
 
                                             <div id="education" class="education">
                                                 <div class="">
-                                                    <h3 class="title">Education</h3>
-                                                    {% if user.is_authenticated %}
-                                                    {% if user.id == faculty.user.id %}
-                                                    <a href="{% url 'add_education' %}"><button type="button" class="btn btn-info" style="float:right;">Add Education</button></a>
-                                                    {% endif %}
-                                                    {% endif %}
+                                                    <h3 class="title">
+                                                        Education
+                                                        {% if user.is_authenticated %}
+                                                            {% if user.id == faculty.user.id %}
+                                                                <a href="{% url 'add_education' %}">
+                                                                    <button type="button" class="btn btn-info"
+                                                                            style="float:right; margin-right: 2em">Add
+                                                                        Education
+                                                                    </button>
+                                                                </a>
+                                                            {% endif %}
+                                                        {% endif %}
+
+
+                                                    </h3>
+
                                                     {% if faculty.education_set.all %}
                                                         {% for edu in faculty.education_set.all %}
 
@@ -301,18 +338,64 @@
                                             </div>
 
 
+                                            <!--Research Interest div-->
+
+                                            <div id="research" class="work">
+                                                <div class="">
+                                                    <h3 class="title">Research Interest</h3>
+
+                                                    {% if faculty.research_interest.all %}
+                                                        {% for exp in faculty.research_interest.all %}
+
+
+                                                            <!--right-->
+                                                            <div class="row work-info">
+                                                                <div class="col-md-5" style="padding-top: 60px;">
+
+                                                                </div>
+
+                                                                <div class="col-md-6"
+                                                                     style="border-left: 1px solid white; padding-top: 60px;">
+                                                                    <h5 style="border: 0px;">
+                                                                    <span class="glyphicon glyphicon-briefcase"
+                                                                          style="margin-left: -4em"> </span>
+                                                                    </h5>
+
+                                                                    <span class="work-place"
+                                                                          style="color: white;">{{ exp.name }}</span>
+                                                                </div>
+
+                                                            </div>
+
+
+
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <center>
+                                                            <p style="color: #ffaaaf">
+                                                                No Experience Details are Available</p>
+
+                                                        </center>
+
+                                                    {% endif %}
+
+
+                                                    <!--left -->
+
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
-
-
+                    <br><br>
                 </div>
-                <br><br>
             </div>
         </div>
-    </div>
 
 {% endblock %}

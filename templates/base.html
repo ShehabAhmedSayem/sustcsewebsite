@@ -58,7 +58,7 @@
     <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
     <link rel="stylesheet" href="{% static 'css/about_style.css' %}">
     <link rel="stylesheet" href="{% static 'css/faculty_detail_style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/admission_form_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
     <link rel="stylesheet" href="{% static 'css/swipebox.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/swiper.css' %}">
@@ -209,21 +209,21 @@
                             <li class="has-dropdown">
                                 <a href="#">People</a>
                                 <ul class="dropdown" style="width:120px;">
-                                    <li><a href="{% url 'student' %}">STUDENT</a></li>
-                                    <li><a href="{% url 'faculty' %}">FACULTY</a></li>
-                                    <li><a href="{% url 'staff' %}">STAFF</a></li>
+                                    <li><a href="{% url 'faculty' %}">Faculty</a></li>
+                                    <li><a href="{% url 'staff' %}">Staff</a></li>
+                                    <li><a href="{% url 'student' %}">Student</a></li>
                                 </ul>
                             </li>
                             <li class="has-dropdown">
                                 <a href="#">Announcement</a>
                                 <ul class="dropdown" style="width:180px;">
-                                    <li><a href="{% url 'notice_board' %}">NOTICE BOARD</a></li>
-                                    <li><a href="{% url 'news' %}">NEWS</a></li>
-                                    <li><a href="{% url 'events' %}">EVENTS</a></li>
-                                    <li><a href="{% url 'honor_board' %}">HONOR BOARD</a></li>
+                                    <li><a href="{% url 'notice_board' %}">Notice Board</a></li>
+                                    <li><a href="{% url 'news' %}">News</a></li>
+                                    <li><a href="{% url 'events' %}">Events</a></li>
+                                    <li><a href="{% url 'honor_board' %}">Honor Board</a></li>
                                 </ul>
                             </li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
                             {% if user.is_authenticated %}
                                 <li><a href="{% url 'logout' %}"><span>Logout</span></a></li>
                             {% else %}
@@ -241,10 +241,10 @@
     {% block footer %}
 
 
-        <footer id="colorlib-footer">
+        <footer style="z-index: 100" id="colorlib-footer">
             <div class="container">
                 <div class="row row-pb-md">
-                    <div class="col-md-5 colorlib-widget">
+                    <div class="col-md-offset-1 col-md-5 colorlib-widget">
                         <h4>ABOUT SUST CSE</h4>
                         <p>Far from the countries Vokalia and Consonantia, there live the blind texts. Separated they
                             live
@@ -258,29 +258,25 @@
                         </ul>
                         </p>
                     </div>
-                    <div class="col-md-2 colorlib-widget">
-                        <h4>Quick Links</h4>
-                        <p>
-                        <ul class="colorlib-footer-links">
-                            <li><a href="#"><i class="icon-check"></i> About Us</a></li>
-                            <li><a href="#"><i class="icon-check"></i> Testimonials</a></li>
-                            <li><a href="#"><i class="icon-check"></i> Courses</a></li>
-                            <li><a href="#"><i class="icon-check"></i> Event</a></li>
-                            <li><a href="#"><i class="icon-check"></i> News</a></li>
-                            <li><a href="#"><i class="icon-check"></i> Contact</a></li>
-                        </ul>
-                        </p>
-                    </div>
 
-                    <div class="col-md-5 colorlib-widget">
+                    <div class="col-md-3 colorlib-widget">
                         <h4>Contact Info</h4>
                         <ul class="colorlib-footer-links">
-                            <li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
+                            <li>Dr M A Wazed Mia IICT Building, <br> Shahjalal University of Science and Technology</li>
                             <li><a href="tel://1234567920"><i class="icon-phone"></i> + 1235 2355 98</a></li>
-                            <li><a href="mailto:info@yoursite.com"><i class="icon-envelope"></i> info@yoursite.com</a>
+                            <li><a href="mailto:info@yoursite.com"><i class="icon-envelope"></i> cse@sust.edu</a>
                             </li>
-                            <li><a href="http://luxehotel.com"><i class="icon-location4"></i> yourwebsite.com</a></li>
+                            <li><a href="http://luxehotel.com"><i class="icon-location4"></i> cse.sust.edu</a></li>
                         </ul>
+                    </div>
+
+                    <div class="col-md-2 colorlib-widget">
+                        <h4>Behind The Scene</h4>
+                        <p>
+                            This Site is Developed from Department of CSE, SUST<br>
+                            <a href="{%  url 'developer' %}" target="_blank">See who is behind the development</a>
+
+                        </p>
                     </div>
                 </div>
             </div>
@@ -290,17 +286,12 @@
                         <div class="col-md-12 text-center">
                             <p>
                                 <small class="block">&copy;
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                     Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                                    All rights reserved | This template is made with <i class="icon-heart"
-                                                                                        aria-hidden="true"></i> by <a
-                                            href="https://colorlib.com" target="_blank">Colorlib</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    All rights reserved to Department of CSE, SUST<br>
+                                    This Site is made with <i class="icon-heart" aria-hidden="true"></i> by <a
+                                            href="{%  url 'developer' %}" target="_blank">Shadat Tonmoy & Shehab Ahmed Sayem</a>
                                 </small>
                                 <br>
-                                <small class="block">Demo Images: <a href="http://unsplash.co/"
-                                                                     target="_blank">Unsplash</a>,
-                                    <a href="http://pexels.com/" target="_blank">Pexels</a></small>
                             </p>
                         </div>
                     </div>

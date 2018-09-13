@@ -2,205 +2,243 @@
 {% block title %}Publications{% endblock %}
 {% block content %}
 
-<!--<script type="text/javascript" src="/static/js/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="/static/js/jquery.min.js"></script>-->
 
-<script type="text/javascript" src="/static/js/jquery.min.js"></script>
-<script type="text/javascript" src="/static/js/data-table.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/data-table.js"></script>
 
-<script>
-    divs = ["poster", "conference", "journal"];
+    <script>
+        divs = ["poster", "conference", "journal"];
 
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
-
-    function showDiv(divName) {
-        for (i = 0; i < divs.length; i++) {
-            console.log("cli " + divs[i].valueOf() + " " + divName.toString());
-            if (divs[i].valueOf() == divName.valueOf()) {
-                var x = document.getElementById(divs[i].valueOf());
-                x.style.display = "block";
-                $("#publication_title").text("Publication: "+divs[i].valueOf())
-            }
-            else {
-                var x = document.getElementById(divs[i].valueOf());
-                x.style.display = "none";
-            }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
         }
-    }
 
-    $(document).ready(function () {
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
 
-        showDiv('conference');
-        var conferenceTable = $('#conferenceTable').DataTable();
-        var journalTable = $('#journalTable').DataTable();
-        var posterTable = $('#posterTable').DataTable();
-
-
-
-        //Check if navbar is expanded or minimized and handle
-        /*$('#navbar-toggle').click(function () {
-            if (state == "expanded") {
-                $('.sidebar').css('margin-left', '-180px');
-                $('#publication_left').css('background-color', 'white');
-                $('#publication_right').css('width', '100%');
-                state = "minimized";
-            } else {
-                if (state == "minimized") {
-                    $('.sidebar').css('margin-left', '0px');
-                    $('#publication_left').css('background-color', '#2b2b2d');
-                    $('#publication_right').css('width', '80%');
-                    state = "expanded";
+        function showDiv(divName) {
+            var title = $(document).find("title").text();
+            for (i = 0; i < divs.length; i++) {
+                console.log("cli " + divs[i].valueOf() + " " + divName.toString());
+                if (divs[i].valueOf() == divName.valueOf()) {
+                    var x = document.getElementById(divs[i].valueOf());
+                    {#x.style.display = "block";#} {#$(x).attr("display","block");#}
+                    $(x).fadeIn();
+                    $("#publication_title").text(title + " (" + capitalize(divs[i].valueOf()) + ")")
+                } else {
+                    var x = document.getElementById(divs[i].valueOf());
+                    {#x.style.display = "none";#} {#$(x).attr("display","none");#}
+                    $(x).fadeOut();
                 }
             }
-        });*/
+        }
+
+        function capitalize(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        $(document).ready(function () {
+
+            showDiv('conference');
+            var conferenceTable = $('#conferenceTable').DataTable();
+            var journalTable = $('#journalTable').DataTable();
+            var posterTable = $('#posterTable').DataTable();
 
 
-    })
-</script>
+            //Check if navbar is expanded or minimized and handle
+            /*$('#navbar-toggle').click(function () {
+                if (state == "expanded") {
+                    $('.sidebar').css('margin-left', '-180px');
+                    $('#publication_left').css('background-color', 'white');
+                    $('#publication_right').css('width', '100%');
+                    state = "minimized";
+                } else {
+                    if (state == "minimized") {
+                        $('.sidebar').css('margin-left', '0px');
+                        $('#publication_left').css('background-color', '#2b2b2d');
+                        $('#publication_right').css('width', '80%');
+                        state = "expanded";
+                    }
+                }
+            });*/
 
 
-<div class="publication-background">
-    <div class="program-content-overlay">
-        <div class="publication_content">
-            <div class="row">
-                <div class="container">
-                    <div class="col-md-12">
-                        <h2 class="program-detail-card-header">
-                            <i class="material-icons">school</i>
-                            <span id="publication_title">Publications</span></h2>
-                        <div class="classes class-single program-detail-header-card">
-                            <div class="desc desc2 row">
-                                <div class="col-md-12 program-detail-container">
+        })
+    </script>
 
-                                    <div id="conference" style="display: none">
-                                        <table id="conferenceTable" class="table table-striped table-bordered"
-                                               style="width:100%">
-                                            <thead>
-                                            <tr>
-                                                <th><a href="#">Title</a></th>
-                                                <th><a href="#">Cited By</a></th>
-                                                <th><a href="#">Published Year</a></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for publication in publications %}
-                                            {% if publication.publication_type.name == 'Conference' %}
-                                            <tr>
-                                                <td>
-                                                    {% if publication.link %}
-                                                    <a href="{{ publication.link }}"><b>{{ publication.title }}</b></a>
-                                                    {% else %}
-                                                    <b>{{ publication.title }}</b>
-                                                    {% endif %}
-                                                    <br>
-                                                    <span>
+
+
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 side-nav">
+        <ul>
+            <li onclick="showDiv('conference')">
+                <a href="#" >
+                    <i class="material-icons sidebar-icon" aria-hidden="true">forum</i>
+                    Conference </a>
+            </li>
+            <li onclick="showDiv('journal')">
+                <a href="#" >
+                    <i class="material-icons sidebar-icon" aria-hidden="true">import_contacts</i>
+                    Journal</a>
+            </li>
+            <li onclick="showDiv('poster')">
+                <a href="#" >
+                    <i class="material-icons sidebar-icon" aria-hidden="true">list_alt</i>
+                    Poster
+                </a>
+            </li>
+        </ul>
+
+
+    </div>
+
+
+    <div class="publication-background">
+        <div class="program-content-overlay">
+            <div class="publication_content">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-2">
+
+                        <div class="container">
+                            <div class="col-md-12">
+                                <h2 class="program-detail-card-header">
+                                    <i class="material-icons">school</i>
+                                    <span id="publication_title">Publications</span></h2>
+                                <div class="classes class-single program-detail-header-card">
+                                    <div class="desc desc2 row">
+                                        <div class="col-md-12 program-detail-container">
+
+
+                                            <div id="conference" style="display: none">
+                                                <table id="conferenceTable" class="table table-striped table-bordered"
+                                                       style="width:100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th><a href="#">Title</a></th>
+                                                        <th><a href="#">Cited By</a></th>
+                                                        <th><a href="#">Published Year</a></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for publication in publications %}
+                                                        {% if publication.publication_type.name == 'Conference' %}
+                                                            <tr>
+                                                                <td>
+                                                                    {% if publication.link %}
+                                                                        <a href="{{ publication.link }}"><b>{{ publication.title }}</b></a>
+                                                                    {% else %}
+                                                                        <b>{{ publication.title }}</b>
+                                                                    {% endif %}
+                                                                    <br>
+                                                                    <span>
                                                         {% if publication.authors %}
-                                                        {{ publication.authors }}
+                                                            {{ publication.authors }}
                                                         {% else %}
-                                                        {{ publication.author_faculty }}
+                                                            {{ publication.author_faculty }}
                                                         {% endif %}
-                                                        </br>
-                                                        {{ publication.where_published }}
+                                                                        </br>
+                                                                        {{ publication.where_published }}
                                                     </span>
-                                                </td>
-                                                <td>{{ publication.cited_by }}</td>
-                                                <td>{{ publication.published_year }}</td>
-                                            </tr>
-                                            {% endif %}
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
+                                                                </td>
+                                                                <td>{{ publication.cited_by }}</td>
+                                                                <td>{{ publication.published_year }}</td>
+                                                            </tr>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+                                            <div id="journal" style="display: none">
+                                                <table id="journalTable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th><a href="#">Title</a></th>
+                                                        <th><a href="#">Cited By</a></th>
+                                                        <th><a href="#">Published Year</a></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for publication in publications %}
+                                                        {% if publication.publication_type.name == 'Journal' %}
+                                                            <tr>
+                                                                <td>{{ publication.title }}</td>
+                                                                <td>{{ publication.cited_by }}</td>
+                                                                <td>{{ publication.published_year }}</td>
+                                                            </tr>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div id="poster" style="display: none">
+                                                <table id="posterTable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th><a href="#">Title</a></th>
+                                                        <th><a href="#">Cited By</a></th>
+                                                        <th><a href="#">Published Year</a></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for publication in publications %}
+                                                        {% if publication.publication_type.name == 'Poster' %}
+                                                            <tr>
+                                                                <td>{{ publication.title }}</td>
+                                                                <td>{{ publication.cited_by }}</td>
+                                                                <td>{{ publication.published_year }}</td>
+                                                            </tr>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+                                        </div>
                                     </div>
-
-
-                                    <div id="journal" style="display: none">
-                                        <table id="journalTable">
-                                            <thead>
-                                            <tr>
-                                                <th><a href="#">Title</a></th>
-                                                <th><a href="#">Cited By</a></th>
-                                                <th><a href="#">Published Year</a></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for publication in publications %}
-                                            {% if publication.publication_type.name == 'Journal' %}
-                                            <tr>
-                                                <td>{{ publication.title }}</td>
-                                                <td>{{ publication.cited_by }}</td>
-                                                <td>{{ publication.published_year }}</td>
-                                            </tr>
-                                            {% endif %}
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div id="poster" style="display: none">
-                                        <table id="posterTable">
-                                            <thead>
-                                            <tr>
-                                                <th><a href="#">Title</a></th>
-                                                <th><a href="#">Cited By</a></th>
-                                                <th><a href="#">Published Year</a></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for publication in publications %}
-                                            {% if publication.publication_type.name == 'Poster' %}
-                                            <tr>
-                                                <td>{{ publication.title }}</td>
-                                                <td>{{ publication.cited_by }}</td>
-                                                <td>{{ publication.published_year }}</td>
-                                            </tr>
-                                            {% endif %}
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
+
                 </div>
+                <br><br>
             </div>
-            <br><br>
+
+            {% comment %}<nav class="navbar navbar-expand-sm navbar-fixed-bottom" id="publication-bottom-nav"
+                 style="background: #0E2231;">
+
+
+                <ul class="bottom-nav">
+
+                    <li>
+                        <a href="#" onclick="showDiv('conference')">
+                            <i class="material-icons sidebar-icon" aria-hidden="true">forum</i>
+                            Conference </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="showDiv('journal')">
+                            <i class="material-icons sidebar-icon" aria-hidden="true">import_contacts</i>
+                            Journal</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="showDiv('poster')">
+                            <i class="material-icons sidebar-icon" aria-hidden="true">list_alt</i>
+                            Poster
+                        </a>
+                    </li>
+                </ul>
+            </nav>{% endcomment %}
         </div>
-
-        <nav class="navbar navbar-expand-sm navbar-fixed-bottom" id="publication-bottom-nav" style="background: #0E2231;">
-
-
-            <ul class="bottom-nav">
-
-                <li>
-                    <a href="#" onclick="showDiv('conference')">
-                        <i class="material-icons sidebar-icon"  aria-hidden="true">forum</i>
-                        Conference </a>
-                </li>
-                <li>
-                    <a href="#" onclick="showDiv('journal')">
-                        <i class="material-icons sidebar-icon" aria-hidden="true">import_contacts</i>
-                        Journal</a>
-                </li>
-                <li>
-                    <a href="#" onclick="showDiv('poster')">
-                        <i class="material-icons sidebar-icon" aria-hidden="true">list_alt</i>
-                        Poster
-                    </a>
-                </li>
-            </ul>
-        </nav>
     </div>
-</div>
 
 {% endblock %}
 

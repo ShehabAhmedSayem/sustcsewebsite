@@ -2,99 +2,105 @@
 {% block title %}Staff{% endblock %}
 {% block content %}
 
-<script src="/static/js/jquery.min.js"></script>
-<script src="/static/js/jquery.hideseek.min.js"></script>
-<script type="text/javascript">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.hideseek.min.js"></script>
+    <script type="text/javascript">
 
-    $(document).ready(function () {
-        $('#searchFaculty').hideseek({
-            list: '.list',
-            nodata: 'Nothing Found',
-            attribute: 'text',
-            matches: false,
-            highlight: false,
-            ignore: '.ignore-me',
-            navigation: false,
-            ignore_accents: false,
-            hidden_mode: false,
-            min_chars: 1
+        $(document).ready(function () {
+            $('#searchStaff').hideseek({
+                list: '.list',
+                nodata: 'Nothing Found',
+                attribute: 'text',
+                matches: false,
+                highlight: false,
+                ignore: '.ignore-me',
+                navigation: false,
+                ignore_accents: false,
+                hidden_mode: false,
+                min_chars: 1
+            });
         });
-    });
 
-</script>
+    </script>
 
 
-<div class="research-group-background">
-    <div class="program-content-overlay">
-        <div class="program-content">
+    <div class="research-group-background">
+        <div class="program-content-overlay">
+            <div class="program-content">
 
-            <div class="faculty-list">
-                <div class="row">
-                    <div class="container">
-                        <div class="col-md-12">
-                            <div class="classes class-single curriculum-detail-container-card">
-                                <div class="desc desc2 row">
-                                    <div class="col-md-12 program-detail-container">
+                <div class="faculty-list">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <div class="classes class-single curriculum-detail-container-card">
+                                    <div class="desc desc2 row">
+                                        <div class="col-md-12 program-detail-container">
 
-                                        <form>
+                                            <form>
 
-                                            <div class="input-group">
+                                                <div class="input-group">
                                                 <span class="input-group-addon"><i
                                                         class="material-icons">search</i></span>
-                                                <input style="border:1px solid #bdc3c7" id="searchFaculty" type="text"
-                                                       class="form-control"
-                                                       name="searchFaculty"
-                                                       placeholder="Search by Faculty Name, Designation, Room No, Status"
-                                                       data-toggle="hideseek" data-list=".list">
-                                            </div>
-                                            <br>
-                                        </form>
-
-                                        {% for staff in staffs %}
-                                        <div class="col-md-4 col-sm-6 list" >
-                                            <div class="card">
-                                                <center>
-                                                    <img src="/media/{{ staff.image }}" alt="Avatar" height="50px" class="img img-responsive">
-                                                </center>
-                                                <div class="card-bottom">
-                                                    <span class="people-designation">
-                                                        <h3 style="color:gray">{{staff.name}}</h3>
-                                                    </span>
-                                                    <span class="people-designation">
-                                                        {{staff.designation}}
-                                                    </span>
-                                                    <span class="people-designation">
-                                                        {{staff.status}}
-                                                    </span>
-                                                    <span class="people-designation" style="margin-bottom: 2%;">
-                                                        {{staff.office}}
-                                                    </span>
-                                                    {% if staff.contact %}
-                                                    <span class="people-designation" style="margin-bottom: 2%;">
-                                                        {{staff.contact}}
-                                                    </span>
-                                                    {% endif %}
-                                                    {% if staff.email %}
-                                                    <span class="people-designation" style="margin-bottom: 2%;">
-                                                        {{staff.email}}
-                                                    </span>
-                                                    {% endif %}
+                                                    <input style="border:1px solid #bdc3c7" id="searchStaff"
+                                                           type="text"
+                                                           class="form-control"
+                                                           name="searchFaculty"
+                                                           placeholder="Search by Faculty Name, Designation, Room No, Status"
+                                                           data-toggle="hideseek" data-list=".list">
                                                 </div>
-                                            </div>
+                                                <br>
+                                            </form>
+
+                                            {% for staff in staffs %}
+                                                <div class="col-md-4 col-sm-6 list">
+                                                    <div class="card">
+                                                        <center>
+                                                            <img src="/media/{{ staff.image }}" alt="Avatar"
+                                                                 height="50px" class="img img-responsive">
+                                                        </center>
+                                                        <div class="card-bottom">
+                                                    <span>
+                                                        <b>
+                                                            <a class="people-title" href="#" >{{ staff.name }}</a>
+                                                        </b>
+                                                    </span>
+                                                            <span class="people-designation">
+                                                        {{ staff.designation }}
+                                                    </span>
+                                                            <span class="people-designation">
+                                                        {{ staff.getStaffStatus }}
+                                                    </span>
+                                                            <span class="people-designation" style="margin-bottom: 2%;">
+                                                        {{ staff.office }}
+                                                    </span>
+                                                            {% if staff.contact %}
+                                                                <span class="people-designation"
+                                                                      style="margin-bottom: 2%;">
+                                                        {{ staff.contact }}
+                                                    </span>
+                                                            {% endif %}
+                                                            {% if staff.email %}
+                                                                <span class="people-designation"
+                                                                      style="margin-bottom: 2%;">
+                                                        {{ staff.email }}
+                                                    </span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+
                                         </div>
-                                        {% endfor %}
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <br><br>
             </div>
-            <br><br>
         </div>
     </div>
-</div>
 
 {% endblock %}

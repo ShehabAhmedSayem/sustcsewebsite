@@ -1,47 +1,82 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Award{% endblock %}
 {% block content %}
 
-<br><br><br><br><br><br>
 
+    <div class="curriculum-background">
+        <div class="program-content-overlay">
+            <div class="program-content">
+                <div class="">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <h2 class="detail-card-header honor-detail-card-header">
+                                    <i class="material-icons">school</i>Awards Of {{ faculty.name }}
+                                    {% if user.is_authenticated %}
+                                        {% if user.id == faculty.user.id %}
+                                            <a href="{% url 'add_award' %}"><i class="material-icons add-button" >add_circle_outline</i></a>
+                                        {% endif %}
+                                    {% endif %}
 
-<div class="col-md-12">
-    <div class="row">
-        <div id="faculty_publication" class="col-md-10 col-md-offset-1">
-            <div class="card">
-                <div class="card-bottom">
-                    <p class="people-detail">
-                        <b>
-                    <p class="people-title">Awards Of {{ faculty.name }}</p>
-                    {% if user.is_authenticated %}
-                    {% if user.id == faculty.user.id %}
-                    <a href="{% url 'add_award' %}"><i class="material-icons" style="display: inline-block; float:right;">add_circle_outline</i></a>
-                    {% endif %}
-                    {% endif %}
-                    </b>
-                    </p>
+                                </h2>
+                                <div class="classes class-single detail-card news-detail-card">
+                                    <div class="desc desc2 row">
+                                        <div class="col-md-12 program-detail-container">
+
+                                            {% if faculty.award_set.all %}
+                                                {% for award in faculty.award_set.all %}
+                                                    <div class="card">
+                                                        <div class="desc">
+                                                            <div class="col-md-12 animate-box">
+
+                                                                <div class="pull-left" style="margin-right: 25px;">
+
+                                                                    {% if not award.image %}
+                                                                        <img height="250px;" width="300px;"
+                                                                        src="{% static 'images/no_image_available.jpeg' %}">
+                                                                    {% else %}
+                                                                        <img height="250px;" width="300px;"
+                                                                         src="/media/{{ award.image }}">
+                                                                    {% endif %}
+                                                                </div>
+
+                                                                <div class="honor-detail-desc">
+                                                                    <h2 style="display: inline-block;">{{ award.title }}</h2>
+                                                                    {% if user.is_authenticated %}
+                                                                        {% if user.id == faculty.user.id %}
+                                                                            <a href="{% url 'delete_award' award.id %}"><i
+                                                                                    class="material-icons"
+                                                                                    style="display: inline-block; float:right;">clear</i></a>
+                                                                        {% endif %}
+                                                                    {% endif %}
+                                                                    <p>
+                                                                        {{ award.details }}
+                                                                    </p>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% else %}
+                                                <center>
+                                                    <img class="img img-responsive" width="25%" height="auto"
+                                                         src="{% static 'images/backgrounds/nothing_found.svg' %}">
+                                                    <br>
+                                                    <h4 style="color: darkred">Sorry! No Award Records found.</h4>
+                                                </center>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                {% if faculty.award_set.all %}
-                {% for award in faculty.award_set.all %}
-                <p class="faculty_detail_description">
-                    <span class="faculty-education-title">{{ award.title }}</span>
-                    {% if user.is_authenticated %}
-                    {% if user.id == faculty.user.id %}
-                    <a href="{% url 'delete_award' award.id %}"><i class="material-icons" style="display: inline-block; float:right;">clear</i></a>
-                    {% endif %}
-                    {% endif %}
-                    <img height="200px;" width="300px;" src="/media/{{ award.image }}">
-                    <span class="faculty-education-subtitle">{{ award.details }}</span>
-                <hr>
-                </p>
-                {% endfor %}
-                {% else %}
-                <p class="faculty_detail_description">No Award Available</p>
-                {% endif %}
-
             </div>
         </div>
     </div>
-</div>
+
 {% endblock %}

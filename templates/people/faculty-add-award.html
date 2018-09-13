@@ -2,51 +2,78 @@
 {% block title %}Award{% endblock %}
 {% block content %}
 
-<br><br><br><br><br><br>
 
-{% if user.is_authenticated %}
-<br>
-<div style="text-align:center;">
-<form enctype="multipart/form-data" method="post" action="">
-    {% csrf_token %}
-    {{ award_form.as_p }}
-    <input type="submit" value="Done" />
-</form>
-    <br>
-<a href="{% url 'faculty_detail' user.id %}">Back to Profile Page</a>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <style>
+        input[type="text"], input[type="email"], input[type="number"], input[type="url"], textarea, select {
+            width: 100%;
+            height: auto;
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #d7d7d7;
+            color: black;
+            border: 0;
+            margin: 8px 16px 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
 
-</div>
-<br>
-<div class="col-md-12">
-    <div class="row">
-        <div id="faculty_publication" class="col-md-10 col-md-offset-1">
-            <div class="card">
-                <div class="card-bottom">
-                    <p class="people-detail">
-                        <b>
-                    <p class="people-title">Award</p>
-                    </b>
-                    </p>
+        input[type="file"]{
+            margin-bottom: 25px;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        table {
+            width: 85%;
+        }
+
+    </style>
+    {% if user.is_authenticated %}
+    <div class="content-admission-form">
+        <div class="admission-form-content-overlay">
+            <div class="admission-form-content">
+                <div class="admission-form-container-card-header">
+                    Add Award Info
                 </div>
 
-                {% if user.faculty.award_set.all %}
-                {% for award in user.faculty.award_set.all %}
-                <p class="faculty_detail_description">
-                    <span class="faculty-education-title">{{ award.title }}</span>
-                    <span class="faculty-education-subtitle">{{ award.details }}</span>
-                <hr>
-                </p>
-                {% endfor %}
-                {% else %}
-                <p class="faculty_detail_description">No Award Details Available</p>
-                {% endif %}
+                <div class="admission-form-container-card">
+                    <form class="form-horizontal" method="POST" action="">
+                    {% csrf_token %}
+                    <table>
+                        {% for field in award_form %}
+                            <tr>
+                                <th>{{ field.label_tag }}</th>
+                                <td>
+                                    {{ field.errors }}
+                                    {{ field }}
+                                    {{ field.help_text }}
+                                </td>
+                            </tr>
+                        {% endfor %}
 
+
+                    </table>
+                    <div class="row spacer input-group-append">
+                        <button type="submit" class="submit-button">Submit</button>
+                    </div>
+                </form>
+                </div>
+            <br>
             </div>
         </div>
     </div>
-</div>
-
 {% else %}
     <p>You have nothing to do here</p>
 {% endif %}
+
 {% endblock %}

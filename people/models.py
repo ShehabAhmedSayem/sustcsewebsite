@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from bs4 import  BeautifulSoup as bsoup
+from urllib.request import urlopen as urlReq
 
 
 class ResearchArea(models.Model):
@@ -64,6 +66,9 @@ class Faculty(models.Model):
             return "On leave"
         elif self.status == 'ex':
             return "Ex Faculty"
+
+
+
 
     class Meta:
         verbose_name_plural = "faculties"
@@ -153,3 +158,9 @@ class Staff(models.Model):
 
     def __str__(self):
         return self.name
+
+    def getStaffStatus(self):
+        if self.status == 'in_service':
+            return "In service"
+        elif self.status == 'ex':
+            return "Ex Staff"

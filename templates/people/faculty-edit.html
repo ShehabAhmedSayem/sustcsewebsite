@@ -1,10 +1,102 @@
-{% if user.is_authenticated %}
-    <form enctype="multipart/form-data" method="post" action="">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        {{ faculty_form.as_p }}
-        <input type="submit" value="Submit" />
-    </form>
-{% else %}
-    <p>You have nothing to do here</p>
-{% endif %}
+{% extends 'base.html' %}
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <style>
+        input[type="text"], input[type="email"], input[type="number"], input[type="url"], textarea, select {
+            width: 100%;
+            height: auto;
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #d7d7d7;
+            color: black;
+            border: 0;
+            margin: 8px 16px 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        table {
+            width: 85%;
+        }
+
+    </style>
+    <div class="content-admission-form">
+        <div class="admission-form-content-overlay">
+            <div class="admission-form-content">
+                <div class="admission-form-container-card-header">
+                    Edit Profile Info
+                </div>
+
+                <div class="admission-form-container-card">
+                    <form class="form-horizontal" method="POST" action="">
+                    {% csrf_token %}
+                    <table>
+                        {% for field in faculty_form %}
+                            <tr>
+                                <th>{{ field.label_tag }}</th>
+                                <td>
+                                    {{ field.errors }}
+                                    {{ field }}
+                                    {{ field.help_text }}
+                                </td>
+
+                            {% if field.label_tag == "Research interest:" %}
+
+                                <p>Yo</p>
+                            {% endif %}
+                            </tr>
+                        {% endfor %}
+
+
+                    </table>
+
+                    <div class="row spacer input-group-append">
+                        <button type="submit" class="submit-button">Submit</button>
+                    </div>
+                </form>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

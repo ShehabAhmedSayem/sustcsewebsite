@@ -25,6 +25,15 @@ def about(request):
     return render(request, 'home/about.html', context)
 
 
+def contact(request):
+    context = {}
+    return render(request, 'home/contact.html', context)
+
+def developer(request):
+    context = {}
+    return render(request, 'home/developer.html', context)
+
+
 def undergrad_major(request):
     program = Program.objects.get(program_name="Undergraduate Major")
     context = {'program': program}
