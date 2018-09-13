@@ -38,11 +38,9 @@
 
                                                                         {% for key,value in socialLinkDict.items %}
                                                                             {% if key == socialProfile.link %}
-                                                                                <img class="img img-responsive" width="32px" height="32px" src="{{ value }}" />
+                                                                                <img class="img-rounded img img-responsive" width="32px" height="32px" src="{{ value }}" />
                                                                             {% endif %}
                                                                         {% endfor %}
-
-{#                                                                        <i class="material-icons">dashboard</i>#}
                                                                     </a>
                                                                 {% endfor %}
                                                             {% endif %}
@@ -151,17 +149,19 @@
 
                                             <div id="work" class="work">
                                                 <div class="">
-                                                    <h3 class="title">Work Experience</h3>
-                                                    {% if user.is_authenticated %}
-                                                        {% if user.id == faculty.user.id %}
-                                                            <a href="{% url 'add_experience' %}">
-                                                                <button type="button" class="btn btn-info"
-                                                                        style="float:right; margin-right: 2em">Add
-                                                                    Experience
-                                                                </button>
-                                                            </a>
+                                                    <h3 class="title">Work Experience
+                                                        {% if user.is_authenticated %}
+                                                            {% if user.id == faculty.user.id %}
+                                                                <a href="{% url 'add_experience' %}">
+                                                                    <button type="button" class="btn btn-info"
+                                                                            style="float:right; margin-right: 2em">Add
+                                                                        Experience
+                                                                    </button>
+                                                                </a>
+                                                            {% endif %}
                                                         {% endif %}
-                                                    {% endif %}
+                                                    </h3>
+
 
                                                     {% if faculty.experience_set.all %}
                                                         {% for exp in faculty.experience_set.all %}
