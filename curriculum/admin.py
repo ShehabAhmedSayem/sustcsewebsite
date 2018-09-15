@@ -17,8 +17,9 @@ class CourseAdmin(admin.ModelAdmin):
         ('course_type', 'course_title'),
         ('course_code', 'course_credit'),
         'course_details',
+        'currently_offering'
     )
-    list_display = ('course_code', 'course_title', 'year_semester')
+    list_display = ('course_code', 'course_title', 'currently_offering')
     list_filter = ('program_name', 'year_semester')
     search_fields = ['course_title', 'course_code']
 

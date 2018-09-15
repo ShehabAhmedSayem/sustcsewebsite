@@ -23,6 +23,9 @@ class CustomUserAdmin(UserAdmin):
     )
 
 
+class ExperienceAdmin(admin.ModelAdmin):
+    list_display = ('faculty', 'designation', 'order_number', 'organization')
+
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Faculty)
 admin.site.register(SocialProfile)
@@ -30,7 +33,7 @@ admin.site.register(Staff)
 admin.site.register(Award)
 admin.site.register(Batch)
 admin.site.register(Education)
-admin.site.register(Experience)
+admin.site.register(Experience, ExperienceAdmin)
 admin.site.register(Student)
 admin.site.register(ResearchStudent)
 admin.site.register(ResearchArea)

@@ -127,9 +127,13 @@ class Experience(models.Model):
     organization = models.CharField(max_length=200)
     designation = models.CharField(max_length=200)
     time_duration = models.CharField(max_length=100)
+    order_number = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.experience_type
+        return self.get_experience_type_display()
+
+    class Meta:
+        ordering = ['order_number']
 
 
 class Education(models.Model):
@@ -141,6 +145,9 @@ class Education(models.Model):
 
     def __str__(self):
         return self.degree
+
+    class Meta:
+        ordering = ['-passing_year']
 
 
 class Staff(models.Model):

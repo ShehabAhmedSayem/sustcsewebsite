@@ -12,6 +12,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 from urllib.parse import urlparse
 import os
+from django.templatetags.static import static
 
 
 class Pub:
@@ -32,18 +33,35 @@ def faculty(request):
     context = {'faculties': faculties}
     return render(request, 'people/faculty.html', context)
 
-def getSocialIcon(link):
+
+def get_social_icon(link):
     url = urlparse(link)
     urlPath = url.path
     link = link.replace(urlPath,"")
     print("LinkFor",link)
-    uClient = urlReq(link)
-    pageHTML = uClient.read()
-    uClient.close()
-    pageSoup = bsoup(pageHTML, "html.parser")
-    containers = pageSoup.find_all("link", {"rel": "icon"})
-    iconLink = containers[0]["href"]
-    return iconLink
+    if link == "https://www.facebook.com":
+        iconlink = static('images/social_icon/fb_round.png')
+    elif link == "https://www.linkedin.com":
+        iconlink = static('images/social_icon/linkedIn.png')
+    elif link == "https://github.com":
+        iconlink = static('images/social_icon/github_round.png')
+    elif link == "https://twitter.com":
+        iconlink = static('images/social_icon/Twitter.png')
+    elif link == "https://plus.google.com":
+        iconlink = static('images/social_icon/Google+.png')
+    elif link == "https://scholar.google.com":
+        iconlink = static('images/social_icon/google_scholar_rounded.png')
+    elif link == "https://www.researchgate.net":
+        iconlink = static('images/social_icon/research_gate_rounded.png')
+    else:
+        uClient = urlReq(link)
+        pageHTML = uClient.read()
+        uClient.close()
+        pageSoup = bsoup(pageHTML, "html.parser")
+        containers = pageSoup.find_all("link", {"rel": "icon"})
+        iconlink = containers[0]["href"]
+
+    return iconlink
 
 
 def faculty_detail(request, user_id):
@@ -51,11 +69,9 @@ def faculty_detail(request, user_id):
     socialLink = faculty.socialprofile_set.all()
     socialLinkDict = {}
     for link in socialLink:
-        print(link.link)
-        print(getSocialIcon(link.link))
-        socialLinkDict[link.link] = getSocialIcon(link.link)
+        socialLinkDict[link.link] = get_social_icon(link.link)
 
-    context = {'faculty': faculty,'socialLinkDict':socialLinkDict}
+    context = {'faculty': faculty, 'socialLinkDict':socialLinkDict}
     return render(request, 'people/faculty-detail.html', context)
 
 
@@ -228,6 +244,28 @@ def delete_education(request, education_id):
 @login_required
 @faculty_required
 @transaction.atomic
+def edit_education(request, education_id):
+    education = get_object_or_404(Education, pk=education_id)
+    if request.method == 'POST':
+        education_form = EducationEditForm(request.POST, instance=education)
+
+        if education_form.is_valid():
+            education_form.save()
+            return redirect('faculty_detail', request.user.id)
+        else:
+            pass
+
+    else:
+        education_form = EducationEditForm(instance=education)
+
+    return render(request, 'people/faculty-publication-edit.html', {
+        'form': education_form,
+    })
+
+
+@login_required
+@faculty_required
+@transaction.atomic
 def add_experience(request):
     if request.method == 'POST':
         experience_form = ExperienceForm(request.POST, user=request.user)
@@ -258,6 +296,47 @@ def delete_experience(request, experience_id):
         messages.error(request, 'You don\'t have authorization!')
 
     return redirect('faculty_detail', request.user.id)
+
+
+@login_required
+@faculty_required
+@transaction.atomic
+def edit_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+    current_order = experience.order_number
+    if request.method == 'POST':
+        experience_form = ExperienceEditForm(request.POST, instance=experience)
+
+        if experience_form.is_valid():
+            desired_order = experience_form.cleaned_data['order_number']
+            if current_order == desired_order:
+                experience_form.save()
+                return redirect('faculty_detail', request.user.id)
+            else:
+                faculty = get_object_or_404(Faculty, pk=request.user.id)
+                experiences = faculty.experience_set.all()
+                if current_order > desired_order:
+                    for exp in experiences:
+                        if exp.order_number < current_order and exp.order_number >= desired_order:
+                            exp.order_number += 1
+                            exp.save()
+                else:
+                    for exp in experiences:
+                        if exp.order_number > current_order and exp.order_number <= desired_order:
+                            exp.order_number -= 1
+                            exp.save()
+
+                experience_form.save()
+                return redirect('faculty_detail', request.user.id)
+        else:
+            pass
+
+    else:
+        experience_form = ExperienceEditForm(instance=experience)
+
+    return render(request, 'people/faculty-publication-edit.html', {
+        'form': experience_form,
+    })
 
 
 @login_required
@@ -299,7 +378,7 @@ def edit_publication(request, publication_id):
         publication_form = PublicationEditForm(instance=publication)
 
     return render(request, 'people/faculty-publication-edit.html', {
-        'publication_form': publication_form,
+        'form': publication_form,
     })
 
 
@@ -341,10 +420,10 @@ def add_social_profile(request):
 @login_required
 @faculty_required
 @transaction.atomic
-def delete_publication(request, publication_id):
-    publication = get_object_or_404(Publication, pk=publication_id)
-    if request.user.faculty == publication.author_faculty:
-        publication.delete()
+def delete_social_profile(request, social_profile_id):
+    social_profile = get_object_or_404(SocialProfile, pk=social_profile_id)
+    if request.user.faculty == social_profile.faculty:
+        social_profile.delete()
         messages.success(request, 'Successfully deleted!')
     else:
         messages.error(request, 'You don\'t have authorization!')
@@ -385,3 +464,25 @@ def delete_award(request, award_id):
         messages.error(request, 'You don\'t have authorization!')
 
     return redirect('faculty_awards', request.user.id)
+
+
+@login_required
+@faculty_required
+@transaction.atomic
+def edit_award(request, award_id):
+    award = get_object_or_404(Award, pk=award_id)
+    if request.method == 'POST':
+        award_form = AwardEditForm(request.POST, instance=award)
+
+        if award_form.is_valid():
+            award_form.save()
+            return redirect('faculty_awards', request.user.id)
+        else:
+            pass
+
+    else:
+        award_form = AwardEditForm(instance=award)
+
+    return render(request, 'people/faculty-publication-edit.html', {
+        'form': award_form,
+    })

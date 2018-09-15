@@ -87,25 +87,10 @@
                                             <br>
                                         </form>
 
-                                        {% for semester in semesters %}
-                                        {% if semester.running %}
                                         <div class="curriculum-semester-card">
 
                                             <p class="semester-title" style="font-size: 1em;">
-                                                {{ semester.get_year_semester_display }}
-
-                                                {% for k,v in totalCoursePerSemester.items %}
-                                                {% if k == semester.year_semester %}
-                                                <span class="total-course-credit"> Total Course : {{v}} </span>
-                                                {% endif %}
-                                                {% endfor %}
-
-                                                {% for k,v in totalCreditPerSemester.items %}
-                                                {% if k == semester.year_semester %}
-                                                <span class="total-course-credit"> Total Credit : {{v}} </span>
-                                                {% endif %}
-                                                {% endfor %}
-
+                                                Currently Offering Courses :
                                             </p>
 
                                             <div class="semester-courses">
@@ -113,9 +98,7 @@
                                                 <div class="row list" style="margin: 15px;">
 
                                                     {% for course in courses %}
-
-                                                        {% if course.year_semester.year_semester == semester.year_semester %}
-
+                                                    {% if course.currently_offering %}
                                                         <div class="col-md-1 col-sm-1 col-xs-1 ignore-me">
                                                             <span class="course-dept-circle ignore-me">{{course.getDept}}</span>
                                                         </div>
@@ -145,21 +128,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {% endif %}
-
+                                                    {% endif %}
                                                     {% endfor %}
 
 
                                                 </div>
-
-
                                             </div>
-
-
                                         </div>
-                                        {% endif %}
-                                        {% endfor %}
-
                                     </div>
                                 </div>
                             </div>

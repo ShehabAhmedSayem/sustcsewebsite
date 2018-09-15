@@ -7,25 +7,25 @@ from django.conf import settings
 
 
 def admission_second_major(request):
-    program = Program.objects.get(program_name="Undergraduate Second Major")
+    program = Program.objects.get(program_name="undergraduate_second_major")
     context = {'program': program}
     return render(request, 'admission/program-admission.html', context)
 
 
 def admission_phd(request):
-    program = Program.objects.get(program_name="Phd")
+    program = Program.objects.get(program_name="phd")
     context = {'program': program}
     return render(request, 'admission/program-admission.html', context)
 
 
 def admission_masters(request):
-    program = Program.objects.get(program_name="Masters")
+    program = Program.objects.get(program_name="masters")
     context = {'program': program}
     return render(request, 'admission/program-admission.html', context)
 
 
 def admission_ccna(request):
-    program = Program.objects.get(program_name="CCNA")
+    program = Program.objects.get(program_name="ccna")
     context = {'program': program}
     return render(request, 'admission/program-admission.html', context)
 
@@ -44,7 +44,7 @@ def second_major_application(request):
     return render(request, 'admission/second-major-application-form.html', {
         'application_form': application_form,
     })
-'''
+
 
 
 def second_major_application(request):
@@ -71,7 +71,7 @@ def second_major_application(request):
         'formset': formset,
     }
     return render(request, 'admission/second-major-application-form.html', context)
-
+'''
 
 def download_form(request, path):
     file_path = os.path.join(settings.MEDIA_ROOT, path)

@@ -26,6 +26,12 @@ class ExperienceForm(forms.ModelForm):
         self.fields['faculty'] = forms.ModelChoiceField(queryset=Faculty.objects.filter(user=user), initial=0)
 
 
+class ExperienceEditForm(forms.ModelForm):
+    class Meta:
+        model = Experience
+        fields = '__all__'
+
+
 class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
@@ -35,6 +41,12 @@ class EducationForm(forms.ModelForm):
         user = kwargs.pop('user', '')
         super(EducationForm, self).__init__(*args, **kwargs)
         self.fields['faculty'] = forms.ModelChoiceField(queryset=Faculty.objects.filter(user=user), initial=0)
+
+
+class EducationEditForm(forms.ModelForm):
+    class Meta:
+        model = Education
+        fields = '__all__'
 
 
 class PublicationForm(forms.ModelForm):
@@ -82,3 +94,9 @@ class AwardForm(forms.ModelForm):
         user = kwargs.pop('user', '')
         super(AwardForm, self).__init__(*args, **kwargs)
         self.fields['faculty'] = forms.ModelChoiceField(queryset=Faculty.objects.filter(user=user), initial=0)
+
+
+class AwardEditForm(forms.ModelForm):
+    class Meta:
+        model = Award
+        fields = '__all__'

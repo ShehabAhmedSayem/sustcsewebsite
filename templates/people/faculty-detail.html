@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block title %}{{ faculty.name }}{% endblock %}
 {% block content %}
 
@@ -30,8 +31,9 @@
                                                             <img src="/media/{{ faculty.image }}" alt=""/>
 
 
-                                                            {% if faculty.socialprofile_set.all %}
+                                                            {% if faculty.socialprofile_set.all or faculty.google_scholars_link %}
                                                                 <span class="social-profile-header">Find Me On</span>
+                                                                {% if faculty.socialprofile_set.all %}
                                                                 {% for socialProfile in faculty.socialprofile_set.all %}
                                                                     <a class="social-profile-icon"
                                                                        href="{{ socialProfile.link }}" target="_blank">
@@ -41,8 +43,16 @@
                                                                                 <img class="img-rounded img img-responsive" width="32px" height="32px" src="{{ value }}" />
                                                                             {% endif %}
                                                                         {% endfor %}
+
                                                                     </a>
                                                                 {% endfor %}
+                                                                {% endif %}
+                                                                {% if faculty.google_scholars_link %}
+                                                                    <a class="social-profile-icon"
+                                                                       href="{{ faculty.google_scholars_link }}" target="_blank">
+                                                                        <img class="img-rounded img img-responsive" width="32px" height="32px" src="{% static 'images/social_icon/google_scholars_rounded.png' %}" />
+                                                                    </a>
+                                                                {% endif %}
                                                             {% endif %}
 
                                                             {% if user.is_authenticated %}
@@ -134,32 +144,37 @@
                                                 </div>
                                             </div>
 
-                                            <div id="about" class="about">
-                                                <div class="container">
-                                                    <h3 class="title"> About Me</h3>
-                                                    <div class="col-md-11 about-left">
-                                                        <p class="about-text">{{ faculty.about }}</p>
-                                                    </div>
 
+                                            <!--About div-->
+
+
+                                            <div id="about" class="about">
+                                                <div class="">
+                                                    <h3 class="title"> About Me</h3>
+                                                    <div class="col-md-12 about-left">
+                                                        <p class="about-text" style="text-align:center;">{{ faculty.about }}</p>
+                                                    </div>
                                                     <div class="clearfix"></div>
                                                 </div>
                                             </div>
 
+
                                             <!--Work Experience div-->
+
 
                                             <div id="work" class="work">
                                                 <div class="">
                                                     <h3 class="title">Work Experience
-                                                        {% if user.is_authenticated %}
-                                                            {% if user.id == faculty.user.id %}
-                                                                <a href="{% url 'add_experience' %}">
-                                                                    <button type="button" class="btn btn-info"
-                                                                            style="float:right; margin-right: 2em">Add
-                                                                        Experience
-                                                                    </button>
-                                                                </a>
-                                                            {% endif %}
-                                                        {% endif %}
+                                                    {% if user.is_authenticated %}
+                                                    {% if user.id == faculty.user.id %}
+                                                    <a href="{% url 'add_experience' %}">
+                                                    <button type="button" class="btn btn-info"
+                                                            style="float:right; margin-right: 2em">Add
+                                                        Experience
+                                                    </button>
+                                                    </a>
+                                                    {% endif %}
+                                                    {% endif %}
                                                     </h3>
 
 
@@ -186,6 +201,9 @@
                                                                             <a href="{% url 'delete_experience' exp.id %}"><i
                                                                                     class="material-icons"
                                                                                     style="display: inline-block; float:right;">clear</i></a>
+                                                                            <a href="{% url 'edit_experience' exp.id %}"><i
+                                                                                    class="material-icons"
+                                                                                    style="display: inline-block; float:right;">edit</i></a>
                                                                         {% endif %}
                                                                     {% endif %}
 
@@ -250,6 +268,7 @@
 
                                             <!--education div-->
 
+
                                             <div id="education" class="education">
                                                 <div class="">
                                                     <h3 class="title">
@@ -291,6 +310,9 @@
                                                                             <a href="{% url 'delete_education' edu.id %}"><i
                                                                                     class="material-icons"
                                                                                     style="display: inline-block; float:right;">clear</i></a>
+                                                                            <a href="{% url 'edit_education' edu.id %}"><i
+                                                                                    class="material-icons"
+                                                                                    style="display: inline-block; float:right;">edit</i></a>
                                                                         {% endif %}
                                                                     {% endif %}
                                                                     <span class="work-place">{{ edu.institution }}</span>
@@ -340,6 +362,7 @@
 
                                             <!--Research Interest div-->
 
+
                                             <div id="research" class="work">
                                                 <div class="">
                                                     <h3 class="title">Research Interest</h3>
@@ -385,6 +408,7 @@
 
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>

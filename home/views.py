@@ -35,31 +35,31 @@ def developer(request):
 
 
 def undergrad_major(request):
-    program = Program.objects.get(program_name="Undergraduate Major")
+    program = Program.objects.get(program_name="undergraduate_major")
     context = {'program': program}
     return render(request, 'home/program_details.html', context)
 
 
 def undergrad_second_major(request):
-    program = Program.objects.get(program_name="Undergraduate Second Major")
+    program = Program.objects.get(program_name="undergraduate_second_major")
     context = {'program': program}
     return render(request, 'home/program_details.html', context)
 
 
 def masters(request):
-    program = Program.objects.get(program_name="Masters")
+    program = Program.objects.get(program_name="masters")
     context = {'program': program}
     return render(request, 'home/program_details.html', context)
 
 
 def phd(request):
-    program = Program.objects.get(program_name="Phd")
+    program = Program.objects.get(program_name="phd")
     context = {'program': program}
     return render(request, 'home/program_details.html', context)
 
 
 def ccna(request):
-    program = Program.objects.get(program_name="CCNA")
+    program = Program.objects.get(program_name="ccna")
     context = {'program': program}
     return render(request, 'home/program_details.html', context)
 

@@ -8,7 +8,7 @@ from django.conf import settings
 
 
 def undergrad_major(request):
-    program = Program.objects.get(program_name="Undergraduate Major")
+    program = Program.objects.get(program_name="undergraduate_major")
     courses = program.course_set.all()
     semesters = Semester.objects.all()
     totalCreditPerSemester = {}
@@ -17,7 +17,7 @@ def undergrad_major(request):
         totalCredit = 0.0
         totalCourse = 0
         for course in courses:
-            if str(course.year_semester) == str(semester.year_semester):
+            if str(course.year_semester) == semester.get_year_semester_display():
                 totalCredit += course.course_credit
                 totalCourse += 1
         totalCreditPerSemester[semester.year_semester] = totalCredit
@@ -27,7 +27,7 @@ def undergrad_major(request):
 
 
 def undergrad_second_major(request):
-    program = Program.objects.get(program_name="Undergraduate Second Major")
+    program = Program.objects.get(program_name="undergraduate_second_major")
     courses = program.course_set.all()
     semesters = Semester.objects.all()
     totalCreditPerSemester = {}
@@ -36,7 +36,7 @@ def undergrad_second_major(request):
         totalCredit = 0.0
         totalCourse = 0
         for course in courses:
-            if str(course.year_semester) == str(semester.year_semester):
+            if str(course.year_semester) == semester.get_year_semester_display():
                 totalCredit += course.course_credit
                 totalCourse += 1
         totalCreditPerSemester[semester.year_semester] = totalCredit
@@ -47,63 +47,27 @@ def undergrad_second_major(request):
 
 
 def masters(request):
-    program = Program.objects.get(program_name="Masters")
+    program = Program.objects.get(program_name='masters')
     courses = program.course_set.all()
-    semesters = Semester.objects.all()
-    totalCreditPerSemester = {}
-    totalCoursePerSemester = {}
-    for semester in semesters:
-        totalCredit = 0.0
-        totalCourse = 0
-        for course in courses:
-            if str(course.year_semester) == str(semester.year_semester):
-                totalCredit += course.course_credit
-                totalCourse += 1
-        totalCreditPerSemester[semester.year_semester] = totalCredit
-        totalCoursePerSemester[semester.year_semester] = totalCourse
-    context = {'program': program, 'courses': courses, 'semesters': semesters,
-               'totalCreditPerSemester': totalCreditPerSemester, 'totalCoursePerSemester': totalCoursePerSemester}
-    return render(request, 'curriculum/curriculum.html', context)
+
+    context = {'program': program, 'courses': courses}
+    return render(request, 'curriculum/curriculum_others.html', context)
 
 
 def phd(request):
-    program = Program.objects.get(program_name="Phd")
+    program = Program.objects.get(program_name='phd')
     courses = program.course_set.all()
-    semesters = Semester.objects.all()
-    totalCreditPerSemester = {}
-    totalCoursePerSemester = {}
-    for semester in semesters:
-        totalCredit = 0.0
-        totalCourse = 0
-        for course in courses:
-            if str(course.year_semester) == str(semester.year_semester):
-                totalCredit += course.course_credit
-                totalCourse += 1
-        totalCreditPerSemester[semester.year_semester] = totalCredit
-        totalCoursePerSemester[semester.year_semester] = totalCourse
-    context = {'program': program, 'courses': courses, 'semesters': semesters,
-               'totalCreditPerSemester': totalCreditPerSemester, 'totalCoursePerSemester': totalCoursePerSemester}
-    return render(request, 'curriculum/curriculum.html', context)
+
+    context = {'program': program, 'courses': courses}
+    return render(request, 'curriculum/curriculum_others.html', context)
 
 
 def ccna(request):
-    program = Program.objects.get(program_name="CCNA")
+    program = Program.objects.get(program_name='ccna')
     courses = program.course_set.all()
-    semesters = Semester.objects.all()
-    totalCreditPerSemester = {}
-    totalCoursePerSemester = {}
-    for semester in semesters:
-        totalCredit = 0.0
-        totalCourse = 0
-        for course in courses:
-            if str(course.year_semester) == str(semester.year_semester):
-                totalCredit += course.course_credit
-                totalCourse += 1
-        totalCreditPerSemester[semester.year_semester] = totalCredit
-        totalCoursePerSemester[semester.year_semester] = totalCourse
-    context = {'program': program, 'courses': courses, 'semesters': semesters,
-               'totalCreditPerSemester': totalCreditPerSemester, 'totalCoursePerSemester': totalCoursePerSemester}
-    return render(request, 'curriculum/curriculum.html', context)
+
+    context = {'program': program, 'courses': courses}
+    return render(request, 'curriculum/curriculum_others.html', context)
 
 
 def syllabus(request):

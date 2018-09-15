@@ -9,19 +9,37 @@ from people.models import Faculty, Batch
 
 
 class Program(models.Model):
-    program_name = models.CharField(max_length=100)
+    PROGRAM_NAME = (
+        ('undergraduate_major', 'Undergraduate Major'),
+        ('undergraduate_second_major', 'Undergraduate Second Major'),
+        ('masters', 'Masters'),
+        ('phd', 'PhD'),
+        ('ccna', 'CCNA'),
+    )
+    program_name = models.CharField(max_length=100, choices=PROGRAM_NAME)
     details = RichTextField()
     admission_form = models.FileField(blank=True, null=True, upload_to='admission_form/')
 
     def __str__(self):
-        return self.program_name
+        return self.get_program_name_display()
 
 
 class Semester(models.Model):
-    year_semester = models.CharField(max_length=10)
+    YEAR_SEMESTER = (
+        ('1/1', '1st Year 1st Semester'),
+        ('1/2', '1st Year 2nd Semester'),
+        ('2/1', '2nd Year 1st Semester'),
+        ('2/2', '2nd Year 2nd Semester'),
+        ('3/1', '3rd Year 1st Semester'),
+        ('3/2', '3rd Year 2nd Semester'),
+        ('4/1', '4th Year 1st Semester'),
+        ('4/2', '4th Year 2nd Semester'),
+    )
+    year_semester = models.CharField(max_length=10, choices=YEAR_SEMESTER)
     running = models.BooleanField(default=False)
+
     def __str__(self):
-        return self.year_semester
+        return self.get_year_semester_display()
 
 
 class Course(models.Model):
@@ -36,7 +54,8 @@ class Course(models.Model):
     course_details = models.TextField()
     course_credit = models.FloatField()
     program_name = models.ForeignKey(Program, null=True, on_delete=models.SET_NULL)
-    year_semester = models.ForeignKey(Semester, null=True, on_delete=models.SET_NULL)
+    year_semester = models.ForeignKey(Semester, blank=True, null=True, on_delete=models.SET_NULL)
+    currently_offering = models.BooleanField(default=True)
 
     def __str__(self):
         return self.course_title

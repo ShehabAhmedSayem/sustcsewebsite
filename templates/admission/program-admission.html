@@ -16,7 +16,7 @@
                         <div class="col-md-12">
                             <h2 class="program-detail-card-header" >
                                 <i class="material-icons">school</i>
-                                Program - {{ program.program_name }}</h2>
+                                Program - {{ program.get_program_name_display }}</h2>
                             <div class="classes class-single program-detail-header-card">
                                 <div class="desc desc2 row">
                                     <div class="col-md-12 program-detail-container">
@@ -62,7 +62,7 @@
                         <div class="col-md-12">
                             <h2 class="program-detail-card-header" >
                                 <i class="material-icons">school</i>
-                                {{ program.program_name }} - Program Detail</h2>
+                                {{ program.get_program_name_display }} - Program Detail</h2>
                             <div class="classes class-single program-detail-container-card">
                                 <div class="desc desc2 row">
                                     <div class="col-md-12 program-detail-container">
@@ -74,16 +74,7 @@
                                     <div class="col-md-12 program-detail-container">
                                         <center class="faculty_detail_description">
                                             {% if program.admission_form %}
-
-                                            {% if program.program_name == "Undergraduate Second Major" %}
-                                                Wanna Get Admitted to Second Major in CSE- fill up this
-                                            {% elif program.program_name == "Masters" %}
-                                                Wanna Get Admitted to Masters- fill up this
-                                            {% elif program.program_name == "Phd" %}
-                                                Wanna Get Admitted to Phd- fill up this
-                                            {% elif program.program_name == "CCNA" %}
-                                                Wanna Get Admitted to CCNA- fill up this
-                                            {% endif %}
+                                                Wanna Get Admitted to {{ program.get_program_name_display }} fill up this
                                             <a href="{% url 'download_form' program.admission_form.name %}">form</a>
                                             {% endif %}
                                         </center>
