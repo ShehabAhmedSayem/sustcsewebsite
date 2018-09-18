@@ -54,3 +54,6 @@ Run the project
 ```
 (my_env)$ python3 manage.py runserver
 ```
+
+The address of django localhost is: http://127.0.0.1:8000/
+Use this address to see the website.
