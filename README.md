@@ -40,17 +40,17 @@ Now clone this project to your project folder
 Navigate to the cloned folder 
 
 ```
-$ cd sustcsewebsite
+(my_env)$ cd sustcsewebsite
 ```
 
 Now use the command below to install all the requirements
 
 ```
-$ pip install -r requirements.txt
+(my_env)$ pip install -r requirements.txt
 ```
 
 Run the project 
 
 ```
-$ python3 manage.py runserver
+(my_env)$ python3 manage.py runserver
 ```
